@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function Register(props) {
 
@@ -59,7 +59,7 @@ function Register(props) {
         </label>
         <button className="login__button" type="submit">Зарегистрироваться</button>
       </form>
-      <p className="login__text">Уже зарегистрированы? <Link className="login__link" to="/sign-in">Войти</Link></p>
+      {/* <p className="login__text">Уже зарегистрированы? <Link className="login__link" to="/sign-in">Войти</Link></p> */}
     </section>
   )
 }
