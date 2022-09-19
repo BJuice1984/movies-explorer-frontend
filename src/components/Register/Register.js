@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import Logo from '../Logo/Logo';
 
 function Register(props) {
 
@@ -28,8 +29,11 @@ function Register(props) {
   }
 
   return (
+    <>
+    
     <section className="login">
-      <h2 className="login__title">Регистрация</h2>
+    <Logo />
+      <h2 className="login__title">Добро пожаловать&#33;</h2>
       <form className="login__input-form" onSubmit={handleSubmit}>
         <label className="login__input-form-label">
           <input
@@ -61,6 +65,7 @@ function Register(props) {
       </form>
       <p className="login__text">Уже зарегистрированы? <Link className="login__link" to="/sign-in">Войти</Link></p>
     </section>
+    </>
   )
 }
 

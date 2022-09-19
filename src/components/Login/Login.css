@@ -1,11 +1,12 @@
 .login {
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 56px;
 }
 
 @media screen and (min-width: 768px) {
   .login {
-    padding-top: 60px;
+    padding-top: 232px;
+    max-width: 396px;
   }
 }
 
@@ -55,7 +56,7 @@
   .login__input-form {
     padding: 0;
     padding-top: 50px;
-    max-width: 358px;
+    max-width: 100%;
   }
 }
 
@@ -120,16 +121,16 @@
 
 .login__title {
   margin: 0;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
+  font-weight: 500;
   color: #fff;
   text-align: center;
+  padding-top: 50px;
 }
 
 @media screen and (min-width: 768px) {
   .login__title {
-    font-size: 24px;
-    line-height: 29px;
+    padding-top: 40px;
   }
 }
