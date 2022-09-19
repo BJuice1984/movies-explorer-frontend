@@ -21,21 +21,33 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { password, email } = formParams;
-    props.onRegClick({ password, email })
+    const { password, email, name } = formParams;
+    props.onRegClick({ password, email, name })
         .catch(err => {
           setMessage(err.message);
         });
   }
 
-  return (
-    <>
-    
+  return (    
     <section className="login">
     <Logo />
       <h2 className="login__title">Добро пожаловать&#33;</h2>
       <form className="login__input-form" onSubmit={handleSubmit}>
         <label className="login__input-form-label">
+          <span className="login__input-name">Имя</span>
+          <input
+          value={formParams.name}
+          onChange={handleChange}
+          className="login__input-text"
+          type="text"
+          name="name"
+          id="name"
+          required
+          minLength="2"
+          maxLength="20" />
+        </label>
+        <label className="login__input-form-label">
+          <span className="login__input-name">Email</span>
           <input
           value={formParams.email}
           onChange={handleChange}
@@ -43,12 +55,12 @@ function Register(props) {
           type="text"
           name="email"
           id="email"
-          placeholder="Email"
           required
           minLength="2"
           maxLength="20" />
         </label>
         <label className="login__input-form-label">
+          <span className="login__input-name">Пароль</span>
           <input
           value={formParams.password}
           onChange={handleChange}
@@ -56,16 +68,14 @@ function Register(props) {
           type="password"
           name="password"
           id="password"
-          placeholder="Пароль"
           required
           minLength="6"
           maxLength="20" />
         </label>
-        <button className="login__button" type="submit">Зарегистрироваться</button>
+        <button className="login__button login__button_type_register" type="submit">Зарегистрироваться</button>
       </form>
-      <p className="login__text">Уже зарегистрированы? <Link className="login__link" to="/sign-in">Войти</Link></p>
+      <p className="login__text">Уже зарегистрированы&#63; <Link className="login__link" to="/sign-in">Войти</Link></p>
     </section>
-    </>
   )
 }
 

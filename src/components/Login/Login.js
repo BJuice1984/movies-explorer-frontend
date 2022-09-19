@@ -1,4 +1,6 @@
 import React from "react";
+import Logo from '../Logo/Logo';
+import { Link } from 'react-router-dom';
 
 function Login(props) {
 
@@ -30,9 +32,11 @@ function Login(props) {
 
   return (
     <section className="login">
-      <h2 className="login__title">Вход</h2>
+      <Logo />
+      <h2 className="login__title">Рады видеть&#33;</h2>
       <form className="login__input-form" onSubmit={handleSubmit}>
         <label className="login__input-form-label">
+          <span className="login__input-name">Email</span>
           <input
           value={formParams.email}
           onChange={handleChange}
@@ -40,12 +44,12 @@ function Login(props) {
           type="text"
           name="email"
           id="email"
-          placeholder="Email"
           required
           minLength="2"
           maxLength="20" />
         </label>
         <label className="login__input-form-label">
+          <span className="login__input-name">Пароль</span>
           <input
           value={formParams.password}
           onChange={handleChange}
@@ -53,13 +57,13 @@ function Login(props) {
           type="password"
           name="password"
           id="password"
-          placeholder="Пароль"
           required
           minLength="6"
           maxLength="20" />
         </label>
         <button className="login__button" type="submit">Войти</button>
       </form>
+      <p className="login__text">Ещё не зарегистрированы&#63; <Link className="login__link" to="/sign-up">Регистрация</Link></p>
     </section>
   )
 }
