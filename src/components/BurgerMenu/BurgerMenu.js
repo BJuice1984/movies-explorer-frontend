@@ -5,7 +5,7 @@ function BurgerMenu() {
 
   return (
     <body>
-    <input type="checkbox" class="toggler"></input>
+    <input type="checkbox" className="toggler"></input>
     <div className="hamburger"><div></div></div>
     <div className="menu">
         <div>
