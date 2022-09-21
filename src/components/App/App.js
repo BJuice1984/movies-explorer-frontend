@@ -2,6 +2,7 @@ import React from 'react';
 // import Header from '../Header/Header';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 import { Routes, Route } from 'react-router-dom';
 // import { Routes, Route, useNavigate, Redirect } from 'react-router-dom';
 import './App.css';
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="sign-up" element={<Register />} />
             <Route path="sign-in" element={<Login />} />
+            <Route path="profile" element={<Profile />} />
           </Routes>
         </div>
       </div>
