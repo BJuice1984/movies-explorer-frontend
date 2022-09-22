@@ -75,7 +75,7 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
 .toggler:checked + .hamburger > div::before{
   top: 0;
   transform: rotate(45deg);
-  background: black;
+  background: white;
 }
 
 /* AND ROTATING THE TOP AND BOTTOM LINES :  */
@@ -83,7 +83,7 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
 .toggler:checked + .hamburger > div::after{
   top: 0;
   transform: rotate(135deg);
-  background: black;
+  background: white;
 }
 
 
