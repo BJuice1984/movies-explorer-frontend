@@ -26,7 +26,6 @@ function AboutProject() {
         <span className="about-project__time-description">Back-end</span>
         <span className="about-project__time-description">Front-end</span>
       </article>
-
     </section>
   )
 }
