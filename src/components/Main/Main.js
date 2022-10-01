@@ -3,6 +3,7 @@ import Promo from '../Promo/Promo';
 import Techs from "../Techs/Techs";
 import AboutProject from "../AboutProject/AboutProject";
 import AboutMe from "../AboutMe/AboutMe";
+import Portfolio from "../Portfolio/Portfolio";
 import './Main.css';
 
 function Main() {
@@ -13,6 +14,7 @@ function Main() {
       <AboutProject />
       <Techs />
       <AboutMe />
+      <Portfolio />
 
     </main>
   )

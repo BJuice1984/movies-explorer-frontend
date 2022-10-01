@@ -131,8 +131,7 @@
   font-size: 13px;
   line-height: 1.23;
   color: #fff;
-  font-weight: 500;
-  justify-self: center;
+  font-weight: 500;  
   min-height: 36px;
   min-width: 129px;
   border-radius: 3px;
@@ -148,13 +147,17 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .promo__button {
-    justify-self: start;
-  }
-}
-
 .promo__button:hover {
   opacity: 0.6;
   transition: 0.2s ease-in-out;
+}
+
+.promo__link {
+  justify-self: center;
+}
+
+@media screen and (min-width: 1024px) {
+  .promo__link {
+    justify-self: start;
+  }
 }
