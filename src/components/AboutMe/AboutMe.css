@@ -1,0 +1,118 @@
+.about-me {
+  margin: 0;
+  background-color: #202020;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 70px;
+}
+
+@media screen and (min-width: 768px) {
+  .about-me {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .about-me {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
+.about-me__title {
+  border-bottom: 1px solid #DADADA;
+  font-size: 18px;
+  line-height: 1.57;
+  color: #fff;
+  margin: 0;
+  font-weight: 400;
+  min-height: 22px;
+  text-align: left;
+  padding-bottom: 28px;
+}
+
+@media screen and (min-width: 768px) {
+  .about-me__title {
+    font-size: 22px;
+    line-height: 1.23;
+  }
+}
+
+.about-me__container {
+  margin: 0 auto;
+  display: grid;
+}
+
+.about-me__student-photo {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  justify-self: center;
+  height: 352px;
+  width: 292px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-image: url('../../images/student-photo.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about-me__student-name {
+  font-size: 30px;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0;
+  font-weight: 400;
+  min-height: 36px;
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.about-me__student-description {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #fff;
+  margin: 0;
+  font-weight: 500;
+  min-height: 16px;
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.about-me__student-text {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #fff;
+  margin: 0;
+  font-weight: 500;
+  min-height: 16px;
+  text-align: left;
+  padding-bottom: 40px;
+}
+
+.about-me__student-links {
+  display: flex;
+  flex-direction: row;
+  min-height: 18px;
+  padding-bottom: 69px;
+}
+
+.about-me__student-link {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.21;
+  text-decoration: none;
+  margin: 0;
+  font-weight: 500;
+  padding-left: 26px;
+}
+
+.about-me__student-link:first-child {
+  padding-left: 0;
+}
+
+.about-me__student-link:hover {
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+}

@@ -64,6 +64,13 @@
   padding-top: 60px;
 }
 
+@media screen and (min-width: 768px) {
+  .techs__subtitle {
+    font-size: 50px;
+    line-height: 1.16;
+  }
+}
+
 .techs__description {
   font-size: 11px;
   line-height: 1.45;
@@ -72,6 +79,18 @@
   font-weight: 400;
   min-height: 32px;
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .techs__description {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .techs__description {
+    font-size: 14px;
+  }
 }
 
 .techs__list {
