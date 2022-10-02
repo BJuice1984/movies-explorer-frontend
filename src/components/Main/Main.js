@@ -4,6 +4,7 @@ import Techs from "../Techs/Techs";
 import AboutProject from "../AboutProject/AboutProject";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
+import Footer from "../Footer/Footer";
 import './Main.css';
 
 function Main() {
@@ -15,6 +16,7 @@ function Main() {
       <Techs />
       <AboutMe />
       <Portfolio />
+      <Footer />
 
     </main>
   )
