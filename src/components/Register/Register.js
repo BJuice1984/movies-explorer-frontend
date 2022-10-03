@@ -36,6 +36,7 @@ function Register(props) {
         <label className="login__input-form-label">
           <span className="login__input-name">Имя</span>
           <input
+          placeholder="Ваше имя"
           value={formParams.name}
           onChange={handleChange}
           className="login__input-text"
@@ -49,6 +50,7 @@ function Register(props) {
         <label className="login__input-form-label">
           <span className="login__input-name">Email</span>
           <input
+          placeholder="Ваша почта"
           value={formParams.email}
           onChange={handleChange}
           className="login__input-text"
@@ -62,6 +64,7 @@ function Register(props) {
         <label className="login__input-form-label">
           <span className="login__input-name">Пароль</span>
           <input
+          placeholder="Ваш пароль"
           value={formParams.password}
           onChange={handleChange}
           className="login__input-text" 

@@ -38,6 +38,7 @@ function Login(props) {
         <label className="login__input-form-label">
           <span className="login__input-name">Email</span>
           <input
+          placeholder="Ваша почта"
           value={formParams.email}
           onChange={handleChange}
           className="login__input-text"
@@ -51,6 +52,7 @@ function Login(props) {
         <label className="login__input-form-label">
           <span className="login__input-name">Пароль</span>
           <input
+          placeholder="Ваш пароль"
           value={formParams.password}
           onChange={handleChange}
           className="login__input-text" 
