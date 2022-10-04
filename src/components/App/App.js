@@ -18,7 +18,10 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="sign-up" element={<Register />} />
             <Route path="sign-in" element={<Login />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" 
+              element={<Profile 
+              isUserName={'Катерина'}
+              isUserEmail={'Kate@'}/>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

@@ -9,8 +9,8 @@ function Header({ isMainPage }) {
     <section className={`header ${isMainPage ? 'header_type_main' : ''}`}>
       <div className="header__container">
         <Logo />
-        <Link className="header__reg-button" to="/sign-up">Регистрация</Link>
-        <Link className="header__entrance-button" to="/sign-in">Войти</Link>
+        <Link className={`header__reg-button ${isMainPage ? 'header__reg-button_type_visible' : ''}`} to="/sign-up">Регистрация</Link>
+        <Link className={`header__entrance-button ${isMainPage ? 'header__entrance-button_type_visible' : ''}`} to="/sign-in">Войти</Link>
       </div>
     </section>
   )

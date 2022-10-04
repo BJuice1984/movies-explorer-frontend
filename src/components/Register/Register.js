@@ -28,7 +28,7 @@ function Register(props) {
         });
   }
 
-  return (    
+  return (
     <section className="login">
     <Logo />
       <h2 className="login__title">Добро пожаловать&#33;</h2>
@@ -59,7 +59,7 @@ function Register(props) {
           id="email"
           required
           minLength="2"
-          maxLength="20" />
+          maxLength="40" />
         </label>
         <label className="login__input-form-label">
           <span className="login__input-name">Пароль</span>
@@ -73,7 +73,7 @@ function Register(props) {
           id="password"
           required
           minLength="6"
-          maxLength="20" />
+          maxLength="40" />
         </label>
         <button className="login__button login__button_type_register" type="submit">Зарегистрироваться</button>
       </form>

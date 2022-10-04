@@ -47,7 +47,7 @@ function Login(props) {
           id="email"
           required
           minLength="2"
-          maxLength="20" />
+          maxLength="40" />
         </label>
         <label className="login__input-form-label">
           <span className="login__input-name">Пароль</span>
@@ -61,7 +61,7 @@ function Login(props) {
           id="password"
           required
           minLength="6"
-          maxLength="20" />
+          maxLength="40" />
         </label>
         <button className="login__button" type="submit">Войти</button>
       </form>

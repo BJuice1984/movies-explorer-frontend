@@ -1,21 +1,33 @@
 .profile {
-  margin: 0 auto;
-  position: relative;;
+  margin: 0;
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
 }
+
+@media screen and (min-width: 520px) {
+  .profile__container {
+    max-width: 410px;
+    margin: 0 auto;
+    padding-top: 236px;
+}}
 
 .profile__button {
   margin: 0 auto;
   margin-top: 267px;
-  min-height: 45px;
-  min-width: 260px;
-  border-radius: 3px;
   border: none;
   cursor: pointer;
-  background-color: #4285F4;
+  background-color: transparent;
   font-size: 12px;
   line-height: 1.25;
   color: #fff;
   font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__button {
+    font-size: 13px;
+  }
 }
 
 .profile__title {
@@ -26,7 +38,11 @@
   color: #fff;
   text-align: center;
   padding-top: 70px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
 
 .profile__input-form {
   display: flex;
@@ -34,14 +50,17 @@
   margin: 0 auto;
   padding: 0;
   border: none;
-  padding-top: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-top: 80px;
 }
 
 .profile__input-form-label {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #424242;
+}
+
+.profile__input-form-label:last-of-type {
+  border-bottom: none;
 }
 
 .profile__input-text {
@@ -53,12 +72,19 @@
   padding: 15px;
   border: 0;
   border-radius: 8px;
-  background-color: #2F2F2F;
+  background-color: transparent;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   outline: none;
   text-align: right;
+  width: 55vw;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__input-text {
+    width: 40vw;
+  }
 }
 
 .profile__input-name {
@@ -73,10 +99,17 @@
 
 .profile__link {
   margin: 0 auto;
+  padding-top: 16px;
   font-size: 12px;
   line-height: 1.21;
   font-weight: 500;
   color: #EE3465;
   text-decoration: none;
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__link {
+    font-size: 13px;
+  }
 }

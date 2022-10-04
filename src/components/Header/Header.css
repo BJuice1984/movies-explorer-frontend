@@ -33,6 +33,7 @@
 }
 
 .header__reg-button {
+  display: none;
   margin-right: 14px;
   font-size: 10px;
   line-height: 1.6;
@@ -44,6 +45,10 @@
   cursor: pointer;
   justify-self: end;
   width: 67px;
+}
+
+.header__reg-button_type_visible {
+  display: block;
 }
 
 @media screen and (min-width: 768px) {
@@ -61,6 +66,7 @@
 }
 
 .header__entrance-button {
+  display: none;
   margin: 0 auto;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -76,6 +82,10 @@
   cursor: pointer;
   text-align: center;
   width: 54px;
+}
+
+.header__entrance-button_type_visible {
+  display: block;
 }
 
 @media screen and (min-width: 768px) {
