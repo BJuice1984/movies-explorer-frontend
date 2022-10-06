@@ -6,6 +6,21 @@
   padding-right: 14px;
 }
 
+@media screen and (min-width: 768px) {
+  .search-form {
+    padding-top: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .search-form {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
 .search-form__container {
   border-bottom: 1px solid #424242;
 }
@@ -64,6 +79,13 @@
   justify-content: center;
   padding-top: 44px;
   padding-bottom: 43px;
+}
+
+@media screen and (min-width: 768px) {
+  .search-form__checkbox {
+    padding-top: 30px;
+    padding-bottom: 39px;
+  }
 }
 
 .search-form__span {
