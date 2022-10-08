@@ -17,3 +17,18 @@
     padding-right: 30px;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .movie-card-list {
+    column-gap: 28px;
+    row-gap: 32px;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .movie-card-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
