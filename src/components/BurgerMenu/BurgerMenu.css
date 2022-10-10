@@ -17,7 +17,6 @@ display: block;
 }
 
 .burger-menu__toggler {
-/* ALWAYS KEEPING THE TOGGLER OR THE CHECKBOX ON TOP OF EVERYTHING :  */
   z-index: 5;
   height: 40px;
   width: 40px;
@@ -40,9 +39,7 @@ display: block;
   justify-content: center;
 }
 
-/* CREATING THE MIDDLE LINE OF THE HAMBURGER : */
-
-.hamburger > div {
+.hamburger__btn {
   position: relative;
   top: 0;
   left: 0;
@@ -52,11 +49,8 @@ display: block;
   transition: all  0.4s ease;
 }
 
-/* CREATING THE TOP AND BOTTOM LINES : 
-TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
-
-.hamburger > div::before,
-.hamburger > div::after {
+.hamburger__btn::before,
+.hamburger__btn::after {
   content: '';
   position: absolute;
   top: -10px;
@@ -66,20 +60,20 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
   transition: all  0.4s ease;
 }
 
-.hamburger > div::after {
+.hamburger__btn::after {
   top: 10px;
 }
 
-.burger-menu__toggler:checked + .hamburger > div {
+.burger-menu__toggler:checked + .hamburger > .hamburger__btn {
   background: rgba(0,0,0,0);
 }
 
-.burger-menu__toggler:checked + .hamburger > div::before {
+.burger-menu__toggler:checked + .hamburger > .hamburger__btn::before {
   top: 0;
   transform: rotate(45deg);
 }
 
-.burger-menu__toggler:checked + .hamburger > div::after {
+.burger-menu__toggler:checked + .hamburger > .hamburger__btn::after {
   top: 0;
   transform: rotate(135deg);
 }
@@ -93,6 +87,7 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
   transform: translateX(100%);
   transition: all 0.5s;
   z-index: 3;
+  margin-top: -18px;
 }
 
 .burger-menu__toggler:checked ~ .menu {
@@ -107,6 +102,16 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
   }
 }
 
+@media screen and (min-width: 768px) {
+  .burger-menu__toggler:checked ~ .menu__blur {
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    position: absolute;
+    transition: all 0.5s;
+  }
+}
+
 .menu__list {
   display: grid;
   flex-direction: column;
@@ -114,8 +119,10 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
   visibility: hidden;
   list-style: none;
   padding: 0;
+  transition: all 0.5s;
 }
 
 .burger-menu__toggler:checked ~ .menu > .menu__list {
   visibility: visible;
+  transition: all 0.5s;
 }
