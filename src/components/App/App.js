@@ -24,8 +24,11 @@ function App() {
               element={<Profile 
               isUserName={'Катерина'}
               isUserEmail={'Kate@'}/>} />
-            <Route path="movies" element={<Movies />} />
-            <Route path="saved-movies" element={<SavedMovies />} />
+            <Route path="movies"
+              element={<Movies 
+              isPathMovies={true}/>} />
+            <Route path="saved-movies"
+              element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

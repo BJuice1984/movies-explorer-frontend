@@ -5,13 +5,13 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './Movies.css'
 
-function Movies() {
+function Movies({ isPathMovies }) {
 
   return(
     <main className="movies">
-      <Header isMainPage={false}/>
+      <Header isMainPage={false} />
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList onPathMovies={isPathMovies} />
       <Footer />
     </main>
   )
