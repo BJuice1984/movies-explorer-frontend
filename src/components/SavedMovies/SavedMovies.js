@@ -6,14 +6,14 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './SavedMovies.css'
 
-function SavedMovies({ isPath }) {
+function SavedMovies() {
 
   return(
     <main className="movies">
       <Header isMainPage={false}/>
       <BurgerMenu />
       <SearchForm />
-      <MoviesCardList onPath={isPath}/>
+      <MoviesCardList />
       <Footer />
     </main>
   )

@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../Header/Header";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { Link } from 'react-router-dom';
 import './Profile.css'
 
@@ -9,7 +8,6 @@ function Profile({ isUserName, isUserEmail }) {
   return (
     <>
       <Header />
-      <BurgerMenu />
       <section className="profile">
         <div className="profile__container">
           <h2 className="profile__title">Привет, Илkkkkkkkkkkfffffffffffffdddddddddddddddddddddddkkkk&#33;</h2>
