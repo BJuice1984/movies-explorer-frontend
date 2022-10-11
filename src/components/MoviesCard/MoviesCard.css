@@ -1,0 +1,110 @@
+.element {
+  margin: 0;
+  background-color: #222;
+  border-radius: 6px;
+  /* box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08); */
+  display: grid;
+  justify-items: stretch;
+  grid-template-columns: 2fr;
+  grid-template-rows: 3fr;
+  grid-template-areas:
+    'element__title element__duration'
+    'element__pic element__pic'
+    'element__like-button element__like-button';
+}
+
+@media screen and (min-width: 768px) {
+  .element {
+    min-width: 342px;
+    min-height: 309px;
+  }
+}
+
+.element__title {
+  grid-area: element__title;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fff;
+  text-align: left;
+  padding-left: 14px;
+}
+
+@media screen and (min-width: 768px) {
+  .element__title {
+    font-size: 15px;
+    line-height: 1.2;
+    padding-left: 18px;
+  }
+}
+
+.element__duration {
+  grid-area: element__duration;
+  font-size: 10px;
+  line-height: 1.8;
+  font-weight: 400;
+  color: #8B8B8B;
+  text-align: right;
+  padding-right: 14px;
+}
+
+@media screen and (min-width: 768px) {
+  .element__duration {
+    font-size: 13px;
+    line-height: 1.4;
+    padding-right: 18px;
+  }
+}
+
+.element__pic {
+  grid-area: element__pic;
+  min-width: 100%;
+  height: calc(88vw / 1.78);
+  object-fit: contain;
+}
+
+@media screen and (min-width: 768px) {
+  .element__pic {
+    max-height: 190px;
+  }
+}
+
+.element__like-button {
+  grid-area: element__like-button;
+  width: 100px;
+  height: 29px;
+  justify-self: center;
+  border: none;
+  border-radius: 30px;
+  background-color: #313131;
+  margin: 14px;
+  font-size: 12px;
+  line-height: 1.1;
+  font-weight: 400;
+  color: #fff;
+  cursor: pointer;
+}
+
+.element__like-button_type_delete {
+  background-image: url('../../images/card_delete_btn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.element__like-button_type_save {
+  background-image: url('../../images/card_saved_btn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #EE3465;
+}
+
+@media screen and (min-width: 768px) {
+  .element__like-button {
+    margin: 18px;
+  }
+}
+
+.element__like-button:hover {
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+}

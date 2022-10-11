@@ -1,0 +1,125 @@
+.profile {
+  margin: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  height: 100vh;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__container {
+    max-width: 410px;
+    margin: 0 auto;
+    padding-top: 236px;
+}}
+
+.profile__button {
+  margin: 0 auto;
+  margin-top: 267px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #fff;
+  font-weight: 400;
+}
+
+.profile__button:hover {
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__button {
+    font-size: 13px;
+  }
+}
+
+.profile__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  padding-top: 70px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.profile__input-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  padding-top: 80px;
+}
+
+.profile__input-form-label {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #424242;
+}
+
+.profile__input-form-label:last-of-type {
+  border-bottom: none;
+}
+
+.profile__input-text {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #fff;
+  padding: 15px;
+  border: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  outline: none;
+  text-align: right;
+  width: 55vw;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__input-text {
+    width: 40vw;
+  }
+}
+
+.profile__input-name {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #fff;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+.profile__link {
+  margin: 0 auto;
+  padding-top: 16px;
+  font-size: 12px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #EE3465;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile__link:hover {
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__link {
+    font-size: 13px;
+  }
+}

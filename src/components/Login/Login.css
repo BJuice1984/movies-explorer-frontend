@@ -1,0 +1,155 @@
+.login {
+  margin: 0 auto;
+  padding-top: 56px;
+  height: 100vh;
+}
+
+@media screen and (min-width: 768px) {
+  .login {
+    padding-top: 232px;
+    max-width: 396px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    padding-top: 70px;
+  }
+}
+
+.login__button {
+  margin: 0 auto;
+  margin-top: 267px;
+  min-height: 45px;
+  min-width: 260px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  background-color: #4285F4;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #fff;
+  font-weight: 400;
+}
+
+.login__button:hover {
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .login__button {
+    margin-top: 179px;
+    min-height: 50px;
+    min-width: 396px;
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+.login__button_type_register {
+  margin-top: 178px;
+}
+
+@media screen and (min-width: 768px) {
+  .login__button_type_register {
+    margin-top: 90px;
+  }
+}
+
+.login__input-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  padding-top: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .login__input-form {
+    padding: 0;
+    padding-top: 20px;
+    max-width: 100%;
+  }
+}
+
+.login__input-form-label {
+  display: contents;
+}
+
+.login__input-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #fff;
+  padding: 15px;
+  border: 0;
+  border-radius: 8px;
+  background-color: #2F2F2F;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  outline: none;
+}
+
+.login__input-name {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #8B8B8B;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+.login__link {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #4285F4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login__link:hover {
+  opacity: 0.85;
+  transition: 0.2s ease-in-out;
+}
+
+.login__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #8B8B8B;
+  padding-top: 20px;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .login__text {
+    line-height: 17px;
+    padding-top: 15px;
+  }
+}
+
+.login__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  padding-top: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .login__title {
+    padding-top: 40px;
+  }
+}
