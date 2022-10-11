@@ -5,6 +5,19 @@ import './Profile.css'
 
 function Profile({ isUserName, isUserEmail }) {
 
+  const [formParams, setFormParams] = React.useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormParams((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+
   return (
     <>
       <Header />
@@ -16,7 +29,8 @@ function Profile({ isUserName, isUserEmail }) {
               <span className="profile__input-name">Имя</span>
               <input
               placeholder="Имя пользователя"
-              deaultValue={isUserName}
+              value={isUserName}
+              onChange={handleChange}
               className="profile__input-text"
               type="text"
               name="name"
@@ -29,7 +43,8 @@ function Profile({ isUserName, isUserEmail }) {
               <span className="profile__input-name">Email</span>
               <input
               placeholder="Email пользователя"
-              deaultValue={isUserEmail}
+              value={isUserEmail}
+              onChange={handleChange}
               className="profile__input-text" 
               type="email"
               name="email"

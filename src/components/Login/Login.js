@@ -39,7 +39,7 @@ function Login(props) {
           <span className="login__input-name">Email</span>
           <input
           placeholder="Ваша почта"
-          deaultValue={formParams.email}
+          value={formParams.email}
           onChange={handleChange}
           className="login__input-text"
           type="text"
@@ -53,7 +53,7 @@ function Login(props) {
           <span className="login__input-name">Пароль</span>
           <input
           placeholder="Ваш пароль"
-          deaultValue={formParams.password}
+          value={formParams.password}
           onChange={handleChange}
           className="login__input-text" 
           type="password"

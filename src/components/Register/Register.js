@@ -51,7 +51,7 @@ function Register(props) {
           <span className="login__input-name">Email</span>
           <input
           placeholder="Ваша почта"
-          deaultValue={formParams.email}
+          value={formParams.email}
           onChange={handleChange}
           className="login__input-text"
           type="text"
