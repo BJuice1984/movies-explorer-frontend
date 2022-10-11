@@ -9,7 +9,9 @@ function Movies({ isPathMovies }) {
 
   return(
     <main className="movies">
-      <Header isMainPage={false} />
+      <Header 
+      isMainPage={false} 
+      isProfilePage={true} />
       <SearchForm />
       <MoviesCardList onPathMovies={isPathMovies} />
       <Footer />

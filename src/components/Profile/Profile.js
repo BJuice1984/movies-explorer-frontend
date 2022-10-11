@@ -16,7 +16,7 @@ function Profile({ isUserName, isUserEmail }) {
               <span className="profile__input-name">Имя</span>
               <input
               placeholder="Имя пользователя"
-              value={isUserName}
+              deaultValue={isUserName}
               className="profile__input-text"
               type="text"
               name="name"
@@ -29,7 +29,7 @@ function Profile({ isUserName, isUserEmail }) {
               <span className="profile__input-name">Email</span>
               <input
               placeholder="Email пользователя"
-              value={isUserEmail}
+              deaultValue={isUserEmail}
               className="profile__input-text" 
               type="email"
               name="email"

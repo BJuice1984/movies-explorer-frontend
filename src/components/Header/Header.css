@@ -28,7 +28,7 @@
 .header__container {
   display: grid;
   align-items: center;
-  grid-template-columns: min-content 1fr min-content;
+  grid-template-columns: 100px 1fr min-content;
   grid-template-rows: 1fr;
 }
 
@@ -101,4 +101,78 @@
 .header__entrance-button:hover {
   opacity: 0.8;
   transition: 0.2s ease-in-out;
+}
+
+.header__links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.header__film-button {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.38;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.5s;
+  display: none;
+}
+
+.header__film-button:first-of-type {
+  padding-right: 8px;
+}
+
+.header__film-button:last-of-type {
+  padding-left: 8px;
+}
+
+.header__film-button:hover {
+  opacity: 0.5;
+  transition: 0.2s ease-in-out;
+}
+
+.header__account-button {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.14;
+  align-self: center;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.5s;
+  display: none;
+}
+
+.header__account-button:hover {
+  opacity: 0.5;
+  transition: 0.2s ease-in-out;
+}
+
+.header__btn {
+  display: none;
+  justify-content: end;
+  background-image: url('../../images/acc_pic.svg');
+  margin: 0 auto;
+  min-width: 100px;
+  min-height: 32px;
+  border: 2px solid #AAAAAA;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 10% 40%;
+}
+
+@media screen and (min-width: 1024px) {
+  .header__film-button {
+    display: block;
+  }
+  
+  .header__account-button {
+    display: block;
+  }
+
+  .header__btn {
+    display: flex;
+  }
 }

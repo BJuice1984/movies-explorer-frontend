@@ -4,18 +4,60 @@ import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-function Header({ isMainPage }) {
+function Header({ isMainPage, isProfilePage }) {
 
   return (
-    <section className={`header ${isMainPage ? 'header_type_main' : ''}`}>
+    <header className={`header ${isMainPage ? 'header_type_main' : ''}`}>
       <BurgerMenu onMainPage={!isMainPage}/>
-      <div className="header__container">
-        <Logo />
-        <Link className={`header__reg-button ${isMainPage ? 'header__reg-button_type_visible' : ''}`} to="/sign-up">Регистрация</Link>
-        <Link className={`header__entrance-button ${isMainPage ? 'header__entrance-button_type_visible' : ''}`} to="/sign-in">Войти</Link>
-      </div>
-    </section>
+      {isMainPage ? ( 
+        <div className="header__container">
+          <Logo />
+          <Link className='header__reg-button header__reg-button_type_visible' to="/sign-up">Регистрация</Link>
+          <Link className='header__entrance-button header__entrance-button_type_visible' to="/sign-in">Войти</Link>
+        </div>
+      ) : (
+        <div className="header__container">
+          <Logo />
+          <nav className="header__links">
+            <Link to='/movies' className="header__film-button">Фильмы</Link>
+            <Link to='/saved-movies' className="header__film-button">Сохраненные фильмы</Link>
+          </nav>
+          <button className="header__btn">
+            <Link to='/profile' className="header__account-button">Аккаунт</Link>
+          </button>
+        </div>
+      )}
+    </header>
   )
 }
 
 export default Header;
+
+// return (
+//   <header className={headerClass}>
+//     <div className='header__container'>
+//       <Logo />
+//       {isLog ? (
+//         <>
+//           <Navigation
+//             isMenuBurgerOpen={isMenuBurgerOpen}
+//             closeMenuBurger={closeMenuBurger}
+//           />
+//           <div className={btnBurgerMenuOpen} onClick={openMenuBurger}>
+//             <span className='header__menu-burger-span'></span>
+//           </div>
+//           <div className={btnBurgerMenuClose} onClick={closeMenuBurger}></div>
+//         </>
+//       ) : (
+//         <>
+//           <Link className='header__link' to='/signup'>
+//             Регистрация
+//           </Link>
+//           <Link className='header__link header__link_color' to='/signin'>
+//             Войти
+//           </Link>
+//         </>
+//       )}
+//     </div>
+//   </header>
+// );
