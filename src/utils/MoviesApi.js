@@ -12,7 +12,7 @@ class MoviesApi {
     return Promise.reject(`Ошибка даных: ${res.status}`)
   }
 
-  getInitialCards() {
+  getInitialMovies() {
     return fetch(this._baseUrl, {
       credentials: this._credentials
     })
