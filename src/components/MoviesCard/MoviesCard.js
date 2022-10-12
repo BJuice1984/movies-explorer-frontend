@@ -1,13 +1,24 @@
 import React from "react";
 import './MoviesCard.css';
-import moviePic from '../../images/student-photo.jpg'
+import moviePic from '../../images/student-photo.jpg';
+import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ onPathMovies }) {
+function MoviesCard() {
+  const [ isMoviesPage, setIsMoviesPage ] = React.useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.pathname === '/movies') {
+      setIsMoviesPage(true);
+    } else {
+      setIsMoviesPage(false);
+    }
+  }, [location])
 
   const [savedMovie, setSavedMovie] = React.useState(false);
 
   function saveMovie() {
-    if (savedMovie || !onPathMovies) {
+    if (savedMovie || !isMoviesPage) {
       setSavedMovie(false);
     } else {
       setSavedMovie(true);
@@ -20,10 +31,10 @@ function MoviesCard({ onPathMovies }) {
       <p className="element__duration">27 минут</p>
       <img className="element__pic" src={moviePic} alt="Картинка постер фильма"></img>
       <button 
-        className={`element__like-button ${!onPathMovies ? 'element__like-button_type_delete' : ''} ${savedMovie ? 'element__like-button_type_save' : ''}`} 
+        className={`element__like-button ${!isMoviesPage ? 'element__like-button_type_delete' : ''} ${savedMovie ? 'element__like-button_type_save' : ''}`} 
         type="button" 
         onClick={saveMovie}
-        aria-label="Сохранить">{!onPathMovies || savedMovie ? '' : 'Сохранить'}
+        aria-label="Сохранить">{!isMoviesPage || savedMovie ? '' : 'Сохранить'}
       </button>
     </article>
   )

@@ -89,8 +89,7 @@ function App() {
               isUserName={'Катерина'}
               isUserEmail={'Kate@'}/>} />
             <Route path="movies"
-              element={<Movies 
-              isPathMovies={true}/>} />
+              element={<Movies />} />
             <Route path="saved-movies"
               element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound />} />

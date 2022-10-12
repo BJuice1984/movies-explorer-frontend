@@ -9,7 +9,7 @@ function SavedMovies() {
 
   return(
     <main className="movies">
-      <Header isMainPage={false}/>
+      <Header />
       <SearchForm />
       <MoviesCardList />
       <Footer />
