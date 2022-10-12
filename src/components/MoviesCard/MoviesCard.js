@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 function MoviesCard() {
   const [ isMoviesPage, setIsMoviesPage ] = React.useState(false);
+  const [savedMovie, setSavedMovie] = React.useState(false);
   const location = useLocation();
 
   React.useEffect(() => {
@@ -13,9 +14,7 @@ function MoviesCard() {
     } else {
       setIsMoviesPage(false);
     }
-  }, [location])
-
-  const [savedMovie, setSavedMovie] = React.useState(false);
+  }, [location]);
 
   function saveMovie() {
     if (savedMovie || !isMoviesPage) {

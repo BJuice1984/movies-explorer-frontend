@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../Logo/Logo";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header({ onLoggedin }) {
@@ -14,7 +14,7 @@ function Header({ onLoggedin }) {
     } else {
       setIsMainPage(false);
     }
-  }, [location])
+  }, [location]);
 
   return (
     <header className={`header ${isMainPage ? 'header_type_main' : ''}`}>
@@ -27,8 +27,11 @@ function Header({ onLoggedin }) {
           {onLoggedin ? (
             <>
               <nav className={`header__links ${onLoggedin ? 'header__links_type_loggedin' : ''}`}>
-                <Link to='/movies' className="header__film-button">Фильмы</Link>
-                <Link to='/saved-movies' className="header__film-button">Сохраненные фильмы</Link>
+
+                <NavLink to='/movies' className={({ isActive }) => isActive ? 'header__film-button_type_active' : 'header__film-button'}>Фильмы</NavLink>
+
+
+                <NavLink to='/saved-movies' className="header__film-button">Сохраненные фильмы</NavLink>
               </nav>
               <button className="header__btn">
                 <Link to='/profile' className="header__account-button">Аккаунт</Link>

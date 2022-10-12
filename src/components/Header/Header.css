@@ -126,6 +126,10 @@
   display: none;
 }
 
+.header__film-button_type_active {
+  border-bottom: solid 2px #fff;
+}
+
 .header__film-button:first-of-type {
   padding-right: 8px;
 }
