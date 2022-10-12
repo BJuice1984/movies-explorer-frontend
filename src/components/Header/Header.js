@@ -4,7 +4,7 @@ import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-function Header({ isMainPage, isProfilePage }) {
+function Header({ isMainPage, onLoggedin }) {
 
   return (
     <header className={`header ${isMainPage ? 'header_type_main' : ''}`}>
@@ -12,8 +12,22 @@ function Header({ isMainPage, isProfilePage }) {
       {isMainPage ? ( 
         <div className="header__container">
           <Logo />
-          <Link className='header__reg-button header__reg-button_type_visible' to="/sign-up">Регистрация</Link>
-          <Link className='header__entrance-button header__entrance-button_type_visible' to="/sign-in">Войти</Link>
+          {onLoggedin ? (
+            <>
+              <nav className={`header__links ${onLoggedin ? 'header__links_type_loggedin' : ''}`}>
+                <Link to='/movies' className="header__film-button">Фильмы</Link>
+                <Link to='/saved-movies' className="header__film-button">Сохраненные фильмы</Link>
+              </nav>
+              <button className="header__btn">
+                <Link to='/profile' className="header__account-button">Аккаунт</Link>
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className='header__reg-button header__reg-button_type_visible' to="/sign-up">Регистрация</Link>
+              <Link className='header__entrance-button header__entrance-button_type_visible' to="/sign-in">Войти</Link>
+            </>
+          )}
         </div>
       ) : (
         <div className="header__container">

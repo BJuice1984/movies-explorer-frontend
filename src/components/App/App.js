@@ -23,7 +23,7 @@ function App() {
   const navigate = useNavigate();
 
   // const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   // const [savedFilms, setSavedFilms] = React.useState([]);
 
 
@@ -75,7 +75,8 @@ function App() {
     <div className="page">
         <div className="page__container">
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Main 
+              isLoggedin={loggedIn}/>} />
             <Route path="sign-up"
               element={<Register
               onRegClick={handleRegister} />} />

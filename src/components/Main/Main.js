@@ -8,11 +8,13 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import './Main.css';
 
-function Main() {
+function Main({ isLoggedin }) {
 
   return (
     <main className="main">
-      <Header isMainPage={true}/>
+      <Header
+        isMainPage={true}
+        onLoggedin={isLoggedin}/>
       <Promo />
       <AboutProject />
       <Techs />

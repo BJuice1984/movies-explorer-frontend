@@ -109,6 +109,13 @@
   justify-content: center;
 }
 
+
+.header__links_type_loggedin {
+  justify-content: end;
+  padding-right: 40px;
+}
+
+
 .header__film-button {
   color: #fff;
   font-size: 13px;
