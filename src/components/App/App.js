@@ -76,7 +76,8 @@ function App() {
         <div className="page__container">
           <Routes>
             <Route path="/" element={<Main 
-              isLoggedin={loggedIn}/>} />
+              isLoggedin={loggedIn}
+              isMainPage={true}/>} />
             <Route path="sign-up"
               element={<Register
               onRegClick={handleRegister} />} />

@@ -1,14 +1,26 @@
 import React from "react";
 import Logo from "../Logo/Logo";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
-function Header({ isMainPage, onLoggedin }) {
+function Header({ onLoggedin }) {
+  const [ isMainPage, setIsMainPage ] = React.useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.pathname === '/') {
+      setIsMainPage(true);
+    } else {
+      setIsMainPage(false);
+    }
+  }, [location])
 
   return (
     <header className={`header ${isMainPage ? 'header_type_main' : ''}`}>
-      <BurgerMenu onMainPage={!isMainPage}/>
+      <BurgerMenu
+        onMainPage={isMainPage}
+        onLoggedin={onLoggedin}/>
       {isMainPage ? ( 
         <div className="header__container">
           <Logo />
@@ -46,32 +58,3 @@ function Header({ isMainPage, onLoggedin }) {
 }
 
 export default Header;
-
-// return (
-//   <header className={headerClass}>
-//     <div className='header__container'>
-//       <Logo />
-//       {isLog ? (
-//         <>
-//           <Navigation
-//             isMenuBurgerOpen={isMenuBurgerOpen}
-//             closeMenuBurger={closeMenuBurger}
-//           />
-//           <div className={btnBurgerMenuOpen} onClick={openMenuBurger}>
-//             <span className='header__menu-burger-span'></span>
-//           </div>
-//           <div className={btnBurgerMenuClose} onClick={closeMenuBurger}></div>
-//         </>
-//       ) : (
-//         <>
-//           <Link className='header__link' to='/signup'>
-//             Регистрация
-//           </Link>
-//           <Link className='header__link header__link_color' to='/signin'>
-//             Войти
-//           </Link>
-//         </>
-//       )}
-//     </div>
-//   </header>
-// );
