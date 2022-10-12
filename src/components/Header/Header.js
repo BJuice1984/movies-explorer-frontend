@@ -27,11 +27,8 @@ function Header({ onLoggedin }) {
           {onLoggedin ? (
             <>
               <nav className={`header__links ${onLoggedin ? 'header__links_type_loggedin' : ''}`}>
-
-                <NavLink to='/movies' className={({ isActive }) => isActive ? 'header__film-button_type_active' : 'header__film-button'}>Фильмы</NavLink>
-
-
-                <NavLink to='/saved-movies' className="header__film-button">Сохраненные фильмы</NavLink>
+                <Link to='/movies' className="header__film-button">Фильмы</Link>
+                <Link to='/saved-movies' className="header__film-button">Сохраненные фильмы</Link>
               </nav>
               <button className="header__btn">
                 <Link to='/profile' className="header__account-button">Аккаунт</Link>
@@ -48,8 +45,8 @@ function Header({ onLoggedin }) {
         <div className="header__container">
           <Logo />
           <nav className="header__links">
-            <Link to='/movies' className="header__film-button">Фильмы</Link>
-            <Link to='/saved-movies' className="header__film-button">Сохраненные фильмы</Link>
+            <NavLink to='/movies' className={({ isActive }) => isActive ? 'header__film-button header__film-button_type_active' : 'header__film-button'}>Фильмы</NavLink>
+            <NavLink to='/saved-movies' className={({ isActive }) => isActive ? 'header__film-button header__film-button_type_active' : 'header__film-button'}>Сохраненные фильмы</NavLink>
           </nav>
           <button className="header__btn">
             <Link to='/profile' className="header__account-button">Аккаунт</Link>

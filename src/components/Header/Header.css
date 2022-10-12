@@ -131,11 +131,11 @@
 }
 
 .header__film-button:first-of-type {
-  padding-right: 8px;
+  margin-right: 8px;
 }
 
 .header__film-button:last-of-type {
-  padding-left: 8px;
+  margin-left: 8px;
 }
 
 .header__film-button:hover {
