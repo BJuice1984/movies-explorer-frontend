@@ -7,48 +7,67 @@ import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 // import { Routes, Route, useNavigate, Redirect } from 'react-router-dom';
 import './App.css';
 
+import useLogin from '../../hooks/useLogin';
 
 
-import * as Auth from '../../utils/MainApi';
+
+// import * as Auth from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
 
 
 
 
 function App() {
 
-  const navigate = useNavigate();
+  const {
+    loggedIn,
+    handleRegister,
+    handleLogin
+  } = useLogin();
 
-  // const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(true);
-  // const [savedFilms, setSavedFilms] = React.useState([]);
+  // const navigate = useNavigate();
+
+  // // const [currentUser, setCurrentUser] = React.useState({});
+  // const [loggedIn, setLoggedIn] = React.useState(true);
+  // // const [savedFilms, setSavedFilms] = React.useState([]);
 
 
-  const handleRegister = ({ name, password, email }) => {
-    return Auth.register(name, password, email)
-    .then(() => {
-      navigate('/sign-in')
+  // const handleRegister = ({ name, password, email }) => {
+  //   return Auth.register(name, password, email)
+  //   .then(() => {
+  //     navigate('/sign-in')
+  //   })
+  //   .catch(() => {
+  //     navigate('/sign-up')
+  //   })
+  // }
+
+  // const handleLogin = ({ password, email }) => {
+  //   return Auth.authorize(password, email)
+  //   .then((data) => {
+  //     if (data) {
+
+  //       setLoggedIn(true);
+  //     }
+  //   })
+  //   .catch(() => {
+  //     navigate('/sign-in')
+  //   })
+  // }
+
+  React.useEffect(() => {
+    moviesApi.getInitialMovies()
+    .then((movies) => {
+      localStorage.setItem("initial-movies", JSON.stringify(movies));
     })
-    .catch(() => {
-      navigate('/sign-up')
+    .catch(err => {
+      console.log(err)
     })
-  }
-
-  const handleLogin = ({ password, email }) => {
-    return Auth.authorize(password, email)
-    .then((data) => {
-      if (data) {
-
-        setLoggedIn(true);
-      }
-    })
-    .catch(() => {
-      navigate('/sign-in')
-    })
-  }
+  }, []);
 
   // React.useEffect(() => {
   //   if (loggedIn) {

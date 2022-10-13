@@ -1,7 +1,6 @@
 class MoviesApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._credentials = options.credentials;
     this._headers = options.headers;
   }
 
@@ -22,6 +21,5 @@ class MoviesApi {
 
 export const moviesApi = new MoviesApi({
   baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
-  credentials: 'include',
   headers: {'Content-Type': 'application/json'}
 });

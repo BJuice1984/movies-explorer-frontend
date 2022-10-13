@@ -8,8 +8,8 @@ const checkResponse = (res) =>  {
 };
 
 export const register = (name, password, email) => {
-  const data = JSON.stringify({name, password, email});
-  console.log(data)
+  // const data = JSON.stringify({name, password, email});
+  // console.log(data)
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
