@@ -8,6 +8,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { Routes, Route } from 'react-router-dom';
+import { CurrentUserContext } from '../../context/CurrnetUserContext';
 // import { Routes, Route, useNavigate, Redirect } from 'react-router-dom';
 import './App.css';
 
@@ -24,10 +25,13 @@ import { moviesApi } from '../../utils/MoviesApi';
 function App() {
 
   const {
+    currentUser,
     loggedIn,
     handleRegister,
     handleLogin
   } = useLogin();
+
+  console.log(currentUser)
 
   // const navigate = useNavigate();
 
@@ -91,12 +95,13 @@ function App() {
   // }, [loggedIn]);
 
   return (
-    <div className="page">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
         <div className="page__container">
           <Routes>
             <Route path="/" element={<Main 
               isLoggedin={loggedIn}
-              isMainPage={true}/>} />
+              />} />
             <Route path="sign-up"
               element={<Register
               onRegClick={handleRegister} />} />
@@ -105,8 +110,7 @@ function App() {
               onLoginClick={handleLogin} />} />
             <Route path="profile" 
               element={<Profile 
-              isUserName={'Катерина'}
-              isUserEmail={'Kate@'}/>} />
+              currentUser={currentUser}/>} />
             <Route path="movies"
               element={<Movies />} />
             <Route path="saved-movies"
@@ -115,6 +119,7 @@ function App() {
           </Routes>
         </div>
       </div>
+    </CurrentUserContext.Provider>
   );
 }
 

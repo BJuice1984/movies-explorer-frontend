@@ -3,7 +3,9 @@ import Header from "../Header/Header";
 import { Link } from 'react-router-dom';
 import './Profile.css'
 
-function Profile({ isUserName, isUserEmail }) {
+function Profile({ currentUser }) {
+
+  console.log(currentUser.email)
 
   const [formParams, setFormParams] = React.useState({
     email: '',
@@ -23,13 +25,13 @@ function Profile({ isUserName, isUserEmail }) {
       <Header />
       <section className="profile">
         <div className="profile__container">
-          <h2 className="profile__title">Привет, Илkkkkkkkkkkfffffffffffffdddddddddddddddddddddddkkkk&#33;</h2>
+          <h2 className="profile__title">Привет, {currentUser.name}&#33;</h2>
           <form className="profile__input-form" >
             <label className="profile__input-form-label">
               <span className="profile__input-name">Имя</span>
               <input
               placeholder="Имя пользователя"
-              value={isUserName}
+              value={currentUser.name}
               onChange={handleChange}
               className="profile__input-text"
               type="text"
@@ -43,7 +45,7 @@ function Profile({ isUserName, isUserEmail }) {
               <span className="profile__input-name">Email</span>
               <input
               placeholder="Email пользователя"
-              value={isUserEmail}
+              value={currentUser.email}
               onChange={handleChange}
               className="profile__input-text" 
               type="email"

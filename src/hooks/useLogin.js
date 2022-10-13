@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  console.log(currentUser)
 
   const navigate = useNavigate();
 
   const handleRegister = ({ name, password, email }) => {
     return Auth.register(name, password, email)
     .then(() => {
-      navigate('/sign-in')
+      handleLogin( { password, email });
     })
     .catch(() => {
       navigate('/sign-up')
@@ -22,15 +25,23 @@ function useLogin() {
     .then((data) => {
       if (data) {
         setLoggedIn(true);
-        navigate('/')
+        navigate('/');
+        getMyProfile();
       }
     })
-    .catch(() => {
-      
+    .catch((err) => {
+      console.log(err);
     })
   }
 
+  const getMyProfile = () => {
+    Auth.getMyProfile()
+    .then((profile) => {
+      setCurrentUser({ name: profile.name, email: profile.email })})
+  }
+
   return {
+    currentUser,
     loggedIn,
     handleRegister,
     handleLogin
