@@ -6,8 +6,6 @@ function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
 
-  console.log(currentUser)
-
   const navigate = useNavigate();
 
   const handleRegister = ({ name, password, email }) => {

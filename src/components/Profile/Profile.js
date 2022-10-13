@@ -1,15 +1,12 @@
 import React from "react";
 import Header from "../Header/Header";
-import { Link } from 'react-router-dom';
 import './Profile.css'
 
 function Profile({ currentUser, onLogout }) {
 
-  console.log(currentUser.email)
-
   const [formParams, setFormParams] = React.useState({
-    email: '',
-    password: '',
+    name: currentUser.name,
+    email: currentUser.email,
   });
 
   const handleChange = (e) => {
@@ -31,7 +28,7 @@ function Profile({ currentUser, onLogout }) {
               <span className="profile__input-name">Имя</span>
               <input
               placeholder="Имя пользователя"
-              value={currentUser.name}
+              value={formParams.name}
               onChange={handleChange}
               className="profile__input-text"
               type="text"
@@ -45,7 +42,7 @@ function Profile({ currentUser, onLogout }) {
               <span className="profile__input-name">Email</span>
               <input
               placeholder="Email пользователя"
-              value={currentUser.email}
+              value={formParams.email}
               onChange={handleChange}
               className="profile__input-text" 
               type="email"

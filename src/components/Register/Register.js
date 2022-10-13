@@ -5,6 +5,7 @@ import Logo from '../Logo/Logo';
 function Register(props) {
 
   const [formParams, setFormParams] = React.useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -65,7 +66,7 @@ function Register(props) {
           <span className="login__input-name">Пароль</span>
           <input
           placeholder="Ваш пароль"
-          deaultValue={formParams.password}
+          value={formParams.password}
           onChange={handleChange}
           className="login__input-text" 
           type="password"

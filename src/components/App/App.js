@@ -26,8 +26,6 @@ function App() {
     handleLogout
   } = useLogin();
 
-  console.log(currentUser, loggedIn)
-
   React.useEffect(() => {
     moviesApi.getInitialMovies()
     .then((movies) => {
