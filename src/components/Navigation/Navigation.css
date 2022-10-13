@@ -39,7 +39,7 @@
 }
 
 .menu__btn {
-  display: flex;
+  display: grid;
   justify-content: end;
   background-image: url('../../images/acc_pic.svg');
   margin: 0 auto;
