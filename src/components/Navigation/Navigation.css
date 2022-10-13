@@ -53,3 +53,7 @@
   background-repeat: no-repeat;
   background-position: 10% 40%;
 }
+
+.menu__btn_type_active {
+  box-shadow: 0 0 0 1px #2BE080, 0 0 8px #2BE080;
+}

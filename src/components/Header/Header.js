@@ -48,7 +48,7 @@ function Header({ onLoggedin }) {
             <NavLink to='/movies' className={({ isActive }) => isActive ? 'header__film-button header__film-button_type_active' : 'header__film-button'}>Фильмы</NavLink>
             <NavLink to='/saved-movies' className={({ isActive }) => isActive ? 'header__film-button header__film-button_type_active' : 'header__film-button'}>Сохраненные фильмы</NavLink>
           </nav>
-          <button className="header__btn">
+          <button className={`header__btn ${(location.pathname === '/profile') ? 'header__btn_type_active' : ''}`}>
             <Link to='/profile' className="header__account-button">Аккаунт</Link>
           </button>
         </div>
