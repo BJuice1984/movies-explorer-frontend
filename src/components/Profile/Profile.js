@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { Link } from 'react-router-dom';
 import './Profile.css'
 
-function Profile({ currentUser }) {
+function Profile({ currentUser, onLogout }) {
 
   console.log(currentUser.email)
 
@@ -55,8 +55,8 @@ function Profile({ currentUser }) {
               minLength="6"
               maxLength="20" />
             </label>
-            <button className="profile__button" type="submit">Редактировать</button>
-            <Link className="profile__link" to="/sign-in">Выйти из аккаунта</Link>
+            <button className="profile__button" type="button">Редактировать</button>
+            <button className="profile__link" type="button" onClick={onLogout}>Выйти из аккаунта</button>
           </form>
         </div>
       </section>

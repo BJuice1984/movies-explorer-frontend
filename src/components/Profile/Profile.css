@@ -109,7 +109,8 @@
   line-height: 1.21;
   font-weight: 500;
   color: #EE3465;
-  text-decoration: none;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 }
 

@@ -22,7 +22,8 @@ function App() {
     currentUser,
     loggedIn,
     handleRegister,
-    handleLogin
+    handleLogin,
+    handleLogout
   } = useLogin();
 
   console.log(currentUser, loggedIn)
@@ -36,27 +37,6 @@ function App() {
       console.log(err)
     })
   }, []);
-
-  // React.useEffect(() => {
-  //   if (loggedIn) {
-  //     navigate('/movies')
-  //   }
-  // }, [navigate, loggedIn])
-
-  // React.useEffect(() => {
-  //   // setIsLoading(true);
-  //   if (loggedIn) {
-  //     Promise.all([Auth.getInitialUser(), Auth.getInitialFilms()])
-  //     .then(([userData, initialFilms]) => {
-  //       setCurrentUser(userData);
-  //       setSavedFilms(initialFilms)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  //     // .finally(() => setIsLoading(false));
-  //   }
-  // }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -74,7 +54,8 @@ function App() {
               onLoginClick={handleLogin} />} />
             <Route path="profile" 
               element={<Profile 
-              currentUser={currentUser}/>} />
+              currentUser={currentUser}
+              onLogout={handleLogout}/>} />
             <Route path="movies"
               element={<Movies />} />
             <Route path="saved-movies"

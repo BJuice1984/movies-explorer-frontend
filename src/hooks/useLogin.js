@@ -26,7 +26,7 @@ function useLogin() {
       if (data) {
         setLoggedIn(true);
         navigate('/');
-        getMyProfile();
+        _getMyProfile();
       }
     })
     .catch((err) => {
@@ -34,17 +34,35 @@ function useLogin() {
     })
   }
 
-  const getMyProfile = () => {
+  const handleLogout = () => {
+    return Auth.logout()
+    .then(() => {
+      setLoggedIn(false);
+      navigate('/sign-in');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const _getMyProfile = () => {
     Auth.getMyProfile()
     .then((profile) => {
-      setCurrentUser({ name: profile.name, email: profile.email })})
+      if (profile) {
+        setCurrentUser({ name: profile.name, email: profile.email })
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })  
   }
 
   return {
     currentUser,
     loggedIn,
     handleRegister,
-    handleLogin
+    handleLogin,
+    handleLogout
   };
 }
 
