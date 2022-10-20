@@ -5,13 +5,16 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './Movies.css'
 
-function Movies() {
+function Movies({ isLoggedin, getSavedMovies, localMovies }) {
 
   return(
     <main className="movies">
       <Header />
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm
+        isLoggedin={isLoggedin}
+        getSavedMovies={getSavedMovies} />
+      <MoviesCardList
+        localMovies={localMovies} />
       <Footer />
     </main>
   )

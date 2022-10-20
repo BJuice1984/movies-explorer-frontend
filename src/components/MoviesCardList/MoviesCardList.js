@@ -2,17 +2,12 @@ import React from "react";
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList() {
+function MoviesCardList({ localMovies }) {
 
   return(
     <section className="movie-card-list">
       <ul className="movie-card-list__items">
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {localMovies.map(movie => <MoviesCard movie={movie} key={movie.id ? movie.id : movie.movieId}/>)}
       </ul>
       <button className="movie-card-list__btn">Ещё</button>
     </section>

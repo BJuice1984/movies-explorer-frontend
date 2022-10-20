@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../Header/Header";
+import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './Profile.css'
 
-function Profile({ currentUser, onLogout }) {
+function Profile({ onLogout }) {
+
+  const currentUser = useContext(CurrentUserContext);
 
   const [formParams, setFormParams] = React.useState({
     name: currentUser.name,

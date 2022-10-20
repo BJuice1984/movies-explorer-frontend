@@ -11,7 +11,8 @@ import { CurrentUserContext } from '../../context/CurrnetUserContext';
 import './App.css';
 
 import useLogin from '../../hooks/useLogin';
-import { moviesApi } from '../../utils/MoviesApi';
+import useInitialMovies from '../../hooks/useInitialMovies';
+// import { getInitialMovies } from '../../utils/MoviesApi';
 
 
 
@@ -26,15 +27,22 @@ function App() {
     handleLogout
   } = useLogin();
 
-  React.useEffect(() => {
-    moviesApi.getInitialMovies()
-    .then((movies) => {
-      localStorage.setItem("initial-movies", JSON.stringify(movies));
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }, []);
+  // console.log(currentUser)
+
+  const {
+    getSavedMovies,
+    localMovies
+  } = useInitialMovies();
+
+  // React.useEffect(() => {
+  //   getInitialMovies()
+  //   .then((movies) => {
+  //     localStorage.setItem("initial-movies", JSON.stringify(movies));
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //   })
+  // }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -52,10 +60,12 @@ function App() {
               onLoginClick={handleLogin} />} />
             <Route path="profile" 
               element={<Profile 
-              currentUser={currentUser}
               onLogout={handleLogout}/>} />
             <Route path="movies"
-              element={<Movies />} />
+              element={<Movies
+              isLoggedin={loggedIn}
+              getSavedMovies={getSavedMovies}
+              localMovies={localMovies}/>} />
             <Route path="saved-movies"
               element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound />} />

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  // console.log(loggedIn);
 
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ function useLogin() {
     return Auth.authorize(password, email)
     .then((data) => {
       if (data) {
-        setLoggedIn(true);
+        
         navigate('/');
         _getMyProfile();
       }
@@ -36,6 +37,7 @@ function useLogin() {
     return Auth.logout()
     .then(() => {
       setLoggedIn(false);
+      localStorage.clear();
       navigate('/sign-in');
     })
     .catch((err) => {
@@ -43,17 +45,26 @@ function useLogin() {
     })
   }
 
+  // const updateMyProfile = () => {
+
+  // }
+
   const _getMyProfile = () => {
     Auth.getMyProfile()
     .then((profile) => {
       if (profile) {
-        setCurrentUser({ name: profile.name, email: profile.email })
+        setCurrentUser({ name: profile.name, email: profile.email });
+        setLoggedIn(true);
       }
     })
     .catch((err) => {
       console.log(err);
     })  
   }
+
+  React.useEffect(() => {
+    _getMyProfile();
+  }, [loggedIn])
 
   return {
     currentUser,

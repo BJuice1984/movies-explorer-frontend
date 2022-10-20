@@ -1,12 +1,18 @@
 import React from "react";
 import './SearchForm.css'
 
-function SearchForm() {
+function SearchForm({ getSavedMovies }) {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getSavedMovies()
+    console.log('tap')
+  }
 
   return(
     <section className="search-form">
       <div className="search-form__container">
-        <form className="search-form__input-form" >
+        <form className="search-form__input-form" onSubmit={handleSubmit}>
           <label className="search-form__input-form-label">
             <input
             placeholder="Фильм"
