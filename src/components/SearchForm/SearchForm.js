@@ -6,7 +6,6 @@ function SearchForm({ getSavedMovies }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     getSavedMovies()
-    console.log('tap')
   }
 
   return(

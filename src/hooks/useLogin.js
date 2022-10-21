@@ -23,7 +23,6 @@ function useLogin() {
     return Auth.authorize(password, email)
     .then((data) => {
       if (data) {
-        
         navigate('/');
         _getMyProfile();
       }
@@ -45,9 +44,17 @@ function useLogin() {
     })
   }
 
-  // const updateMyProfile = () => {
-
-  // }
+  const updateMyProfile = (name, email) => {
+    return Auth.updateMyProfile(name, email)
+    .then((profile) => {
+      if (profile) {
+        setCurrentUser({ name: profile.name, email: profile.email });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   const _getMyProfile = () => {
     Auth.getMyProfile()
@@ -71,7 +78,8 @@ function useLogin() {
     loggedIn,
     handleRegister,
     handleLogin,
-    handleLogout
+    handleLogout,
+    updateMyProfile
   };
 }
 
