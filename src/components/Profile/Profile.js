@@ -7,10 +7,10 @@ function Profile({ onLogout, updateMyProfile }) {
 
   const currentUser = useContext(CurrentUserContext);
 
-  const [formParams, setFormParams] = React.useState({
-    name: currentUser.name || '',
-    email: currentUser.email || '',
-  });
+  const [formParams, setFormParams] = React.useState({});
+  const [inputDisable, setInputDisable] = React.useState(true);
+  const [buttonDisable, setButtonDisable] = React.useState(false);
+  const [inputValid, setInputValid] = React.useState(false);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -22,10 +22,25 @@ function Profile({ onLogout, updateMyProfile }) {
 
   React.useEffect(() => {
     setFormParams({
-      name: currentUser.name,
-      email: currentUser.email,
+      name: currentUser.name || '',
+      email: currentUser.email || '',
     })
   }, [currentUser])
+
+  const handleInput = () => {
+    setInputDisable(false)
+    // setButtonDisable(true)
+  }
+
+  // React.useEffect(() => {
+  //   if (formParams.name === currentUser.name && formParams.email === currentUser.email) {
+  //     setButtonDisable(true)
+  //     setInputValid(false)
+  //   } else {
+  //     setButtonDisable(false)
+  //     setInputValid(true)
+  //   }
+  // }, [currentUser.email, currentUser.name, formParams.email, formParams.name])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +66,8 @@ function Profile({ onLogout, updateMyProfile }) {
               id="name"
               required
               minLength="2"
-              maxLength="20" />
+              maxLength="20"
+              disabled={inputDisable} />
             </label>
             <label className="profile__input-form-label">
               <span className="profile__input-name">Email</span>
@@ -65,9 +81,16 @@ function Profile({ onLogout, updateMyProfile }) {
               id="email"
               required
               minLength="6"
-              maxLength="20" />
+              maxLength="20"
+              disabled={inputDisable} />
             </label>
-            <button className="profile__button" type="submit">Редактировать</button>
+            <button
+              onClick={handleInput}
+              disabled={buttonDisable}
+              className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : inputValid ? 'profile__button_type_valid' : ''}`} 
+              type={inputDisable ? "button" : "submit"}>
+                {inputDisable ? "Редактировать" : "Сохранить"}
+              </button>
             <button className="profile__link" type="button" onClick={onLogout}>Выйти из аккаунта</button>
           </form>
         </div>
