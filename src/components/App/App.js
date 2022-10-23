@@ -31,7 +31,8 @@ function App() {
 
   const {
     localUserMovies,
-    handleAddUserMovie
+    handleAddUserMovie,
+    handleGetUserMovies
   } = useUserMovies();
 
   return (
@@ -60,6 +61,7 @@ function App() {
               handleAddUserMovie={handleAddUserMovie}/>} />
             <Route path="saved-movies"
               element={<SavedMovies
+              handleGetUserMovies={handleGetUserMovies}
               localUserMovies={localUserMovies}/>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

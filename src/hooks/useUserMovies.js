@@ -35,9 +35,17 @@ function useUserMovies() {
     })
   };
 
+  function handleGetUserMovies() {
+    getUserMovies()
+    .then((movies) => {
+      setLocalUserMovies(movies)
+    })
+  }
+
   return {
     localUserMovies,
-    handleAddUserMovie
+    handleAddUserMovie,
+    handleGetUserMovies
   }
 }
 

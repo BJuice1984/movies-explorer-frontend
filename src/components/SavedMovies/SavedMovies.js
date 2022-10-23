@@ -5,7 +5,11 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './SavedMovies.css'
 
-function SavedMovies({ localUserMovies }) {
+function SavedMovies({ localUserMovies, handleGetUserMovies }) {
+
+  React.useEffect(() => {
+    handleGetUserMovies()
+  }, [handleGetUserMovies])
 
   return(
     <main className="movies">
