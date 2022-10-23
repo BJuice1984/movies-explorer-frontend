@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ movies, handleGetUserMovies, handleAddUserMovie }) {
+function MoviesCardList({ movies, handleAddUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(true);
   const location = useLocation();
 

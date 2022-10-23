@@ -60,7 +60,6 @@ function useLogin() {
     .then((profile) => {
       if (profile) {
         setCurrentUser({ name: profile.name, email: profile.email });
-
       }
     })
     .catch((err) => {

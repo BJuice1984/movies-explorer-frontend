@@ -7,6 +7,12 @@ import './Movies.css'
 
 function Movies({ isLoggedin, getSavedMovies, localMovies, handleAddUserMovie }) {
 
+  React.useEffect(() => {
+    if (localMovies.length === 0) {
+      getSavedMovies()
+    }
+  }, [])
+
   return(
     <main className="movies">
       <Header />

@@ -8,24 +8,17 @@ import './SavedMovies.css'
 function SavedMovies({ localUserMovies, handleGetUserMovies }) {
 
   React.useEffect(() => {
-    console.log('savedmovies')
-    handleGetUserMovies()
-  }, [])
-
-  // React.useEffect(() => {
-  //   if (localUserMovies) {
-  //     handleGetUserMovies()
-  //   }
-    
-  // }, [])
+    if (localUserMovies.length === 0) {
+      handleGetUserMovies()
+    }
+  }, [handleGetUserMovies, localUserMovies.length])
 
   return(
     <main className="movies">
       <Header />
       <SearchForm />
       <MoviesCardList
-      movies={localUserMovies}
-      handleGetUserMovies={handleGetUserMovies} />
+      movies={localUserMovies} />
       <Footer />
     </main>
   )

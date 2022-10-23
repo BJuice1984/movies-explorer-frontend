@@ -5,7 +5,7 @@ function SearchForm({ getSavedMovies }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getSavedMovies()
+    // getSavedMovies()
   }
 
   return(
