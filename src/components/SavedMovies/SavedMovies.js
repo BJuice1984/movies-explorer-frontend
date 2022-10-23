@@ -5,13 +5,14 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './SavedMovies.css'
 
-function SavedMovies() {
+function SavedMovies({ localUserMovies }) {
 
   return(
     <main className="movies">
       <Header />
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList
+      movies={localUserMovies} />
       <Footer />
     </main>
   )

@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrnetUserContext';
 import useLogin from '../../hooks/useLogin';
 import useInitialMovies from '../../hooks/useInitialMovies';
+import useUserMovies from '../../hooks/useUserMovies';
 import './App.css';
 
 function App() {
@@ -28,6 +29,13 @@ function App() {
     localMovies
   } = useInitialMovies();
 
+  const {
+    localUserMovies,
+    handleAddUserMovie
+  } = useUserMovies();
+
+  console.log(localUserMovies)
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -45,15 +53,16 @@ function App() {
             <Route path="profile" 
               element={<Profile 
               onLogout={handleLogout}
-              updateMyProfile={updateMyProfile}/>}
-              currentUser={currentUser} />
+              updateMyProfile={updateMyProfile}/>} />
             <Route path="movies"
               element={<Movies
               isLoggedin={loggedIn}
               getSavedMovies={getSavedMovies}
-              localMovies={localMovies}/>} />
+              localMovies={localMovies}
+              handleAddUserMovie={handleAddUserMovie}/>} />
             <Route path="saved-movies"
-              element={<SavedMovies />} />
+              element={<SavedMovies
+              localUserMovies={localUserMovies}/>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

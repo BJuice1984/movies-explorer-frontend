@@ -2,7 +2,7 @@ import React from "react";
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie }) {
+function MoviesCard({ movie, handleAddUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
   const [savedMovie, setSavedMovie] = React.useState(false);
   const location = useLocation();
@@ -20,6 +20,8 @@ function MoviesCard({ movie }) {
       setSavedMovie(false);
     } else {
       setSavedMovie(true);
+      handleAddUserMovie(movie);
+                                            console.log('убрать запрос на сервер из MainApi')
     }
   }
 

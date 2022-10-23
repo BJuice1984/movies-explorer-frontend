@@ -5,7 +5,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './Movies.css'
 
-function Movies({ isLoggedin, getSavedMovies, localMovies }) {
+function Movies({ isLoggedin, getSavedMovies, localMovies, handleAddUserMovie }) {
 
   return(
     <main className="movies">
@@ -14,7 +14,8 @@ function Movies({ isLoggedin, getSavedMovies, localMovies }) {
         isLoggedin={isLoggedin}
         getSavedMovies={getSavedMovies} />
       <MoviesCardList
-        localMovies={localMovies} />
+        handleAddUserMovie={handleAddUserMovie}
+        movies={localMovies} />
       <Footer />
     </main>
   )
