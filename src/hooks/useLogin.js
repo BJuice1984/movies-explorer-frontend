@@ -23,7 +23,7 @@ function useLogin() {
     .then((data) => {
       if (data) {
         navigate('/');
-        _getMyProfile();
+        setLoggedIn(true);
       }
     })
     .catch((err) => {
@@ -60,7 +60,7 @@ function useLogin() {
     .then((profile) => {
       if (profile) {
         setCurrentUser({ name: profile.name, email: profile.email });
-        setLoggedIn(true);
+
       }
     })
     .catch((err) => {
