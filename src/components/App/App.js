@@ -34,8 +34,6 @@ function App() {
     handleAddUserMovie
   } = useUserMovies();
 
-  console.log(localUserMovies)
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">

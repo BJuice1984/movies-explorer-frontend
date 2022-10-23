@@ -5,7 +5,7 @@ function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
 
-  async function handleAddUserMovie({
+  function handleAddUserMovie({
     country,
     director,
     duration,
@@ -16,9 +16,8 @@ function useUserMovies() {
     thumbnail,
     movieId,
     nameRU,
-    nameEN,
-  }) {
-    await addUserMovie({
+    nameEN,}) {
+    addUserMovie({
       country,
       director,
       duration,
@@ -30,12 +29,10 @@ function useUserMovies() {
       movieId,
       nameRU,
       nameEN,
-    });
-    await getUserMovies()
-    .then((movies) => {
-      setLocalUserMovies(movies)
     })
-    return
+    .then((movie) => {
+      setLocalUserMovies([movie, ...localUserMovies])
+    })
   };
 
   return {
