@@ -18,7 +18,12 @@ function MoviesCardList({ movies, handleAddUserMovie }) {
   return(
     <section className="movie-card-list">
       <ul className="movie-card-list__items">
-        {movies.map(movie => <MoviesCard movie={movie} key={movie.id ? movie.id : movie.movieId} handleAddUserMovie={handleAddUserMovie}/>)}
+        {movies.map(movie => 
+          <MoviesCard
+            movie={movie}
+            key={movie.id ? movie.id : movie.movieId}
+            handleAddUserMovie={handleAddUserMovie}/>
+        )}
       </ul>
       <button
         className={`movie-card-list__btn ${isMoviesPage ? '' : 'movie-card-list__btn_type_disable'}`}

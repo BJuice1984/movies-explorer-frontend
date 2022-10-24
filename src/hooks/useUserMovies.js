@@ -35,10 +35,21 @@ function useUserMovies() {
     })
   };
 
-  const handleGetUserMovies = React.useCallback(async() => {
+  const handleGetUserMovies = React.useCallback(async (currentUser) => {
     await getUserMovies()
         .then((movies) => {
-          localStorage.setItem("user-movies", JSON.stringify(movies));
+          // movies.forEach(function (arrItem) {
+          //   var x = arrItem.owner + 2;
+          //   console.log(x)
+          // })
+          // console.log('currentUser.userID', currentUser.userID)
+
+          const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
+          // console.log('filtredMovies', filtredMovies)
+          return filtredMovies
+        })
+        .then((filtredMovies) => {
+          localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
         })
         .catch(err => {
           console.log(err)

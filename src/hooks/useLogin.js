@@ -59,7 +59,7 @@ function useLogin() {
     Auth.getMyProfile()
     .then((profile) => {
       if (profile) {
-        setCurrentUser({ name: profile.name, email: profile.email });
+        setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
       }
     })
     .catch((err) => {
