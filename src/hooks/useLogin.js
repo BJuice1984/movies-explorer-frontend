@@ -35,6 +35,7 @@ function useLogin() {
     return Auth.logout()
     .then(() => {
       setLoggedIn(false);
+      setCurrentUser({});
       localStorage.clear();
       navigate('/sign-in');
     })

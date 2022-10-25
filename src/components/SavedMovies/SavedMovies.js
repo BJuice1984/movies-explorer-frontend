@@ -9,7 +9,6 @@ import { CurrentUserContext } from "../../context/CurrnetUserContext";
 function SavedMovies({ localUserMovies, handleGetUserMovies }) {
 
   const currentUser = useContext(CurrentUserContext);
-  // console.log('SavedMovies', currentUser);
 
   React.useEffect(() => {
     if (localUserMovies.length === 0) {

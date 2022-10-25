@@ -4,6 +4,7 @@ import { addUserMovie, getUserMovies } from '../utils/MainApi';
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
+  console.log(localUserMovies)
 
   function handleAddUserMovie({
     country,
@@ -38,14 +39,7 @@ function useUserMovies() {
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
     await getUserMovies()
         .then((movies) => {
-          // movies.forEach(function (arrItem) {
-          //   var x = arrItem.owner + 2;
-          //   console.log(x)
-          // })
-          // console.log('currentUser.userID', currentUser.userID)
-
           const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
-          // console.log('filtredMovies', filtredMovies)
           return filtredMovies
         })
         .then((filtredMovies) => {

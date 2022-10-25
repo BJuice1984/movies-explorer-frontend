@@ -8,6 +8,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { Routes, Route } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrnetUserContext';
+import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
 import useLogin from '../../hooks/useLogin';
 import useInitialMovies from '../../hooks/useInitialMovies';
 import useUserMovies from '../../hooks/useUserMovies';
@@ -49,20 +50,25 @@ function App() {
             <Route path="sign-in"
               element={<Login
               onLoginClick={handleLogin} />} />
-            <Route path="profile" 
-              element={<Profile 
-              onLogout={handleLogout}
-              updateMyProfile={updateMyProfile}/>} />
-            <Route path="movies"
-              element={<Movies
-              isLoggedin={loggedIn}
-              getSavedMovies={getSavedMovies}
-              localMovies={localMovies}
-              handleAddUserMovie={handleAddUserMovie}/>} />
-            <Route path="saved-movies"
-              element={<SavedMovies
-              handleGetUserMovies={handleGetUserMovies}
-              localUserMovies={localUserMovies}/>} />
+
+            <Route element={<ProtectedRoutes
+              loggedIn={loggedIn} />} >
+              <Route path="profile" 
+                element={<Profile 
+                onLogout={handleLogout}
+                updateMyProfile={updateMyProfile}/>} />
+              <Route path="movies"
+                element={<Movies
+                isLoggedin={loggedIn}
+                getSavedMovies={getSavedMovies}
+                localMovies={localMovies}
+                handleAddUserMovie={handleAddUserMovie}/>} />
+              <Route path="saved-movies"
+                element={<SavedMovies
+                handleGetUserMovies={handleGetUserMovies}
+                localUserMovies={localUserMovies}/>} />
+            </Route>
+            
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
