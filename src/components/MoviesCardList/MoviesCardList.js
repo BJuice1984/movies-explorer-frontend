@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ movies, handleAddUserMovie }) {
+function MoviesCardList({ movies, handleAddUserMovie, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(true);
   const location = useLocation();
 
@@ -22,7 +22,8 @@ function MoviesCardList({ movies, handleAddUserMovie }) {
           <MoviesCard
             movie={movie}
             key={movie.id ? movie.id : movie.movieId}
-            handleAddUserMovie={handleAddUserMovie}/>
+            handleAddUserMovie={handleAddUserMovie}
+            handleDeleteUserMovie={handleDeleteUserMovie}/>
         )}
       </ul>
       <button

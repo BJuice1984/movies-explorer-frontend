@@ -66,7 +66,7 @@ export const logout = () => {
 }
 
 export const addUserMovie = (movie) => {
-  // console.log('api', movie.image.id)
+  console.log(movie)
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
     credentials: 'include',
@@ -81,7 +81,7 @@ export const addUserMovie = (movie) => {
       year: movie.year || 'Неизвестно',
       description: movie.description || 'Неизвестно',
       image: `https://api.nomoreparties.co${movie.image.url}`,  //убрать запрос на сервер
-      trailerLink: movie.trailerLink || 'Неизвестно',
+      trailerLink: movie.trailerLink || 'https://www.youtube.com/',  // God Save Ozzy bag!!!!
       thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
       movieId: movie.image.id,                                        //Не приходит movie.id
       nameRU: movie.nameRU || movie.nameEN,
@@ -90,6 +90,15 @@ export const addUserMovie = (movie) => {
   })
   .then(checkResponse)
 };
+
+export const deleteUserMovie = (movieId) => {
+  console.log(movieId)
+  return fetch(`${BASE_URL}/movies/${movieId}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  })
+  .then(checkResponse)
+}
 
 export const getUserMovies = () => {
   return fetch(`${BASE_URL}/movies`, {

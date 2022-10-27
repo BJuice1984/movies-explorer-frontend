@@ -2,7 +2,7 @@ import React from "react";
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, handleAddUserMovie }) {
+function MoviesCard({ movie, handleAddUserMovie, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
   const [savedMovie, setSavedMovie] = React.useState(false);
   const location = useLocation();
@@ -18,6 +18,7 @@ function MoviesCard({ movie, handleAddUserMovie }) {
   function saveMovie() {
     if (savedMovie || !isMoviesPage) {
       setSavedMovie(false);
+      handleDeleteUserMovie(movie);
     } else {
       setSavedMovie(true);
       handleAddUserMovie(movie);

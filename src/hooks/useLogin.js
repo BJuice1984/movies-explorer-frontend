@@ -22,6 +22,7 @@ function useLogin() {
     return Auth.authorize(password, email)
     .then((data) => {
       if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
         navigate('/');
         setLoggedIn(true);
       }
@@ -56,25 +57,53 @@ function useLogin() {
     })
   }
 
-  const _getMyProfile = () => {
-    Auth.getMyProfile()
+  // const getMyProfile = () => {
+  //   Auth.getMyProfile()
+  //   .then((profile) => {
+  //     if (profile) {
+  //       setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })  
+  // }
+
+  const getMyProfile = React.useCallback(async () => {
+    await Auth.getMyProfile()
     .then((profile) => {
-      if (profile) {
-        setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
-      }
+      setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
+      setLoggedIn(true);
     })
     .catch((err) => {
-      console.log(err);
-    })  
-  }
+      console.log(err)
+    })
+  }, [])
 
-  React.useEffect(() => {
-    _getMyProfile();
-  }, [loggedIn])
+  // const handleGetUserMovies = React.useCallback(async (currentUser) => {
+  //   await getUserMovies()
+  //       .then((movies) => {
+  //         const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
+  //         return filtredMovies
+  //       })
+  //       .then((filtredMovies) => {
+  //         localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
+  // }, []);
+
+  // React.useEffect(() => {
+  //   getMyProfile();
+  //   console.log('useLogin', loggedIn)
+  // }, [loggedIn])
 
   return {
     currentUser,
     loggedIn,
+    getMyProfile,
     handleRegister,
     handleLogin,
     handleLogout,

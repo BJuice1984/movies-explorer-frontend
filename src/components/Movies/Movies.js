@@ -5,7 +5,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './Movies.css'
 
-function Movies({ isLoggedin, getSavedMovies, localMovies, handleAddUserMovie }) {
+function Movies({ isLoggedin, getSavedMovies, localMovies, handleAddUserMovie, handleDeleteUserMovie }) {
 
   React.useEffect(() => {
     if (localMovies.length === 0) {
@@ -21,6 +21,7 @@ function Movies({ isLoggedin, getSavedMovies, localMovies, handleAddUserMovie })
         getSavedMovies={getSavedMovies} />
       <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
+        handleDeleteUserMovie={handleDeleteUserMovie}
         movies={localMovies} />
       <Footer />
     </main>

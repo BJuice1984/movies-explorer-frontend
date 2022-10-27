@@ -19,6 +19,7 @@ function App() {
   const {
     currentUser,
     loggedIn,
+    getMyProfile,
     handleRegister,
     handleLogin,
     handleLogout,
@@ -33,8 +34,19 @@ function App() {
   const {
     localUserMovies,
     handleAddUserMovie,
+    handleDeleteUserMovie,
     handleGetUserMovies
   } = useUserMovies();
+
+  React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    // console.log(user)
+    if (user) {
+      getMyProfile();
+    }
+  }, [getMyProfile, loggedIn])
+
+  // console.log('App', loggedIn)
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -62,13 +74,14 @@ function App() {
                 isLoggedin={loggedIn}
                 getSavedMovies={getSavedMovies}
                 localMovies={localMovies}
-                handleAddUserMovie={handleAddUserMovie}/>} />
+                handleAddUserMovie={handleAddUserMovie}
+                handleDeleteUserMovie={handleDeleteUserMovie} />} />
               <Route path="saved-movies"
                 element={<SavedMovies
                 handleGetUserMovies={handleGetUserMovies}
                 localUserMovies={localUserMovies}/>} />
             </Route>
-            
+
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

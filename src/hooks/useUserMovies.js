@@ -1,10 +1,10 @@
 import React from "react";
-import { addUserMovie, getUserMovies } from '../utils/MainApi';
+import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
 
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
-  console.log(localUserMovies)
+  // console.log(localUserMovies)
 
   function handleAddUserMovie({
     country,
@@ -36,6 +36,18 @@ function useUserMovies() {
     })
   };
 
+  function handleDeleteUserMovie(movie) {    // Добавить ли проверку movie.owner === currentUser.userID?
+    deleteUserMovie(movie.image.id)            //Не приходит movie.id
+    .then(() => {
+      setLocalUserMovies((prevMovies) => {
+        return prevMovies.filter(m => m.movieId !== movie.movie.image.id)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
     await getUserMovies()
         .then((movies) => {
@@ -51,22 +63,10 @@ function useUserMovies() {
       return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
 
-
-
-  // async function handleGetUserMovies() {
-  //     await getUserMovies()
-  //       .then((movies) => {
-  //         localStorage.setItem("user-movies", JSON.stringify(movies));
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
-  // }
-
   return {
     localUserMovies,
     handleAddUserMovie,
+    handleDeleteUserMovie,
     handleGetUserMovies
   }
 }
