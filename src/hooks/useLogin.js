@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedOut, setLoggedOut] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
 
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function useLogin() {
         localStorage.setItem("user", JSON.stringify(data));
         navigate('/');
         setLoggedIn(true);
+        setLoggedOut(false);
       }
     })
     .catch((err) => {
@@ -36,6 +38,7 @@ function useLogin() {
     return Auth.logout()
     .then(() => {
       setLoggedIn(false);
+      setLoggedOut(true);
       setCurrentUser({});
       localStorage.clear();
       navigate('/sign-in');
@@ -57,18 +60,6 @@ function useLogin() {
     })
   }
 
-  // const getMyProfile = () => {
-  //   Auth.getMyProfile()
-  //   .then((profile) => {
-  //     if (profile) {
-  //       setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })  
-  // }
-
   const getMyProfile = React.useCallback(async () => {
     await Auth.getMyProfile()
     .then((profile) => {
@@ -80,29 +71,10 @@ function useLogin() {
     })
   }, [])
 
-  // const handleGetUserMovies = React.useCallback(async (currentUser) => {
-  //   await getUserMovies()
-  //       .then((movies) => {
-  //         const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
-  //         return filtredMovies
-  //       })
-  //       .then((filtredMovies) => {
-  //         localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
-  // }, []);
-
-  // React.useEffect(() => {
-  //   getMyProfile();
-  //   console.log('useLogin', loggedIn)
-  // }, [loggedIn])
-
   return {
     currentUser,
     loggedIn,
+    loggedOut,
     getMyProfile,
     handleRegister,
     handleLogin,

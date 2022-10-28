@@ -66,7 +66,7 @@ export const logout = () => {
 }
 
 export const addUserMovie = (movie) => {
-  console.log(movie)
+  // console.log(movie)
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
     credentials: 'include',
@@ -92,7 +92,6 @@ export const addUserMovie = (movie) => {
 };
 
 export const deleteUserMovie = (movieId) => {
-  console.log(movieId)
   return fetch(`${BASE_URL}/movies/${movieId}`, {
     method: 'DELETE',
     credentials: 'include'

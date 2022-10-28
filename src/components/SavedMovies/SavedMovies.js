@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import './SavedMovies.css'
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 
-function SavedMovies({ localUserMovies, handleGetUserMovies }) {
+function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMovie }) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -21,7 +21,8 @@ function SavedMovies({ localUserMovies, handleGetUserMovies }) {
       <Header />
       <SearchForm />
       <MoviesCardList
-        movies={localUserMovies} />
+        movies={localUserMovies}
+        handleDeleteUserMovie={handleDeleteUserMovie} />
       <Footer />
     </main>
   )

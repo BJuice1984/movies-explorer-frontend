@@ -19,7 +19,8 @@ function useInitialMovies() {
 
   return {
     getSavedMovies,
-    localMovies
+    localMovies,
+    setLocalMovies
   }
 }
 

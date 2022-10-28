@@ -4,7 +4,7 @@ import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
-  // console.log(localUserMovies)
+  console.log('localUserMovies', localUserMovies)
 
   function handleAddUserMovie({
     country,
@@ -32,15 +32,17 @@ function useUserMovies() {
       nameEN,
     })
     .then((movie) => {
-      setLocalUserMovies([movie, ...localUserMovies])
+      console.log('ответ', movie)
+      setLocalUserMovies([movie, ...localUserMovies])   // При добавлении не приходит id, только после обновления страницы
     })
   };
 
-  function handleDeleteUserMovie(movie) {    // Добавить ли проверку movie.owner === currentUser.userID?
-    deleteUserMovie(movie.image.id)            //Не приходит movie.id
+  const handleDeleteUserMovie = (movie) => { 
+    console.log(movie._id)   // Добавить ли проверку movie.owner === currentUser.userID?
+    deleteUserMovie(movie._id)
     .then(() => {
       setLocalUserMovies((prevMovies) => {
-        return prevMovies.filter(m => m.movieId !== movie.movie.image.id)
+        return prevMovies.filter(m => m._id !== movie._id)  // При добавлении не приходит id, только после обновления страницы
       })
     })
     .catch(err => {
@@ -49,8 +51,11 @@ function useUserMovies() {
   }
 
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
+    // console.log('currentUser.userID', currentUser.userID)
+
     await getUserMovies()
         .then((movies) => {
+          // console.log('getUserMovies',movies)
           const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
           return filtredMovies
         })
@@ -65,6 +70,7 @@ function useUserMovies() {
 
   return {
     localUserMovies,
+    setLocalUserMovies,
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies

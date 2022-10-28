@@ -18,6 +18,7 @@ function MoviesCard({ movie, handleAddUserMovie, handleDeleteUserMovie }) {
   function saveMovie() {
     if (savedMovie || !isMoviesPage) {
       setSavedMovie(false);
+      console.log('tap', movie)
       handleDeleteUserMovie(movie);
     } else {
       setSavedMovie(true);
