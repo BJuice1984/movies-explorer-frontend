@@ -8,6 +8,8 @@ import { CurrentUserContext } from "../../context/CurrnetUserContext";
 
 function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMovie }) {
 
+  console.log('saved', localUserMovies)
+
   const currentUser = useContext(CurrentUserContext);
 
   React.useEffect(() => {

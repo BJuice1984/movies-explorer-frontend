@@ -4,7 +4,7 @@ import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
-  console.log('localUserMovies', localUserMovies)
+  // console.log('localUserMovies', localUserMovies)
 
   function handleAddUserMovie({
     country,
@@ -32,17 +32,15 @@ function useUserMovies() {
       nameEN,
     })
     .then((movie) => {
-      console.log('ответ', movie)
-      setLocalUserMovies([movie, ...localUserMovies])   // При добавлении не приходит id, только после обновления страницы
+      setLocalUserMovies([movie, ...localUserMovies])
     })
   };
 
-  const handleDeleteUserMovie = (movie) => { 
-    console.log(movie._id)   // Добавить ли проверку movie.owner === currentUser.userID?
+  const handleDeleteUserMovie = (movie) => {
     deleteUserMovie(movie._id)
     .then(() => {
       setLocalUserMovies((prevMovies) => {
-        return prevMovies.filter(m => m._id !== movie._id)  // При добавлении не приходит id, только после обновления страницы
+        return prevMovies.filter(m => m._id !== movie._id)
       })
     })
     .catch(err => {

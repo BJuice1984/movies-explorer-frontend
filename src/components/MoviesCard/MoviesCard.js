@@ -2,10 +2,16 @@ import React from "react";
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, handleAddUserMovie, handleDeleteUserMovie }) {
+function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
   const [savedMovie, setSavedMovie] = React.useState(false);
+  const [handledMovie, setHandledMovie] = React.useState({})
   const location = useLocation();
+
+  // console.log('savedMovie', savedMovie)
+  // console.log('!isMoviesPage', !isMoviesPage)
+  // console.log('localUserMovies', localUserMovies)
+  // console.log('handledMovie', handledMovie)
 
   React.useEffect(() => {
     if (location.pathname === '/movies') {
@@ -14,12 +20,27 @@ function MoviesCard({ movie, handleAddUserMovie, handleDeleteUserMovie }) {
       setIsMoviesPage(false);
     }
   }, [location]);
+  
+  React.useEffect(() => {
+    if (localUserMovies) {
+      localUserMovies.forEach(localUserMovie => {
+        // console.log('localUserMovie.nameRU', localUserMovie)
+        // console.log('movie.nameRU', movie.id)
+        if (localUserMovie.nameRU === movie.nameRU && localUserMovie.movieId === movie.id) {
+          setSavedMovie(true);
+          setHandledMovie(localUserMovie)
+        }
+      })
+    }
+  }, [movie, localUserMovies])
 
   function saveMovie() {
     if (savedMovie || !isMoviesPage) {
       setSavedMovie(false);
-      console.log('tap', movie)
-      handleDeleteUserMovie(movie);
+      // console.log('tap', movie)
+      // console.log('handledMovie === 0', Object.keys(handledMovie).length === 0)
+      // console.log('handledMovie', handledMovie)
+      handleDeleteUserMovie(Object.keys(handledMovie).length === 0 ? movie : handledMovie);
     } else {
       setSavedMovie(true);
       handleAddUserMovie(movie);

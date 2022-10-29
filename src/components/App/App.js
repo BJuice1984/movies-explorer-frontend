@@ -49,7 +49,7 @@ function App() {
   }, [getMyProfile, loggedIn]);
 
   React.useEffect(() => {
-    console.log('loggedOut', loggedOut)
+    // console.log('loggedOut', loggedOut)
     if (loggedOut) {
       setLocalUserMovies([]);
       setLocalMovies([])
@@ -83,6 +83,7 @@ function App() {
                 isLoggedin={loggedIn}
                 getSavedMovies={getSavedMovies}
                 localMovies={localMovies}
+                localUserMovies={localUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
                 handleDeleteUserMovie={handleDeleteUserMovie} />} />
               <Route path="saved-movies"
