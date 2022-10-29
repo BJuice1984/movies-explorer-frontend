@@ -17,10 +17,14 @@ function useInitialMovies() {
     return setLocalMovies(JSON.parse(localStorage.getItem("initial-movies")))
   };
 
+  const clearLocalState = React.useCallback(() => {
+    return setLocalMovies([]);
+  }, []);
+
   return {
     getSavedMovies,
     localMovies,
-    setLocalMovies
+    clearLocalState
   }
 }
 

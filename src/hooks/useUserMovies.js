@@ -4,7 +4,6 @@ import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
-  // console.log('localUserMovies', localUserMovies)
 
   function handleAddUserMovie({
     country,
@@ -66,9 +65,13 @@ function useUserMovies() {
       return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
 
+  const clearLocalUserState = React.useCallback(() => {
+    return setLocalUserMovies([]);
+  }, []);
+
   return {
     localUserMovies,
-    setLocalUserMovies,
+    clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies

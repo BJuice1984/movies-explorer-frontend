@@ -30,12 +30,12 @@ function App() {
   const {
     getSavedMovies,
     localMovies,
-    setLocalMovies
+    clearLocalState
   } = useInitialMovies();
 
   const {
     localUserMovies,
-    setLocalUserMovies,
+    clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies
@@ -49,12 +49,11 @@ function App() {
   }, [getMyProfile, loggedIn]);
 
   React.useEffect(() => {
-    // console.log('loggedOut', loggedOut)
     if (loggedOut) {
-      setLocalUserMovies([]);
-      setLocalMovies([])
+      clearLocalState();
+      clearLocalUserState();
     }
-  }, [loggedOut, setLocalMovies, setLocalUserMovies])
+  }, [clearLocalState, clearLocalUserState, loggedOut])
 
 
   return (
