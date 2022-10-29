@@ -84,6 +84,7 @@ function App() {
                 getSavedMovies={getSavedMovies}
                 localMovies={localMovies}
                 localUserMovies={localUserMovies}
+                handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
                 handleDeleteUserMovie={handleDeleteUserMovie} />} />
               <Route path="saved-movies"

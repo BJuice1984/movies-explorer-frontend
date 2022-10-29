@@ -16,7 +16,7 @@ function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMov
     if (localUserMovies.length === 0) {
       handleGetUserMovies(currentUser)
     }
-  }, [currentUser, handleGetUserMovies, localUserMovies.length])
+  }, [currentUser, handleGetUserMovies, localUserMovies.length]);
 
   return(
     <main className="movies">
