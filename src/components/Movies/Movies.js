@@ -11,11 +11,8 @@ function Movies({
   getSavedMovies,
   localMovies,
   localUserMovies,
-
-
   handleLoadMore,
   numberOfFilms,
-
   handleGetUserMovies,
   handleAddUserMovie,
   handleDeleteUserMovie
@@ -29,12 +26,6 @@ function Movies({
     }
   }, [currentUser, handleGetUserMovies, localUserMovies.length]);
 
-  // React.useEffect(() => {
-  //   if (localMovies.length === 0) {
-  //     getSavedMovies()
-  //   }
-  // }, [])
-
   return(
     <main className="movies">
       <Header />
@@ -45,11 +36,8 @@ function Movies({
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}
         localUserMovies={localUserMovies}
-
         handleLoadMore={handleLoadMore}
         numberOfFilms={numberOfFilms}
-
-
         movies={localMovies} />
       <Footer />
     </main>

@@ -48,11 +48,8 @@ function useUserMovies() {
   }
 
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
-    // console.log('currentUser.userID', currentUser.userID)
-
     await getUserMovies()
         .then((movies) => {
-          // console.log('getUserMovies',movies)
           const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
           return filtredMovies
         })
