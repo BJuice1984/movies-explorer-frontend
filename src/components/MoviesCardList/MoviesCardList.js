@@ -7,20 +7,16 @@ function MoviesCardList({
   movies,
   localUserMovies,
   handleAddUserMovie,
-
   handleLoadMore,
   numberOfFilms,
-
   handleDeleteUserMovie
 }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(true);
-  const location = useLocation();
-
-  // console.log('movies', movies)
-  // console.log('visibleData', visibleData)
-
-
+  const location = useLocation();  
   const slice = movies.slice(0, numberOfFilms)
+
+  // console.log('slice', slice)
+  // console.log('numberOfFilms', numberOfFilms) //для savedMovies numberOfFilms === underfined
 
   React.useEffect(() => {
     if (location.pathname === '/saved-movies') {
@@ -43,7 +39,7 @@ function MoviesCardList({
         )}
       </ul>
       <button
-        className={`movie-card-list__btn ${isMoviesPage ? '' : 'movie-card-list__btn_type_disable'}`}
+        className={`movie-card-list__btn ${isMoviesPage && slice.length !== movies.length ? '' : 'movie-card-list__btn_type_disable'}`}
         type="button"
         onClick={handleLoadMore}
         aria-label="Показать ещё">Ещё</button>

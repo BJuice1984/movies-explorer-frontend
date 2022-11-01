@@ -8,11 +8,6 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
   const [handledMovie, setHandledMovie] = React.useState({})
   const location = useLocation();
 
-  // console.log('savedMovie', savedMovie)
-  // console.log('!isMoviesPage', !isMoviesPage)
-  // console.log('localUserMovies', localUserMovies)
-  // console.log('handledMovie', handledMovie)
-
   React.useEffect(() => {
     if (location.pathname === '/movies') {
       setIsMoviesPage(true);
@@ -24,8 +19,6 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
   React.useEffect(() => {
     if (localUserMovies) {
       localUserMovies.forEach(localUserMovie => {
-        // console.log('localUserMovie.nameRU', localUserMovie)
-        // console.log('movie.nameRU', movie.id)
         if (localUserMovie.nameRU === movie.nameRU && localUserMovie.movieId === movie.id) {
           setSavedMovie(true);
           setHandledMovie(localUserMovie)
@@ -37,9 +30,6 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
   function saveMovie() {
     if (savedMovie || !isMoviesPage) {
       setSavedMovie(false);
-      // console.log('tap', movie)
-      // console.log('handledMovie === 0', Object.keys(handledMovie).length === 0)
-      // console.log('handledMovie', handledMovie)
       handleDeleteUserMovie(Object.keys(handledMovie).length === 0 ? movie : handledMovie);
     } else {
       setSavedMovie(true);
