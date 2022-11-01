@@ -6,7 +6,20 @@ import Footer from "../Footer/Footer";
 import './Movies.css'
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 
-function Movies({ isLoggedin, getSavedMovies, localMovies, localUserMovies, handleGetUserMovies, handleAddUserMovie, handleDeleteUserMovie }) {
+function Movies({
+  isLoggedin,
+  getSavedMovies,
+  localMovies,
+  localUserMovies,
+
+
+  handleLoadMore,
+  numberOfFilms,
+
+  handleGetUserMovies,
+  handleAddUserMovie,
+  handleDeleteUserMovie
+}) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -16,11 +29,11 @@ function Movies({ isLoggedin, getSavedMovies, localMovies, localUserMovies, hand
     }
   }, [currentUser, handleGetUserMovies, localUserMovies.length]);
 
-  React.useEffect(() => {
-    if (localMovies.length === 0) {
-      getSavedMovies()
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   if (localMovies.length === 0) {
+  //     getSavedMovies()
+  //   }
+  // }, [])
 
   return(
     <main className="movies">
@@ -32,6 +45,11 @@ function Movies({ isLoggedin, getSavedMovies, localMovies, localUserMovies, hand
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}
         localUserMovies={localUserMovies}
+
+        handleLoadMore={handleLoadMore}
+        numberOfFilms={numberOfFilms}
+
+
         movies={localMovies} />
       <Footer />
     </main>

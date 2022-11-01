@@ -66,7 +66,7 @@ export const logout = () => {
 }
 
 export const addUserMovie = (movie) => {
-  // console.log(movie)
+  console.log(movie)
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
     credentials: 'include',

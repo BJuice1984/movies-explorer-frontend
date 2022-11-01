@@ -12,6 +12,7 @@ import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
 import useLogin from '../../hooks/useLogin';
 import useInitialMovies from '../../hooks/useInitialMovies';
 import useUserMovies from '../../hooks/useUserMovies';
+import usePagination from '../../hooks/usePagination';
 import './App.css';
 
 function App() {
@@ -41,6 +42,11 @@ function App() {
     handleGetUserMovies
   } = useUserMovies();
 
+  const {
+    handleLoadMore,
+    numberOfFilms
+  } = usePagination();
+
   React.useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
@@ -62,17 +68,16 @@ function App() {
         <div className="page__container">
           <Routes>
             <Route path="/" element={<Main 
-              isLoggedin={loggedIn}
-              />} />
+              isLoggedin={loggedIn}/>} />
             <Route path="sign-up"
               element={<Register
-              onRegClick={handleRegister} />} />
+              onRegClick={handleRegister}/>} />
             <Route path="sign-in"
               element={<Login
-              onLoginClick={handleLogin} />} />
+              onLoginClick={handleLogin}/>} />
 
             <Route element={<ProtectedRoutes
-              loggedIn={loggedIn} />} >
+              loggedIn={loggedIn}/>} >
               <Route path="profile" 
                 element={<Profile 
                 onLogout={handleLogout}
@@ -83,6 +88,12 @@ function App() {
                 getSavedMovies={getSavedMovies}
                 localMovies={localMovies}
                 localUserMovies={localUserMovies}
+
+                handleLoadMore={handleLoadMore}
+                numberOfFilms={numberOfFilms}
+
+
+
                 handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
                 handleDeleteUserMovie={handleDeleteUserMovie} />} />

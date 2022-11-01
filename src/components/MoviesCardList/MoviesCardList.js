@@ -3,9 +3,24 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ movies, localUserMovies, handleAddUserMovie, handleDeleteUserMovie }) {
+function MoviesCardList({
+  movies,
+  localUserMovies,
+  handleAddUserMovie,
+
+  handleLoadMore,
+  numberOfFilms,
+
+  handleDeleteUserMovie
+}) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(true);
   const location = useLocation();
+
+  // console.log('movies', movies)
+  // console.log('visibleData', visibleData)
+
+
+  const slice = movies.slice(0, numberOfFilms)
 
   React.useEffect(() => {
     if (location.pathname === '/saved-movies') {
@@ -18,7 +33,7 @@ function MoviesCardList({ movies, localUserMovies, handleAddUserMovie, handleDel
   return(
     <section className="movie-card-list">
       <ul className="movie-card-list__items">
-        {movies.map(movie =>
+        {slice.map(movie =>
           <MoviesCard
             movie={movie}
             localUserMovies={localUserMovies}
@@ -29,7 +44,8 @@ function MoviesCardList({ movies, localUserMovies, handleAddUserMovie, handleDel
       </ul>
       <button
         className={`movie-card-list__btn ${isMoviesPage ? '' : 'movie-card-list__btn_type_disable'}`}
-        type="button" 
+        type="button"
+        onClick={handleLoadMore}
         aria-label="Показать ещё">Ещё</button>
     </section>
   )
