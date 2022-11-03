@@ -30,7 +30,9 @@ function App() {
 
   const {
     getSavedMovies,
+    handleSearchFilm,
     localMovies,
+    localSearchedMovies,
     clearLocalState
   } = useInitialMovies();
 
@@ -84,7 +86,9 @@ function App() {
               <Route path="movies"
                 element={<Movies
                 getSavedMovies={getSavedMovies}
+                handleSearchFilm={handleSearchFilm}
                 localMovies={localMovies}
+                localSearchedMovies={localSearchedMovies}
                 localUserMovies={localUserMovies}
                 handleLoadMore={handleLoadMore}
                 numberOfFilms={numberOfFilms}

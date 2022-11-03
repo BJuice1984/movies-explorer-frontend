@@ -8,7 +8,9 @@ import { CurrentUserContext } from "../../context/CurrnetUserContext";
 
 function Movies({
   getSavedMovies,
+  handleSearchFilm,
   localMovies,
+  localSearchedMovies,
   localUserMovies,
   handleLoadMore,
   numberOfFilms,
@@ -29,14 +31,15 @@ function Movies({
     <main className="movies">
       <Header />
       <SearchForm
-        getSavedMovies={getSavedMovies} />
+        getSavedMovies={getSavedMovies}
+        handleSearchFilm={handleSearchFilm} />
       <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}
         localUserMovies={localUserMovies}
         handleLoadMore={handleLoadMore}
         numberOfFilms={numberOfFilms}
-        movies={localMovies} />
+        movies={localSearchedMovies} />
       <Footer />
     </main>
   )

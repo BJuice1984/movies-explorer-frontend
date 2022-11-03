@@ -63,7 +63,7 @@ function useUserMovies() {
   }, []);
 
   const clearLocalUserState = React.useCallback(() => {
-    return setLocalUserMovies([]);
+    setLocalUserMovies([]);
   }, []);
 
   return {
