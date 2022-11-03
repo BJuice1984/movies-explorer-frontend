@@ -33,7 +33,7 @@ function usePagination() {
   const handleChangeClientWidth = () => {
     setTimeout(() => {
       setClientWidth(document.documentElement.clientWidth);
-    }, 1000);
+    }, 1500);
   }
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ function usePagination() {
     return () => {
       window.removeEventListener('resize', handleChangeClientWidth);
     }
-  }, [clientWidth])
+  }, [clientWidth]);
 
   const handleLoadMore = () => {
     setnumberOfFilms(numberOfFilms + numberMoreFilms)

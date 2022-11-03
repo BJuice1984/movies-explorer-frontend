@@ -7,7 +7,6 @@ import './Movies.css'
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 
 function Movies({
-  isLoggedin,
   getSavedMovies,
   localMovies,
   localUserMovies,
@@ -30,7 +29,6 @@ function Movies({
     <main className="movies">
       <Header />
       <SearchForm
-        isLoggedin={isLoggedin}
         getSavedMovies={getSavedMovies} />
       <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}

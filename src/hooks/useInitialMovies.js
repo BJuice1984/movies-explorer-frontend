@@ -8,7 +8,6 @@ function useInitialMovies() {
   async function getSavedMovies() {
     await getInitialMovies()
     .then((movies) => {
-      console.log(movies)
       localStorage.setItem("initial-movies", JSON.stringify(movies));
     })
     .catch(err => {

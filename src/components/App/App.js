@@ -76,27 +76,21 @@ function App() {
               element={<Login
               onLoginClick={handleLogin}/>} />
 
-            <Route element={<ProtectedRoutes
-              loggedIn={loggedIn}/>} >
+            <Route element={<ProtectedRoutes loggedIn={loggedIn}/>} >
               <Route path="profile" 
                 element={<Profile 
                 onLogout={handleLogout}
                 updateMyProfile={updateMyProfile}/>} />
               <Route path="movies"
                 element={<Movies
-                isLoggedin={loggedIn}
                 getSavedMovies={getSavedMovies}
                 localMovies={localMovies}
                 localUserMovies={localUserMovies}
-
                 handleLoadMore={handleLoadMore}
                 numberOfFilms={numberOfFilms}
-
-
-
                 handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
-                handleDeleteUserMovie={handleDeleteUserMovie} />} />
+                handleDeleteUserMovie={handleDeleteUserMovie}/>} />
               <Route path="saved-movies"
                 element={<SavedMovies
                 handleGetUserMovies={handleGetUserMovies}
