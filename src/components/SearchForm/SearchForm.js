@@ -1,12 +1,23 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import './SearchForm.css'
 
 function SearchForm({ getSavedMovies }) {
 
+  const location = useLocation();
+
+  const [filmInputValue, setFilmInputValue] = React.useState({});
+
+  const handleFilmInput = (e) => {
+    setFilmInputValue(e.target.value)
+  };
+
+  console.log('setFilmInputValue', filmInputValue)
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    getSavedMovies()
-  }
+    location.pathname === '/saved-movies' ? console.log('savedmovies') : getSavedMovies()
+  };
 
   return(
     <section className="search-form">
@@ -14,6 +25,7 @@ function SearchForm({ getSavedMovies }) {
         <form className="search-form__input-form" onSubmit={handleSubmit}>
           <label className="search-form__input-form-label">
             <input
+            onChange={handleFilmInput}
             placeholder="Фильм"
             className="search-form__input-text"
             type="search"
