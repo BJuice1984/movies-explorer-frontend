@@ -16,6 +16,7 @@ function Movies({
   handleLoadMore,
   numberOfFilms,
   handleChangeCheckboxStatus,
+  checkboxStatus,
   handleGetUserMovies,
   handleAddUserMovie,
   handleDeleteUserMovie
@@ -36,7 +37,8 @@ function Movies({
         getSavedMovies={getSavedMovies}
         handleSearchFilm={handleSearchFilm}
         searchedFilmName={searchedFilmName}
-        handleChangeCheckboxStatus={handleChangeCheckboxStatus} />
+        handleChangeCheckboxStatus={handleChangeCheckboxStatus}
+        checkboxStatus={checkboxStatus} />
       <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}

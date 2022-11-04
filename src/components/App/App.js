@@ -35,6 +35,7 @@ function App() {
     localSearchedMovies,
     searchedFilmName,
     handleChangeCheckboxStatus,
+    checkboxStatus,
     clearLocalState
   } = useInitialMovies();
 
@@ -99,6 +100,7 @@ function App() {
                 handleLoadMore={handleLoadMore}
                 numberOfFilms={numberOfFilms}
                 handleChangeCheckboxStatus={handleChangeCheckboxStatus}
+                checkboxStatus={checkboxStatus}
                 handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
                 handleDeleteUserMovie={handleDeleteUserMovie}/>} />

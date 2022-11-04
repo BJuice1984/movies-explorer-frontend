@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import './SearchForm.css';
 
-function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus }) {
+function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus, checkboxStatus }) {
 
   const location = useLocation();
 
@@ -34,7 +34,8 @@ function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handle
         <div className="search-form__checkbox">
           <label className="switch">
             <input type="checkbox"
-            onChange={handleChangeCheckboxStatus} />
+            onChange={handleChangeCheckboxStatus}
+            defaultChecked={checkboxStatus} />
             <span className="slider"></span>
           </label>
           <p className="search-form__span">Короткометражки</p>

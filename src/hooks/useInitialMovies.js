@@ -1,12 +1,13 @@
 import React from "react";
 import { getInitialMovies } from "../utils/MoviesApi";
+import { SHORT_MOVIE_DURATION } from '../constants/constatnts';
 
 function useInitialMovies() {
 
   const [localMovies, setLocalMovies] = React.useState(JSON.parse(localStorage.getItem("initial-movies")) ?? []);
   const [localSearchedMovies, setLocalSearchedMovies] = React.useState(JSON.parse(localStorage.getItem("user-searched-movies")) ?? []);
   const [searchedFilmName, setSearchedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-film-name")) ?? '');
-  const [checkboxStatus, setCheckboxStatus] = React.useState(false);
+  const [checkboxStatus, setCheckboxStatus] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-movies-status")) ?? false);
 
   async function getSavedMovies() {
     await getInitialMovies()
@@ -22,7 +23,7 @@ function useInitialMovies() {
   const searchFilm = React.useCallback(async (searchedFilmName) => {
     const searchedMovies = localMovies.filter((movie) => {
       if (checkboxStatus) {
-        return (movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase())) && movie.duration < 40
+        return (movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase())) && movie.duration < SHORT_MOVIE_DURATION
       } else {
         return movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase())
       } 
@@ -51,11 +52,13 @@ function useInitialMovies() {
 
   const handleChangeCheckboxStatus = (e) => {
     if (e.target.checked) {
-      setCheckboxStatus(true)
-      console.log('✅ Checkbox is checked');
+      localStorage.setItem("checkbox-path-movies-status", JSON.stringify(true))
+      // console.log('✅ Checkbox is checked');
+      return setCheckboxStatus(true)
     } else {
-      setCheckboxStatus(false)
-      console.log('⛔️ Checkbox is NOT checked');
+      localStorage.setItem("checkbox-path-movies-status", JSON.stringify(false))
+      // console.log('⛔️ Checkbox is NOT checked');
+      return setCheckboxStatus(false)
     }
   };
 
@@ -72,6 +75,7 @@ function useInitialMovies() {
     localSearchedMovies,
     searchedFilmName,
     handleChangeCheckboxStatus,
+    checkboxStatus,
     clearLocalState
   }
 }

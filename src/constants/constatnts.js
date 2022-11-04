@@ -7,3 +7,5 @@ export const MOBILE_NUMBER = 5;
 
 export const DESKTOP_MORE_NUMBER = 3;
 export const TABLET_MORE_NUMBER = 2;
+
+export const SHORT_MOVIE_DURATION = 40;
