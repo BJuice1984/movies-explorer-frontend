@@ -6,6 +6,7 @@ function useInitialMovies() {
   const [localMovies, setLocalMovies] = React.useState(JSON.parse(localStorage.getItem("initial-movies")) ?? []);
   const [localSearchedMovies, setLocalSearchedMovies] = React.useState(JSON.parse(localStorage.getItem("user-searched-movies")) ?? []);
   const [searchedFilmName, setSearchedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-film-name")) ?? '');
+  const [checkboxStatus, setCheckboxStatus] = React.useState(false);
 
   async function getSavedMovies() {
     await getInitialMovies()
@@ -19,14 +20,20 @@ function useInitialMovies() {
   };
 
   const searchFilm = React.useCallback(async (searchedFilmName) => {
-    const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase()));
+    const searchedMovies = localMovies.filter((movie) => {
+      if (checkboxStatus) {
+        return (movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase())) && movie.duration < 40
+      } else {
+        return movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase())
+      } 
+    });
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
     return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")))
-  }, [localMovies])
+  }, [checkboxStatus, localMovies]);
 
   React.useEffect(() => {
     searchFilm(searchedFilmName);
-  }, [searchFilm, searchedFilmName])
+  }, [searchFilm, searchedFilmName]);
 
   async function handleSearchFilm(filmName) {
     if (!JSON.parse(localStorage.getItem("initial-movies"))) {
@@ -42,6 +49,16 @@ function useInitialMovies() {
     }
   }
 
+  const handleChangeCheckboxStatus = (e) => {
+    if (e.target.checked) {
+      setCheckboxStatus(true)
+      console.log('✅ Checkbox is checked');
+    } else {
+      setCheckboxStatus(false)
+      console.log('⛔️ Checkbox is NOT checked');
+    }
+  };
+
   const clearLocalState = React.useCallback(() => {
       setLocalMovies([]);
       setLocalSearchedMovies([]);
@@ -54,6 +71,7 @@ function useInitialMovies() {
     localMovies,
     localSearchedMovies,
     searchedFilmName,
+    handleChangeCheckboxStatus,
     clearLocalState
   }
 }

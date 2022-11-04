@@ -49,17 +49,17 @@ function useUserMovies() {
 
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
     await getUserMovies()
-        .then((movies) => {
-          const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
-          return filtredMovies
-        })
-        .then((filtredMovies) => {
-          localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
+      .then((movies) => {
+        const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
+        return filtredMovies
+      })
+      .then((filtredMovies) => {
+        localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
 
   const clearLocalUserState = React.useCallback(() => {
