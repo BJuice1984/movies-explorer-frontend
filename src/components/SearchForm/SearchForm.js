@@ -2,24 +2,15 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import './SearchForm.css';
 
-function SearchForm({ getSavedMovies, handleSearchFilm }) {
+function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName }) {
 
   const location = useLocation();
 
-  const [filmInputValue, setFilmInputValue] = React.useState({});
-
-  // console.log(filmInputValue)
-  // console.log('localMovies', localMovies)
-
-  // const handleFilmInput = (e) => {
-  //   setFilmInputValue(e.target.value)
-  // };
+  const [filmInputValue, setFilmInputValue] = React.useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // getSavedMovies()
     location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue)
-
   };
 
   return(
@@ -29,8 +20,8 @@ function SearchForm({ getSavedMovies, handleSearchFilm }) {
           <label className="search-form__input-form-label">
             <input
             onInput={e => setFilmInputValue(e.target.value)}
-            // onChange={handleFilmInput}
             placeholder="Фильм"
+            defaultValue={searchedFilmName}
             className="search-form__input-text"
             type="search"
             name="search"

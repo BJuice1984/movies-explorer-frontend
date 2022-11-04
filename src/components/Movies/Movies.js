@@ -11,6 +11,7 @@ function Movies({
   handleSearchFilm,
   localMovies,
   localSearchedMovies,
+  searchedFilmName,
   localUserMovies,
   handleLoadMore,
   numberOfFilms,
@@ -32,7 +33,8 @@ function Movies({
       <Header />
       <SearchForm
         getSavedMovies={getSavedMovies}
-        handleSearchFilm={handleSearchFilm} />
+        handleSearchFilm={handleSearchFilm}
+        searchedFilmName={searchedFilmName} />
       <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}

@@ -33,6 +33,7 @@ function App() {
     handleSearchFilm,
     localMovies,
     localSearchedMovies,
+    searchedFilmName,
     clearLocalState
   } = useInitialMovies();
 
@@ -92,6 +93,7 @@ function App() {
                 handleSearchFilm={handleSearchFilm}
                 localMovies={localMovies}
                 localSearchedMovies={localSearchedMovies}
+                searchedFilmName={searchedFilmName}
                 localUserMovies={localUserMovies}
                 handleLoadMore={handleLoadMore}
                 numberOfFilms={numberOfFilms}
