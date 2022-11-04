@@ -63,6 +63,9 @@ function App() {
     }
   }, [clearLocalState, clearLocalUserState, loggedOut])
 
+  // console.log('loggedOut', loggedOut)
+  // console.log('app', localMovies)
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

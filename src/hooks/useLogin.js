@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [loggedOut, setLoggedOut] = React.useState(true);
+  const [loggedOut, setLoggedOut] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
 
   const navigate = useNavigate();

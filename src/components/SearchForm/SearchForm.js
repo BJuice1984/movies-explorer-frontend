@@ -17,7 +17,9 @@ function SearchForm({ getSavedMovies, handleSearchFilm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // getSavedMovies()
     location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue)
+
   };
 
   return(
