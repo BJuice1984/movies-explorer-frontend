@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import './SavedMovies.css'
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 
-function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMovie }) {
+function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMovie, handleChangeCheckboxStatusPathSavedMovies, checkboxStatusPathSavedMovies }) {
 
   // console.log('saved', localUserMovies)
 
@@ -21,7 +21,9 @@ function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMov
   return(
     <main className="movies">
       <Header />
-      <SearchForm />
+      <SearchForm
+        handleChangeCheckboxStatus={handleChangeCheckboxStatusPathSavedMovies}
+        checkboxStatus={checkboxStatusPathSavedMovies} />
       <MoviesCardList
         movies={localUserMovies}
         handleDeleteUserMovie={handleDeleteUserMovie} />

@@ -4,6 +4,7 @@ import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState([]);
+  const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
 
   function handleAddUserMovie({
     country,
@@ -62,12 +63,24 @@ function useUserMovies() {
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
 
+  const handleChangeCheckboxStatusPathSavedMovies = (e) => {
+    if (e.target.checked) {
+      localStorage.setItem("checkbox-path-savedMovies-status", JSON.stringify(true))
+      return setCheckboxStatusPathSavedMovies(true)
+    } else {
+      localStorage.setItem("checkbox-path-savedMovies-status", JSON.stringify(false))
+      return setCheckboxStatusPathSavedMovies(false)
+    }
+  };
+
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
   }, []);
 
   return {
     localUserMovies,
+    handleChangeCheckboxStatusPathSavedMovies,
+    checkboxStatusPathSavedMovies,
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,

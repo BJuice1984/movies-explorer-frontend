@@ -34,13 +34,15 @@ function App() {
     localMovies,
     localSearchedMovies,
     searchedFilmName,
-    handleChangeCheckboxStatus,
-    checkboxStatus,
+    handleChangeCheckboxStatusPathMovies,
+    checkboxStatusPathMovies,
     clearLocalState
   } = useInitialMovies();
 
   const {
     localUserMovies,
+    handleChangeCheckboxStatusPathSavedMovies,
+    checkboxStatusPathSavedMovies,
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
@@ -99,8 +101,8 @@ function App() {
                 localUserMovies={localUserMovies}
                 handleLoadMore={handleLoadMore}
                 numberOfFilms={numberOfFilms}
-                handleChangeCheckboxStatus={handleChangeCheckboxStatus}
-                checkboxStatus={checkboxStatus}
+                handleChangeCheckboxStatusPathMovies={handleChangeCheckboxStatusPathMovies}
+                checkboxStatusPathMovies={checkboxStatusPathMovies}
                 handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
                 handleDeleteUserMovie={handleDeleteUserMovie}/>} />
@@ -108,7 +110,9 @@ function App() {
                 element={<SavedMovies
                 handleGetUserMovies={handleGetUserMovies}
                 handleDeleteUserMovie={handleDeleteUserMovie}
-                localUserMovies={localUserMovies}/>} />
+                localUserMovies={localUserMovies}
+                handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
+                checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
             </Route>
 
             <Route path="*" element={<PageNotFound />} />
