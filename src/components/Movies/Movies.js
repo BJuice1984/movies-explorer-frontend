@@ -8,7 +8,6 @@ import './Movies.css'
 function Movies({
   getSavedMovies,
   handleSearchFilm,
-  localMovies,
   localSearchedMovies,
   searchedFilmName,
   localUserMovies,

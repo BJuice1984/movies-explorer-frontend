@@ -77,7 +77,6 @@ function useInitialMovies() {
   return {
     getSavedMovies,
     handleSearchFilm,
-    localMovies,
     localSearchedMovies,
     searchedFilmName,
     handleChangeCheckboxStatusPathMovies,

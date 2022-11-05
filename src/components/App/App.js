@@ -31,7 +31,6 @@ function App() {
   const {
     getSavedMovies,
     handleSearchFilm,
-    localMovies,
     localSearchedMovies,
     searchedFilmName,
     handleChangeCheckboxStatusPathMovies,
@@ -96,7 +95,6 @@ function App() {
                 element={<Movies
                 getSavedMovies={getSavedMovies}
                 handleSearchFilm={handleSearchFilm}
-                localMovies={localMovies}
                 localSearchedMovies={localSearchedMovies}
                 searchedFilmName={searchedFilmName}
                 localUserMovies={localUserMovies}
