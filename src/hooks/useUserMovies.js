@@ -3,10 +3,10 @@ import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
 
 function useUserMovies() {
 
-  const [localUserMovies, setLocalUserMovies] = React.useState([]);
+  const [localUserMovies, setLocalUserMovies] = React.useState(JSON.parse(localStorage.getItem("user-movies")) ?? []);
   const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
 
-  function handleAddUserMovie({
+  async function handleAddUserMovie({
     country,
     director,
     duration,
@@ -18,7 +18,7 @@ function useUserMovies() {
     movieId,
     nameRU,
     nameEN,}) {
-    addUserMovie({
+    await addUserMovie({
       country,
       director,
       duration,
@@ -32,8 +32,9 @@ function useUserMovies() {
       nameEN,
     })
     .then((movie) => {
-      setLocalUserMovies([movie, ...localUserMovies])
+      localStorage.setItem("user-movies", JSON.stringify([movie, ...localUserMovies]));
     })
+    return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
 
   const handleDeleteUserMovie = (movie) => {
@@ -75,6 +76,7 @@ function useUserMovies() {
 
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
+    setCheckboxStatusPathSavedMovies(false)
   }, []);
 
   return {

@@ -53,11 +53,9 @@ function useInitialMovies() {
   const handleChangeCheckboxStatusPathMovies = (e) => {
     if (e.target.checked) {
       localStorage.setItem("checkbox-path-movies-status", JSON.stringify(true))
-      // console.log('✅ Checkbox is checked');
       return setCheckboxStatusPathMovies(true)
     } else {
       localStorage.setItem("checkbox-path-movies-status", JSON.stringify(false))
-      // console.log('⛔️ Checkbox is NOT checked');
       return setCheckboxStatusPathMovies(false)
     }
   };
@@ -66,6 +64,7 @@ function useInitialMovies() {
       setLocalMovies([]);
       setLocalSearchedMovies([]);
       setSearchedFilmName('');
+      setCheckboxStatusPathMovies(false)
   }, []);
 
   return {
