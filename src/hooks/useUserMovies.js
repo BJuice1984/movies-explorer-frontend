@@ -1,5 +1,6 @@
 import React from "react";
 import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
+import { SHORT_MOVIE_DURATION } from '../constants/constatnts';
 
 function useUserMovies() {
 
@@ -76,6 +77,16 @@ function useUserMovies() {
       return setCheckboxStatusPathSavedMovies(false)
     }
   };
+
+  React.useEffect(() => {
+    if (checkboxStatusPathSavedMovies) {
+      setLocalUserMovies((prevMovies) => {
+        return prevMovies.filter(m => m.duration < SHORT_MOVIE_DURATION)
+      })
+    } else {
+      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
+    }
+  }, [checkboxStatusPathSavedMovies])
 
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
