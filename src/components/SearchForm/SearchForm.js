@@ -8,7 +8,6 @@ function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handle
 
   const [filmInputValue, setFilmInputValue] = React.useState('');
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue)

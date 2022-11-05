@@ -16,7 +16,7 @@ function useUserMovies() {
     image,
     trailerLink,
     thumbnail,
-    movieId,
+    id,
     nameRU,
     nameEN,}) {
     await addUserMovie({
@@ -28,7 +28,7 @@ function useUserMovies() {
       image,
       trailerLink,
       thumbnail,
-      movieId,
+      id,
       nameRU,
       nameEN,
     })
@@ -42,7 +42,7 @@ function useUserMovies() {
   };
 
   async function handleDeleteUserMovie(movie) {
-    await deleteUserMovie(movie._id)
+    await deleteUserMovie(movie)
     .then((movie) => {
       const filtredMovies = localUserMovies.filter((film) => film._id !== movie._id);
       return filtredMovies
@@ -93,7 +93,6 @@ function useUserMovies() {
 
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
-    console.log('asas')
     setCheckboxStatusPathSavedMovies(false)
   }, []);
 

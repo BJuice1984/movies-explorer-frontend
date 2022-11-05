@@ -8,8 +8,6 @@ const checkResponse = (res) =>  {
 };
 
 export const register = (name, password, email) => {
-  // const data = JSON.stringify({name, password, email});
-  // console.log(data)
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
@@ -22,8 +20,6 @@ export const register = (name, password, email) => {
 };
 
 export const authorize = (password, email) => {
-  // const data2 = JSON.stringify({password, email});
-  // console.log(data2)
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     credentials: 'include',
@@ -82,7 +78,7 @@ export const addUserMovie = (movie) => {
       image: `https://api.nomoreparties.co${movie.image.url}`,  //убрать запрос на сервер
       trailerLink: movie.trailerLink || 'https://www.youtube.com/',  // God Save Ozzy bag!!!!
       thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-      movieId: movie.image.id,                                        //Не приходит movie.id
+      movieId: movie.id,
       nameRU: movie.nameRU || movie.nameEN,
       nameEN: movie.nameEN || movie.nameRU, 
     })
@@ -90,8 +86,9 @@ export const addUserMovie = (movie) => {
   .then(checkResponse)
 };
 
-export const deleteUserMovie = (movieId) => {
-  return fetch(`${BASE_URL}/movies/${movieId}`, {
+export const deleteUserMovie = (movie) => {
+  console.log('api', movie._id)
+  return fetch(`${BASE_URL}/movies/${movie._id}`, {
     method: 'DELETE',
     credentials: 'include'
   })

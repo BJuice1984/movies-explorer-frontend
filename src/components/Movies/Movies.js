@@ -30,8 +30,6 @@ function Movies({
     }
   }, [currentUser, handleGetUserMovies, localUserMovies.length]);
 
-  console.log('localUserMoviesMOVIES',localUserMovies)
-
   return(
     <main className="movies">
       <Header />

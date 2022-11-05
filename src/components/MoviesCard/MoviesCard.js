@@ -5,8 +5,11 @@ import { useLocation } from 'react-router-dom';
 function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
   const [savedMovie, setSavedMovie] = React.useState(false);
-  const [handledMovie, setHandledMovie] = React.useState({})
   const location = useLocation();
+
+  // console.log('MCL', handledMovie)
+  // console.log('MCLmovie', movie)
+  // console.log('MOVcARD___savedMovie', savedMovie)
 
   React.useEffect(() => {
     if (location.pathname === '/movies') {
@@ -16,24 +19,24 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
     }
   }, [location]);
   
-  React.useEffect(() => {
-    if (localUserMovies) {
-      localUserMovies.forEach(localUserMovie => {
-        if (localUserMovie.nameRU === movie.nameRU && localUserMovie.movieId === movie.id) {
-          setSavedMovie(true);
-          setHandledMovie(localUserMovie)
-        }
-      })
-    }
-  }, [movie, localUserMovies])
+  // React.useEffect(() => {
+  //   if (localUserMovies) {
+  //     localUserMovies.forEach(localUserMovie => {
+  //       if (localUserMovie.nameRU === movie.nameRU && localUserMovie.movieId === movie.id) {
+  //         setSavedMovie(true);
+  //         // setHandledMovie(localUserMovie)
+  //       }
+  //     })
+  //   }
+  // }, [movie, localUserMovies])
 
-  function saveMovie() {
+  async function saveMovie() {
     if (savedMovie || !isMoviesPage) {
+      await handleDeleteUserMovie(movie._id ? movie : localUserMovies.find(film => film.movieId === movie.id));
       setSavedMovie(false);
-      handleDeleteUserMovie(Object.keys(handledMovie).length === 0 ? movie : handledMovie);
     } else {
+      await handleAddUserMovie(movie);
       setSavedMovie(true);
-      handleAddUserMovie(movie);
                                             console.log('убрать запрос на сервер из MainApi')
     }
   }
