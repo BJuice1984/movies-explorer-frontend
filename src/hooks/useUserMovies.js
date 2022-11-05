@@ -34,6 +34,9 @@ function useUserMovies() {
     .then((movie) => {
       localStorage.setItem("user-movies", JSON.stringify([movie, ...localUserMovies]));
     })
+    .catch(err => {
+      console.log(err);
+    })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
 

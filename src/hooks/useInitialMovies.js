@@ -43,6 +43,9 @@ function useInitialMovies() {
         setLocalMovies(res);
         localStorage.setItem("user-searched-film-name", JSON.stringify(filmName));
       })
+      .catch(err => {
+        console.log(err);
+      })
       return setSearchedFilmName(JSON.parse(localStorage.getItem("user-searched-film-name")))
     } else {
       localStorage.setItem("user-searched-film-name", JSON.stringify(filmName));
