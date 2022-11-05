@@ -87,12 +87,13 @@ function useUserMovies() {
         return prevMovies.filter(m => m.duration < SHORT_MOVIE_DURATION)
       })
     } else {
-      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
+      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? [])
     }
   }, [checkboxStatusPathSavedMovies])
 
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
+    console.log('asas')
     setCheckboxStatusPathSavedMovies(false)
   }, []);
 

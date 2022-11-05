@@ -63,7 +63,7 @@ function useInitialMovies() {
         return prevMovies.filter(m => m.duration < SHORT_MOVIE_DURATION)
       })
     } else {
-      setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")))
+      setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")) ?? [])
     }
   }, [checkboxStatusPathMovies])
 
