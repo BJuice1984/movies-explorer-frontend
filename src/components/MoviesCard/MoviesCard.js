@@ -7,10 +7,6 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
   const [savedMovie, setSavedMovie] = React.useState(false);
   const location = useLocation();
 
-  // console.log('MCL', handledMovie)
-  // console.log('MCLmovie', movie)
-  // console.log('MOVcARD___savedMovie', savedMovie)
-
   React.useEffect(() => {
     if (location.pathname === '/movies') {
       setIsMoviesPage(true);
@@ -18,17 +14,12 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
       setIsMoviesPage(false);
     }
   }, [location]);
-  
-  // React.useEffect(() => {
-  //   if (localUserMovies) {
-  //     localUserMovies.forEach(localUserMovie => {
-  //       if (localUserMovie.nameRU === movie.nameRU && localUserMovie.movieId === movie.id) {
-  //         setSavedMovie(true);
-  //         // setHandledMovie(localUserMovie)
-  //       }
-  //     })
-  //   }
-  // }, [movie, localUserMovies])
+
+  React.useEffect(() => {
+    if (localUserMovies) {
+      localUserMovies.find(film => film.movieId === movie.id) ? setSavedMovie(true) : setSavedMovie(false)
+    }
+  }, [localUserMovies, movie.id])
 
   async function saveMovie() {
     if (savedMovie || !isMoviesPage) {
