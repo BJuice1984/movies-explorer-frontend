@@ -41,22 +41,25 @@ function useUserMovies() {
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
 
-  const handleDeleteUserMovie = (movie) => {
-    deleteUserMovie(movie._id)
-    .then(() => {
-      setLocalUserMovies((prevMovies) => {
-        return prevMovies.filter(m => m._id !== movie._id)
-      })
+  async function handleDeleteUserMovie(movie) {
+    await deleteUserMovie(movie._id)
+    .then((movie) => {
+      const filtredMovies = localUserMovies.filter((film) => film._id !== movie._id);
+      return filtredMovies
+    })
+    .then((filtredMovies) => {
+      localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
     })
     .catch(err => {
       console.log(err)
     })
+    return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }
 
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
     await getUserMovies()
       .then((movies) => {
-        const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID)
+        const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID);
         return filtredMovies
       })
       .then((filtredMovies) => {
