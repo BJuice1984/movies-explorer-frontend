@@ -7,6 +7,8 @@ function useUserMovies() {
   const [localUserMovies, setLocalUserMovies] = React.useState(JSON.parse(localStorage.getItem("user-movies")) ?? []);
   const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
 
+  console.log('localUserMovies', localUserMovies)
+
   async function handleAddUserMovie({
     country,
     director,

@@ -3,25 +3,32 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-import './SavedMovies.css'
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
+import './SavedMovies.css'
 
-function SavedMovies({ localUserMovies, handleGetUserMovies, handleDeleteUserMovie, handleChangeCheckboxStatusPathSavedMovies, checkboxStatusPathSavedMovies }) {
+function SavedMovies({
+  localUserMovies,
+  handleGetUserMovies,
+  handleDeleteUserMovie,
+  handleChangeCheckboxStatusPathSavedMovies,
+  checkboxStatusPathSavedMovies
+}) {
 
   const currentUser = useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    if (localUserMovies.length === 0) {
+    if (localUserMovies.length === 0 && !checkboxStatusPathSavedMovies) {
       handleGetUserMovies(currentUser)
     }
-  }, [currentUser, handleGetUserMovies, localUserMovies.length]);
+  }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, localUserMovies.length]);
 
   return(
     <main className="movies">
       <Header />
       <SearchForm
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathSavedMovies}
-        checkboxStatus={checkboxStatusPathSavedMovies} />
+        checkboxStatus={checkboxStatusPathSavedMovies}
+        handleGetUserMovies={handleGetUserMovies} />
       <MoviesCardList
         movies={localUserMovies}
         handleDeleteUserMovie={handleDeleteUserMovie} />

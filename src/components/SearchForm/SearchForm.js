@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './SearchForm.css';
 
-function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus, checkboxStatus }) {
+function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus, checkboxStatus, handleGetUserMovies }) {
 
   const location = useLocation();
+  const currentUser = useContext(CurrentUserContext);
 
   const [filmInputValue, setFilmInputValue] = React.useState('');
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue)
+    if (searchedFilmName) {
+      location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue);
+    } else {
+      await handleGetUserMovies(currentUser);
+      location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue)
+    }
   };
 
   return(

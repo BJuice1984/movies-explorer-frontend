@@ -17,9 +17,9 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
 
   React.useEffect(() => {
     if (localUserMovies) {
-      localUserMovies.find(film => film.movieId === movie.id) ? setSavedMovie(true) : setSavedMovie(false)
+      localUserMovies.find(film => film.movieId === movie.id) ? setSavedMovie(true) : setSavedMovie(false);
     }
-  }, [localUserMovies, movie.id])
+  }, [localUserMovies, movie.id]);
 
   async function saveMovie() {
     if (savedMovie || !isMoviesPage) {
