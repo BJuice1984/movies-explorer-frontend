@@ -101,9 +101,10 @@ function useUserMovies() {
     return setSearchedSavedFilmName(JSON.parse(localStorage.getItem("user-searched-saved-film-name")))
   }
 
-    function handleSearchSavedFilm(filmName) {
-      updateLocalStorageFilmeName(filmName)
+  function handleSearchSavedFilm(filmName) {
+    updateLocalStorageFilmeName(filmName)
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies")).filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+    console.log('searchedMovies', searchedMovies)
     return setLocalUserMovies(searchedMovies)
   }
 

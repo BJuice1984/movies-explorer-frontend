@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-import { useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './SearchForm.css';
 
-function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus, checkboxStatus, handleGetUserMovies }) {
+function SearchForm({ handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus, checkboxStatus, handleGetUserMovies }) {
 
-  const location = useLocation();
   const currentUser = useContext(CurrentUserContext);
 
   const [filmInputValue, setFilmInputValue] = React.useState('');
@@ -14,7 +12,6 @@ function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handle
     e.preventDefault();
     if (searchedFilmName) {
       handleSearchFilm(filmInputValue);
-      console.log('Searc', searchedFilmName)
     } else {
       await handleGetUserMovies(currentUser);
       handleSearchFilm(filmInputValue)

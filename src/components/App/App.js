@@ -29,7 +29,6 @@ function App() {
   } = useLogin();
 
   const {
-    getSavedMovies,
     handleSearchFilm,
     localSearchedMovies,
     searchedFilmName,
@@ -95,7 +94,6 @@ function App() {
                 updateMyProfile={updateMyProfile}/>} />
               <Route path="movies"
                 element={<Movies
-                getSavedMovies={getSavedMovies}
                 handleSearchFilm={handleSearchFilm}
                 localSearchedMovies={localSearchedMovies}
                 searchedFilmName={searchedFilmName}

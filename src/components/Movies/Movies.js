@@ -24,7 +24,6 @@ function Movies({
     <main className="movies">
       <Header />
       <SearchForm
-        getSavedMovies={getSavedMovies}
         handleSearchFilm={handleSearchFilm}
         searchedFilmName={searchedFilmName}
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathMovies}
