@@ -20,8 +20,8 @@ function useInitialMovies() {
     return JSON.parse(localStorage.getItem("initial-movies"))
   };
 
-  const searchFilm = React.useCallback(async (searchedFilmName) => {
-    const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(searchedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedFilmName.toLowerCase()));
+  const searchFilm = React.useCallback(async (filmName) => {
+    const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
     return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")))
   }, [localMovies]);

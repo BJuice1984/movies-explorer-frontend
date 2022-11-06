@@ -6,8 +6,7 @@ function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState(JSON.parse(localStorage.getItem("user-movies")) ?? []);
   const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
-
-  console.log('localUserMovies', localUserMovies)
+  const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
 
   async function handleAddUserMovie({
     country,
@@ -73,6 +72,41 @@ function useUserMovies() {
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
 
+  // console.log('searchedSavedFilmName', searchedSavedFilmName)
+  // console.log('localUserMovies', localUserMovies)
+
+  // React.useEffect(() => {
+  //   setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")));
+  //   const searchedMovies = localUserMovies.filter((movie) => movie.nameRU.toLowerCase().includes(searchedSavedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedSavedFilmName.toLowerCase()));
+  //   return setLocalUserMovies(searchedMovies)
+  // }, [localUserMovies, searchedSavedFilmName]);
+
+  // const searchSavedFilm = React.useCallback(async (filmName) => {
+  //   const searchedMovies = localUserMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+  //   localStorage.setItem("user-movies", JSON.stringify(searchedMovies));
+  //   return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
+  // }, []);
+
+  //   React.useEffect(() => {
+  //     searchSavedFilm(searchedSavedFilmName);
+  // }, []);
+
+  // React.useEffect(() => {
+  //   setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? []);
+  //   console.log('useEffff')
+  // }, [searchedSavedFilmName]);
+  
+  const updateLocalStorageFilmeName = (name) => {
+    localStorage.setItem("user-searched-saved-film-name", JSON.stringify(name));
+    return setSearchedSavedFilmName(JSON.parse(localStorage.getItem("user-searched-saved-film-name")))
+  }
+
+    function handleSearchSavedFilm(filmName) {
+      updateLocalStorageFilmeName(filmName)
+    const searchedMovies = JSON.parse(localStorage.getItem("user-movies")).filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+    return setLocalUserMovies(searchedMovies)
+  }
+
   const handleChangeCheckboxStatusPathSavedMovies = (e) => {
     if (e.target.checked) {
       localStorage.setItem("checkbox-path-savedMovies-status", JSON.stringify(true))
@@ -95,11 +129,14 @@ function useUserMovies() {
 
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
-    setCheckboxStatusPathSavedMovies(false)
+    setCheckboxStatusPathSavedMovies(false);
+    setSearchedSavedFilmName('');
   }, []);
 
   return {
     localUserMovies,
+    handleSearchSavedFilm,
+    searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     clearLocalUserState,

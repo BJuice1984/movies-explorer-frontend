@@ -8,6 +8,8 @@ import './SavedMovies.css'
 
 function SavedMovies({
   localUserMovies,
+  handleSearchSavedFilm,
+  searchedSavedFilmName,
   handleGetUserMovies,
   handleDeleteUserMovie,
   handleChangeCheckboxStatusPathSavedMovies,
@@ -28,6 +30,8 @@ function SavedMovies({
       <SearchForm
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathSavedMovies}
         checkboxStatus={checkboxStatusPathSavedMovies}
+        handleSearchFilm={handleSearchSavedFilm}
+        searchedFilmName={searchedSavedFilmName}
         handleGetUserMovies={handleGetUserMovies} />
       <MoviesCardList
         movies={localUserMovies}

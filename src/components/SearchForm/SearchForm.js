@@ -13,10 +13,11 @@ function SearchForm({ getSavedMovies, handleSearchFilm, searchedFilmName, handle
   async function handleSubmit(e) {
     e.preventDefault();
     if (searchedFilmName) {
-      location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue);
+      handleSearchFilm(filmInputValue);
+      console.log('Searc', searchedFilmName)
     } else {
       await handleGetUserMovies(currentUser);
-      location.pathname === '/saved-movies' ? console.log('savedmovies') : handleSearchFilm(filmInputValue)
+      handleSearchFilm(filmInputValue)
     }
   };
 

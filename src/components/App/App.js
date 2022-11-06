@@ -40,6 +40,8 @@ function App() {
 
   const {
     localUserMovies,
+    handleSearchSavedFilm,
+    searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     clearLocalUserState,
@@ -110,6 +112,8 @@ function App() {
                 handleGetUserMovies={handleGetUserMovies}
                 handleDeleteUserMovie={handleDeleteUserMovie}
                 localUserMovies={localUserMovies}
+                handleSearchSavedFilm={handleSearchSavedFilm}
+                searchedSavedFilmName={searchedSavedFilmName}
                 handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
                 checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
             </Route>
