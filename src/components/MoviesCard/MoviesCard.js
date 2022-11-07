@@ -28,11 +28,8 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
     } else {
       await handleAddUserMovie(movie);
       setSavedMovie(true);
-                                            console.log('убрать запрос на сервер из MainApi')
     }
   }
-
-                                            // movie.image.url???
 
   return(
     <article className="element">

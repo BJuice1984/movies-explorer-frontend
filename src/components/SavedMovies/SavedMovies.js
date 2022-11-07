@@ -3,7 +3,6 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-import Preloader from "../Preloader/Preloader";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './SavedMovies.css'
 
@@ -36,10 +35,10 @@ function SavedMovies({
         searchedFilmName={searchedSavedFilmName}
         isLoading={isUserMoviesLoading}
         handleGetUserMovies={handleGetUserMovies} />
-      {isUserMoviesLoading ? <Preloader/> : <MoviesCardList
+      <MoviesCardList
         movies={localUserMovies}
         isLoading={isUserMoviesLoading}
-        handleDeleteUserMovie={handleDeleteUserMovie} />}
+        handleDeleteUserMovie={handleDeleteUserMovie} />
       <Footer />
     </main>
   )

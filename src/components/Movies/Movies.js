@@ -16,6 +16,7 @@ function Movies({
   handleChangeCheckboxStatusPathMovies,
   checkboxStatusPathMovies,
   isLoading,
+  isError,
   isUserMoviesLoading,
   handleGetUserMovies,
   handleAddUserMovie,
@@ -39,6 +40,7 @@ function Movies({
         handleLoadMore={handleLoadMore}
         numberOfFilms={numberOfFilms}
         isLoading={isUserMoviesLoading}
+        isError={isError}
         movies={localSearchedMovies} />}
       <Footer />
     </main>

@@ -35,6 +35,7 @@ function App() {
     handleChangeCheckboxStatusPathMovies,
     checkboxStatusPathMovies,
     isLoading,
+    isError,
     clearLocalState
   } = useInitialMovies();
 
@@ -70,8 +71,7 @@ function App() {
     }
   }, [clearLocalState, clearLocalUserState, loggedOut])
 
-  // console.log('loggedOut', loggedOut)
-  // console.log('app', localMovies)
+
   // God Save Ozzy bag!!!!
 
 
@@ -105,6 +105,7 @@ function App() {
                 handleChangeCheckboxStatusPathMovies={handleChangeCheckboxStatusPathMovies}
                 checkboxStatusPathMovies={checkboxStatusPathMovies}
                 isLoading={isLoading}
+                isError={isError}
                 isUserMoviesLoading={isUserMoviesLoading}
                 handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}

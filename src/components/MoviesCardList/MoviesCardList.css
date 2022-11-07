@@ -3,6 +3,28 @@
   flex-direction: column;
 }
 
+.movie-card-list__info {
+  font-size: 15px;
+  line-height: 1.25;
+  color: #fff;
+  font-weight: 500;
+  margin: 0 auto;
+  padding-top: 80px;
+  width: 200px;
+  text-align: center;
+}
+
+.movie-card-list__info_type_disable {
+display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .movie-card-list__info {
+    font-size: 25px;
+    width: 600px;
+  }
+}
+
 .movie-card-list__items {
   margin: 0;
   display: grid;

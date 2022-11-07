@@ -8,7 +8,8 @@ function useInitialMovies() {
   const [localSearchedMovies, setLocalSearchedMovies] = React.useState(JSON.parse(localStorage.getItem("user-searched-movies")) ?? []);
   const [searchedFilmName, setSearchedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-film-name")) ?? '');
   const [checkboxStatusPathMovies, setCheckboxStatusPathMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-movies-status")) ?? false);
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState('Введите название фильма в строке поиска');
 
   async function getSavedMovies() {
     setIsLoading(true);
@@ -17,7 +18,8 @@ function useInitialMovies() {
         localStorage.setItem("initial-movies", JSON.stringify(movies));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err)
+        setIsError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
       })
       .finally(() => setIsLoading(false));
     return JSON.parse(localStorage.getItem("initial-movies"))
@@ -25,6 +27,9 @@ function useInitialMovies() {
 
   const searchFilm = React.useCallback(async (filmName) => {
     const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+    if (localMovies.length !== 0 && searchedMovies.length === 0) {
+      setIsError('Ничего не найдено')
+    };
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
     return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")))
   }, [localMovies]);
@@ -74,7 +79,8 @@ function useInitialMovies() {
       setLocalMovies([]);
       setLocalSearchedMovies([]);
       setSearchedFilmName('');
-      setCheckboxStatusPathMovies(false)
+      setCheckboxStatusPathMovies(false);
+      setIsError('Введите название фильма в строке поиска');
   }, []);
 
   return {
@@ -85,6 +91,7 @@ function useInitialMovies() {
     handleChangeCheckboxStatusPathMovies,
     checkboxStatusPathMovies,
     isLoading,
+    isError,
     clearLocalState
   }
 }
