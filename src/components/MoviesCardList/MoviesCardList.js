@@ -9,6 +9,7 @@ function MoviesCardList({
   handleAddUserMovie,
   handleLoadMore,
   numberOfFilms,
+  isLoading,
   handleDeleteUserMovie
 }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(true);
@@ -32,6 +33,7 @@ function MoviesCardList({
             localUserMovies={localUserMovies}
             key={movie._id ? movie._id : movie.id}
             handleAddUserMovie={handleAddUserMovie}
+            isLoading={isLoading}
             handleDeleteUserMovie={handleDeleteUserMovie}/>
         )}
       </ul>

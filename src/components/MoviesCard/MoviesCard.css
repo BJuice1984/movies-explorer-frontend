@@ -98,6 +98,20 @@
   background-color: #EE3465;
 }
 
+.element__like-button_type_disabled {
+  cursor: not-allowed;
+  background-color: #313131;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent .5rem, rgb(41, 41, 41) .5rem, rgb(41, 41, 41) 1rem);
+  background-size: 200% 200%;
+  animation: gradient 5s linear infinite;
+}
+
+@keyframes gradient {
+  100% {
+		background-position: 100% 100%;
+	}
+}
+
 @media screen and (min-width: 768px) {
   .element__like-button {
     margin: 18px;

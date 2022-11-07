@@ -7,6 +7,7 @@ function useUserMovies() {
   const [localUserMovies, setLocalUserMovies] = React.useState(JSON.parse(localStorage.getItem("user-movies")) ?? []);
   const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
+  const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
 
   async function handleAddUserMovie({
     country,
@@ -20,6 +21,7 @@ function useUserMovies() {
     id,
     nameRU,
     nameEN,}) {
+    setIsUserMoviesLoading(true);
     await addUserMovie({
       country,
       director,
@@ -35,6 +37,7 @@ function useUserMovies() {
     })
     .then((movie) => {
       localStorage.setItem("user-movies", JSON.stringify([movie, ...localUserMovies]));
+      setIsUserMoviesLoading(false)
     })
     .catch(err => {
       console.log(err);
@@ -43,6 +46,7 @@ function useUserMovies() {
   };
 
   async function handleDeleteUserMovie(movie) {
+    setIsUserMoviesLoading(true);
     await deleteUserMovie(movie)
     .then((movie) => {
       const filtredMovies = localUserMovies.filter((film) => film._id !== movie._id);
@@ -50,6 +54,7 @@ function useUserMovies() {
     })
     .then((filtredMovies) => {
       localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
+      setIsUserMoviesLoading(false)
     })
     .catch(err => {
       console.log(err)
@@ -58,6 +63,7 @@ function useUserMovies() {
   }
 
   const handleGetUserMovies = React.useCallback(async (currentUser) => {
+    setIsUserMoviesLoading(true);
     await getUserMovies()
       .then((movies) => {
         const filtredMovies = movies.filter((movie) => movie.owner === currentUser.userID);
@@ -69,6 +75,7 @@ function useUserMovies() {
       .catch(err => {
         console.log(err)
       })
+      .finally(setIsUserMoviesLoading(false));
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
   
@@ -79,7 +86,8 @@ function useUserMovies() {
 
   function handleSearchSavedFilm(filmName) {
     updateLocalStorageFilmeName(filmName)
-    const searchedMovies = JSON.parse(localStorage.getItem("user-movies")).filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+    const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
+      .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     return setLocalUserMovies(searchedMovies)
   }
 
@@ -115,6 +123,7 @@ function useUserMovies() {
     searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
+    isUserMoviesLoading,
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,

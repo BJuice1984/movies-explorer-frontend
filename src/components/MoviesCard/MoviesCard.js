@@ -2,7 +2,7 @@ import React from "react";
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUserMovie }) {
+function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
   const [savedMovie, setSavedMovie] = React.useState(false);
   const location = useLocation();
@@ -40,10 +40,14 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, handleDeleteUs
       <p className="element__duration">{movie.duration}</p>
       <img className="element__pic" src={movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image} alt="Картинка постер фильма"></img> 
       <button 
-        className={`element__like-button ${!isMoviesPage ? 'element__like-button_type_delete' : ''} ${savedMovie ? 'element__like-button_type_save' : ''}`} 
+        className={`element__like-button 
+          ${!isMoviesPage ? 'element__like-button_type_delete' : ''} 
+          ${savedMovie ? 'element__like-button_type_save' : ''} 
+          ${isLoading ? 'element__like-button_type_disabled' : ''}`} 
         type="button" 
         onClick={saveMovie}
-        aria-label="Сохранить">{!isMoviesPage || savedMovie ? '' : 'Сохранить'}
+        disabled={isLoading}
+        aria-label="Сохранить">{!isMoviesPage || savedMovie || isLoading ? '' : 'Сохранить'}
       </button>
     </article>
   )

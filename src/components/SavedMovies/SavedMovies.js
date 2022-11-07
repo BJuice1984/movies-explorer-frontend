@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
+import Preloader from "../Preloader/Preloader";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './SavedMovies.css'
 
@@ -13,6 +14,7 @@ function SavedMovies({
   handleGetUserMovies,
   handleDeleteUserMovie,
   handleChangeCheckboxStatusPathSavedMovies,
+  isUserMoviesLoading,
   checkboxStatusPathSavedMovies
 }) {
 
@@ -32,10 +34,12 @@ function SavedMovies({
         checkboxStatus={checkboxStatusPathSavedMovies}
         handleSearchFilm={handleSearchSavedFilm}
         searchedFilmName={searchedSavedFilmName}
+        isLoading={isUserMoviesLoading}
         handleGetUserMovies={handleGetUserMovies} />
-      <MoviesCardList
+      {isUserMoviesLoading ? <Preloader/> : <MoviesCardList
         movies={localUserMovies}
-        handleDeleteUserMovie={handleDeleteUserMovie} />
+        isLoading={isUserMoviesLoading}
+        handleDeleteUserMovie={handleDeleteUserMovie} />}
       <Footer />
     </main>
   )

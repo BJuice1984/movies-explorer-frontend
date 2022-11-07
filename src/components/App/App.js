@@ -44,6 +44,7 @@ function App() {
     searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
+    isUserMoviesLoading,
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
@@ -104,6 +105,7 @@ function App() {
                 handleChangeCheckboxStatusPathMovies={handleChangeCheckboxStatusPathMovies}
                 checkboxStatusPathMovies={checkboxStatusPathMovies}
                 isLoading={isLoading}
+                isUserMoviesLoading={isUserMoviesLoading}
                 handleGetUserMovies={handleGetUserMovies}
                 handleAddUserMovie={handleAddUserMovie}
                 handleDeleteUserMovie={handleDeleteUserMovie}/>} />
@@ -114,6 +116,7 @@ function App() {
                 localUserMovies={localUserMovies}
                 handleSearchSavedFilm={handleSearchSavedFilm}
                 searchedSavedFilmName={searchedSavedFilmName}
+                isUserMoviesLoading={isUserMoviesLoading}
                 handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
                 checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
             </Route>

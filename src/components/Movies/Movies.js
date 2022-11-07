@@ -16,6 +16,7 @@ function Movies({
   handleChangeCheckboxStatusPathMovies,
   checkboxStatusPathMovies,
   isLoading,
+  isUserMoviesLoading,
   handleGetUserMovies,
   handleAddUserMovie,
   handleDeleteUserMovie
@@ -29,6 +30,7 @@ function Movies({
         searchedFilmName={searchedFilmName}
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathMovies}
         checkboxStatus={checkboxStatusPathMovies}
+        isLoading={isLoading}
         handleGetUserMovies={handleGetUserMovies} />
       {isLoading ? <Preloader/> : <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
@@ -36,6 +38,7 @@ function Movies({
         localUserMovies={localUserMovies}
         handleLoadMore={handleLoadMore}
         numberOfFilms={numberOfFilms}
+        isLoading={isUserMoviesLoading}
         movies={localSearchedMovies} />}
       <Footer />
     </main>

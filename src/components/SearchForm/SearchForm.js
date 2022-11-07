@@ -2,7 +2,13 @@ import React, { useContext } from "react";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './SearchForm.css';
 
-function SearchForm({ handleSearchFilm, searchedFilmName, handleChangeCheckboxStatus, checkboxStatus, handleGetUserMovies }) {
+function SearchForm({
+  handleSearchFilm,
+  searchedFilmName,
+  handleChangeCheckboxStatus,
+  checkboxStatus,
+  isLoading,
+  handleGetUserMovies }) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -31,9 +37,14 @@ function SearchForm({ handleSearchFilm, searchedFilmName, handleChangeCheckboxSt
             type="search"
             name="search"
             id="search"
+            disabled={isLoading}
             required />
           </label>
-          <button className="search-form__button" type="submit">Найти</button>
+          <button
+            className="search-form__button"
+            type="submit"
+            disabled={isLoading}
+            aria-label="Найти">{isLoading ? 'Ищем...' : 'Найти'}</button>
         </form>
         <div className="search-form__checkbox">
           <label className="switch">
