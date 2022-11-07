@@ -24,8 +24,10 @@ function Movies({
 }) {
 
   return(
+    <>
+    <Header />
     <main className="movies">
-      <Header />
+
       <SearchForm
         handleSearchFilm={handleSearchFilm}
         searchedFilmName={searchedFilmName}
@@ -42,8 +44,10 @@ function Movies({
         isLoading={isUserMoviesLoading}
         isError={isError}
         movies={localSearchedMovies} />}
-      <Footer />
+
     </main>
+          <Footer />
+          </>
   )
 }
 

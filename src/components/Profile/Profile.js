@@ -51,7 +51,7 @@ function Profile({ onLogout, updateMyProfile }) {
     <>
       <Header />
       <section className="profile">
-        <div className="profile__container">
+
           <h2 className="profile__title">Привет, {currentUser.name}&#33;</h2>
           <form className="profile__input-form" onSubmit={handleSubmit}>
             <label className="profile__input-form-label">
@@ -69,6 +69,7 @@ function Profile({ onLogout, updateMyProfile }) {
               maxLength="20"
               disabled={inputDisable} />
             </label>
+            <p className="profile__input-error">Ошибка jijeisfjeiji</p>
             <label className="profile__input-form-label">
               <span className="profile__input-name">Email</span>
               <input
@@ -84,16 +85,21 @@ function Profile({ onLogout, updateMyProfile }) {
               maxLength="20"
               disabled={inputDisable} />
             </label>
-            <button
-              onClick={handleInput}
-              disabled={buttonDisable}
-              className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : inputValid ? 'profile__button_type_valid' : ''}`} 
-              type={inputDisable ? "button" : "submit"}>
-                {inputDisable ? "Редактировать" : "Сохранить"}
-              </button>
-            <button className="profile__link" type="button" onClick={onLogout}>Выйти из аккаунта</button>
+            <p className="profile__input-error">Ошибка</p>
+            
           </form>
-        </div>
+
+          <div className="buttons__container">
+              <button
+                onClick={handleInput}
+                disabled={buttonDisable}
+                className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : inputValid ? 'profile__button_type_valid' : ''}`} 
+                type={inputDisable ? "button" : "submit"}>
+                  {inputDisable ? "Редактировать" : "Сохранить"}
+                </button>
+              <button className="profile__link" type="button" onClick={onLogout}>Выйти из аккаунта</button>
+            </div>
+
       </section>
     </>
   )
