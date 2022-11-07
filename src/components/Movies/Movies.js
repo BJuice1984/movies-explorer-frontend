@@ -3,10 +3,10 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
+import Preloader from "../Preloader/Preloader";
 import './Movies.css'
 
 function Movies({
-  getSavedMovies,
   handleSearchFilm,
   localSearchedMovies,
   searchedFilmName,
@@ -15,6 +15,7 @@ function Movies({
   numberOfFilms,
   handleChangeCheckboxStatusPathMovies,
   checkboxStatusPathMovies,
+  isLoading,
   handleGetUserMovies,
   handleAddUserMovie,
   handleDeleteUserMovie
@@ -29,13 +30,13 @@ function Movies({
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathMovies}
         checkboxStatus={checkboxStatusPathMovies}
         handleGetUserMovies={handleGetUserMovies} />
-      <MoviesCardList
+      {isLoading ? <Preloader/> : <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}
         localUserMovies={localUserMovies}
         handleLoadMore={handleLoadMore}
         numberOfFilms={numberOfFilms}
-        movies={localSearchedMovies} />
+        movies={localSearchedMovies} />}
       <Footer />
     </main>
   )

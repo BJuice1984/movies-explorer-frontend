@@ -71,30 +71,6 @@ function useUserMovies() {
       })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
-
-  // console.log('searchedSavedFilmName', searchedSavedFilmName)
-  // console.log('localUserMovies', localUserMovies)
-
-  // React.useEffect(() => {
-  //   setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")));
-  //   const searchedMovies = localUserMovies.filter((movie) => movie.nameRU.toLowerCase().includes(searchedSavedFilmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchedSavedFilmName.toLowerCase()));
-  //   return setLocalUserMovies(searchedMovies)
-  // }, [localUserMovies, searchedSavedFilmName]);
-
-  // const searchSavedFilm = React.useCallback(async (filmName) => {
-  //   const searchedMovies = localUserMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
-  //   localStorage.setItem("user-movies", JSON.stringify(searchedMovies));
-  //   return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
-  // }, []);
-
-  //   React.useEffect(() => {
-  //     searchSavedFilm(searchedSavedFilmName);
-  // }, []);
-
-  // React.useEffect(() => {
-  //   setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? []);
-  //   console.log('useEffff')
-  // }, [searchedSavedFilmName]);
   
   const updateLocalStorageFilmeName = (name) => {
     localStorage.setItem("user-searched-saved-film-name", JSON.stringify(name));
@@ -104,7 +80,6 @@ function useUserMovies() {
   function handleSearchSavedFilm(filmName) {
     updateLocalStorageFilmeName(filmName)
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies")).filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
-    console.log('searchedMovies', searchedMovies)
     return setLocalUserMovies(searchedMovies)
   }
 

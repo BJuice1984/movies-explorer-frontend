@@ -8,8 +8,10 @@ function useInitialMovies() {
   const [localSearchedMovies, setLocalSearchedMovies] = React.useState(JSON.parse(localStorage.getItem("user-searched-movies")) ?? []);
   const [searchedFilmName, setSearchedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-film-name")) ?? '');
   const [checkboxStatusPathMovies, setCheckboxStatusPathMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-movies-status")) ?? false);
+  const [isLoading, setIsLoading] = React.useState(false)
 
   async function getSavedMovies() {
+    setIsLoading(true);
     await getInitialMovies()
       .then((movies) => {
         localStorage.setItem("initial-movies", JSON.stringify(movies));
@@ -17,6 +19,7 @@ function useInitialMovies() {
       .catch(err => {
         console.log(err);
       })
+      .finally(() => setIsLoading(false));
     return JSON.parse(localStorage.getItem("initial-movies"))
   };
 
@@ -81,6 +84,7 @@ function useInitialMovies() {
     searchedFilmName,
     handleChangeCheckboxStatusPathMovies,
     checkboxStatusPathMovies,
+    isLoading,
     clearLocalState
   }
 }
