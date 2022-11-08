@@ -91,7 +91,7 @@ function useUserMovies() {
     updateLocalStorageFilmeName(filmName);
     setIsFirstLoading(false);
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
-      .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+      .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()))
     return setLocalUserMovies(searchedMovies)
   }
 

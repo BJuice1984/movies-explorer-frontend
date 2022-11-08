@@ -12,7 +12,7 @@ function SearchForm({
 
   const currentUser = useContext(CurrentUserContext);
 
-  const [filmInputValue, setFilmInputValue] = React.useState('');
+  const [filmInputValue, setFilmInputValue] = React.useState(searchedFilmName ?? '');
 
   async function handleSubmit(e) {
     e.preventDefault();

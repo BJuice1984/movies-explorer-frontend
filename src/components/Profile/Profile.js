@@ -2,9 +2,16 @@ import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import { USER_EMAIL_REGEX, USER_NAME_REGEX } from "../../constants/constatnts";
+import useValidation from "../../hooks/useValidation";
 import './Profile.css'
 
 function Profile({ onLogout, updateMyProfile }) {
+
+  const {
+    validations,
+    inputTypeNameErrors,
+    inputTypeEmailErrors
+  } = useValidation();
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -12,6 +19,11 @@ function Profile({ onLogout, updateMyProfile }) {
   const [inputDisable, setInputDisable] = React.useState(true);
   const [buttonDisable, setButtonDisable] = React.useState(false);
   const [inputValid, setInputValid] = React.useState(false);
+
+
+    
+  console.log('isValid', inputValid)
+  console.log('inputDisable', inputDisable)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -33,19 +45,10 @@ function Profile({ onLogout, updateMyProfile }) {
     // setButtonDisable(true)
   }
 
-  // React.useEffect(() => {
-  //   if (formParams.name === currentUser.name && formParams.email === currentUser.email) {
-  //     setButtonDisable(true)
-  //     setInputValid(false)
-  //   } else {
-  //     setButtonDisable(false)
-  //     setInputValid(true)
-  //   }
-  // }, [currentUser.email, currentUser.name, formParams.email, formParams.name])
-
   const handleSubmit = (e) => {
     e.preventDefault();
     updateMyProfile(formParams.name, formParams.email);
+    // setInputDisable(true)
   }
 
   return (
@@ -53,7 +56,11 @@ function Profile({ onLogout, updateMyProfile }) {
       <Header />
       <section className="profile">
         <h2 className="profile__title">Привет, {currentUser.name}&#33;</h2>
-        <form className="profile__input-form" id="profile__input-form" onSubmit={handleSubmit}>
+        <form 
+        className="profile__input-form" 
+        id="profile__input-form"
+        onChange={validations}
+        onSubmit={handleSubmit}>
           <label className="profile__input-form-label">
             <span className="profile__input-name">Имя</span>
             <input
@@ -61,16 +68,16 @@ function Profile({ onLogout, updateMyProfile }) {
             defaultValue={formParams.name}
             onChange={handleChange}
             className="profile__input-text"
-            type="text"
+            // type="text"
             name="name"
             id="name"
             required
             minLength="2"
             maxLength="30"
-            pattern={USER_NAME_REGEX}  //Исправить регулярку
+            // pattern={USER_NAME_REGEX}  //Исправить регулярку
             disabled={inputDisable} />
           </label>
-          <p className="profile__input-error">Ошибка jijeisfjeiji</p>
+          <p className="profile__input-error">{inputTypeNameErrors}</p>
           <label className="profile__input-form-label">
             <span className="profile__input-name">Email</span>
             <input
@@ -78,7 +85,7 @@ function Profile({ onLogout, updateMyProfile }) {
             defaultValue={formParams.email}
             onChange={handleChange}
             className="profile__input-text" 
-            type="email"
+            // type="email"
             name="email"
             id="email"
             required
@@ -87,7 +94,7 @@ function Profile({ onLogout, updateMyProfile }) {
             pattern={USER_EMAIL_REGEX}
             disabled={inputDisable} />
           </label>
-          <p className="profile__input-error">Ошибка</p>
+          <p className="profile__input-error">{inputTypeEmailErrors}</p>
         </form>
         <div className="buttons__container">
             <button

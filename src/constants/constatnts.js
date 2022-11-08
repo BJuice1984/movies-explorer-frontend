@@ -11,4 +11,4 @@ export const TABLET_MORE_NUMBER = 2;
 export const SHORT_MOVIE_DURATION = 40;
 
 export const USER_EMAIL_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
-export const USER_NAME_REGEX = "[^[a-zA-Zа-яА-Я0-9_%+-]*$]"
+export const USER_NAME_REGEX = "/^[^\s@]+@[^\s@]+\.[^\s@{2,}$/i"
