@@ -14,16 +14,18 @@ function SavedMovies({
   handleDeleteUserMovie,
   handleChangeCheckboxStatusPathSavedMovies,
   isUserMoviesLoading,
+  isFirstLoading,
+  isSavedMoviesError,
   checkboxStatusPathSavedMovies
 }) {
 
   const currentUser = useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    if (localUserMovies.length === 0 && !checkboxStatusPathSavedMovies) {
+    if ((localUserMovies.length === 0 && isFirstLoading) && !checkboxStatusPathSavedMovies) {
       handleGetUserMovies(currentUser)
     }
-  }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, localUserMovies.length]);
+  }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, isFirstLoading, localUserMovies.length]);
 
   return(
     <main className="movies">
@@ -38,6 +40,7 @@ function SavedMovies({
       <MoviesCardList
         movies={localUserMovies}
         isLoading={isUserMoviesLoading}
+        isError={isSavedMoviesError}
         handleDeleteUserMovie={handleDeleteUserMovie} />
       <Footer />
     </main>

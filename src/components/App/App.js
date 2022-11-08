@@ -46,6 +46,8 @@ function App() {
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
+    isFirstLoading,
+    isSavedMoviesError,
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
@@ -118,6 +120,8 @@ function App() {
                 handleSearchSavedFilm={handleSearchSavedFilm}
                 searchedSavedFilmName={searchedSavedFilmName}
                 isUserMoviesLoading={isUserMoviesLoading}
+                isFirstLoading={isFirstLoading}
+                isSavedMoviesError={isSavedMoviesError}
                 handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
                 checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
             </Route>

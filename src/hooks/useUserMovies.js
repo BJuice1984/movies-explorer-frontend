@@ -8,6 +8,8 @@ function useUserMovies() {
   const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
   const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
+  const [isFirstLoading, setIsFirstLoading] = React.useState(true);
+  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState('Ничего не найдено');
 
   async function handleAddUserMovie({
     country,
@@ -41,6 +43,7 @@ function useUserMovies() {
     })
     .catch(err => {
       console.log(err);
+      setIsSavedMoviesError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
     })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
@@ -85,7 +88,8 @@ function useUserMovies() {
   }
 
   function handleSearchSavedFilm(filmName) {
-    updateLocalStorageFilmeName(filmName)
+    updateLocalStorageFilmeName(filmName);
+    setIsFirstLoading(false);
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
       .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     return setLocalUserMovies(searchedMovies)
@@ -115,6 +119,7 @@ function useUserMovies() {
     setLocalUserMovies([]);
     setCheckboxStatusPathSavedMovies(false);
     setSearchedSavedFilmName('');
+    setIsFirstLoading(true);
   }, []);
 
   return {
@@ -124,6 +129,8 @@ function useUserMovies() {
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
+    isFirstLoading,
+    isSavedMoviesError,
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,

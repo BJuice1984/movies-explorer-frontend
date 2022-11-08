@@ -27,7 +27,7 @@ function MoviesCardList({
 
   return(
     <section className="movie-card-list">
-      <p className={`movie-card-list__info ${isMoviesPage && slice.length === 0 ? '' : 'movie-card-list__info_type_disable'}`}>{isError}</p>
+      <p className={`movie-card-list__info ${slice.length === 0 ? '' : 'movie-card-list__info_type_disable'}`}>{isError}</p>
       <ul className="movie-card-list__items">
         {slice.map(movie =>
           <MoviesCard
