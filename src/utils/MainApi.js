@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+import { BASE_URL, BEAT_FILMS_API, YOUTUBE_URL } from '../constants/constatnts';
 
 const checkResponse = (res) =>  {
   if (res.ok) {
@@ -75,9 +75,9 @@ export const addUserMovie = (movie) => {
       duration: movie.duration || 'Неизвестно',
       year: movie.year || 'Неизвестно',
       description: movie.description || 'Неизвестно',
-      image: `https://api.nomoreparties.co${movie.image.url}`,
-      trailerLink: movie.trailerLink || 'https://www.youtube.com/',  // God Save Ozzy bag!!!!
-      thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+      image: BEAT_FILMS_API + movie.image.url,
+      trailerLink: movie.trailerLink || YOUTUBE_URL,  // God Save Ozzy bag!!!!
+      thumbnail: BEAT_FILMS_API + movie.image.formats.thumbnail.url,
       movieId: movie.id,
       nameRU: movie.nameRU || movie.nameEN,
       nameEN: movie.nameEN || movie.nameRU, 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { USER_EMAIL_REGEX, USER_NAME_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE } from "../../constants/constatnts";
+import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
 import './Profile.css'
 

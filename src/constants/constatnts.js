@@ -10,6 +10,10 @@ export const TABLET_MORE_NUMBER = 2;
 
 export const SHORT_MOVIE_DURATION = 40;
 
+export const BEAT_FILMS_API = 'https://api.nomoreparties.co';
+export const BASE_URL = 'http://localhost:3000';
+export const YOUTUBE_URL = 'https://www.youtube.com/';
+
 export const USER_EMAIL_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 export const USER_EMAIL_ERROR_MESSAGE = "E-mail должен соответствовать формату name@domain.ru";
 export const USER_NAME_ERROR_MESSAGE = "Имя пользователя может содержать только буквенно-цифровые символы, символ подчеркивания (_), дефис (-), точку (.) или символ @";
