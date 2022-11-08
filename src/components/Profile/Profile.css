@@ -116,6 +116,10 @@
   padding: 0;
 }
 
+.profile__input-error_type_disable {
+  display: none;
+}
+
 .profile__input-text {
   margin: 0;
   font-size: 11px;
@@ -171,5 +175,6 @@
 @media screen and (min-width: 768px) {
   .profile__link {
     font-size: 13px;
+    padding-bottom: 269px;
   }
 }

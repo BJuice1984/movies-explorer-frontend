@@ -38,6 +38,8 @@ function SearchForm({
             name="search"
             id="search"
             disabled={isLoading}
+            minLength="1"
+            maxLength="50"
             required />
           </label>
           <button
