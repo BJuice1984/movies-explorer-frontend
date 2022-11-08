@@ -1,6 +1,6 @@
 import React from "react";
 import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
-import { SHORT_MOVIE_DURATION } from '../constants/constatnts';
+import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE } from '../constants/constatnts';
 
 function useUserMovies() {
 
@@ -43,7 +43,7 @@ function useUserMovies() {
     })
     .catch(err => {
       console.log(err);
-      setIsSavedMoviesError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+      setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE)
     })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };

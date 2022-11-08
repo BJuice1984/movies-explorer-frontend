@@ -1,6 +1,6 @@
 import React from "react";
 import { getInitialMovies } from "../utils/MoviesApi";
-import { SHORT_MOVIE_DURATION } from '../constants/constatnts';
+import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, NO_MATCHED_FILMS, TYPE_FILM_NAME } from '../constants/constatnts';
 
 function useInitialMovies() {
 
@@ -9,7 +9,7 @@ function useInitialMovies() {
   const [searchedFilmName, setSearchedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-film-name")) ?? '');
   const [checkboxStatusPathMovies, setCheckboxStatusPathMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-movies-status")) ?? false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isError, setIsError] = React.useState('Введите название фильма в строке поиска');
+  const [isError, setIsError] = React.useState(TYPE_FILM_NAME);
 
   async function getSavedMovies() {
     setIsLoading(true);
@@ -19,7 +19,7 @@ function useInitialMovies() {
       })
       .catch(err => {
         console.log(err)
-        setIsError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        setIsError(MAIN_API_ERROR_MESSAGE);
       })
       .finally(() => setIsLoading(false));
     return JSON.parse(localStorage.getItem("initial-movies"))
@@ -28,7 +28,7 @@ function useInitialMovies() {
   const searchFilm = React.useCallback(async (filmName) => {
     const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     if (localMovies.length !== 0 && searchedMovies.length === 0) {
-      setIsError('Ничего не найдено')
+      setIsError(NO_MATCHED_FILMS)
     };
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
     return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")))
@@ -80,7 +80,7 @@ function useInitialMovies() {
       setLocalSearchedMovies([]);
       setSearchedFilmName('');
       setCheckboxStatusPathMovies(false);
-      setIsError('Введите название фильма в строке поиска');
+      setIsError(TYPE_FILM_NAME);
   }, []);
 
   return {
