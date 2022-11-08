@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { USER_EMAIL_REGEX, USER_NAME_REGEX } from "../../constants/constatnts";
+import { USER_EMAIL_REGEX, USER_NAME_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
 import './Profile.css'
 
@@ -10,7 +10,7 @@ function Profile({ onLogout, updateMyProfile }) {
   const {
     validations,
     inputTypeNameErrors,
-    inputTypeEmailErrors
+    inputTypeEmailErrors,
   } = useValidation();
 
   const currentUser = useContext(CurrentUserContext);
@@ -19,11 +19,6 @@ function Profile({ onLogout, updateMyProfile }) {
   const [inputDisable, setInputDisable] = React.useState(true);
   const [buttonDisable, setButtonDisable] = React.useState(false);
   const [inputValid, setInputValid] = React.useState(false);
-
-
-    
-  console.log('isValid', inputValid)
-  console.log('inputDisable', inputDisable)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -68,16 +63,14 @@ function Profile({ onLogout, updateMyProfile }) {
             defaultValue={formParams.name}
             onChange={handleChange}
             className="profile__input-text"
-            // type="text"
             name="name"
             id="name"
             required
             minLength="2"
             maxLength="30"
-            // pattern={USER_NAME_REGEX}  //Исправить регулярку
             disabled={inputDisable} />
           </label>
-          <p className="profile__input-error">{inputTypeNameErrors}</p>
+          {inputTypeNameErrors && <p className="profile__input-error">{inputTypeNameErrors}</p>}
           <label className="profile__input-form-label">
             <span className="profile__input-name">Email</span>
             <input
@@ -85,7 +78,6 @@ function Profile({ onLogout, updateMyProfile }) {
             defaultValue={formParams.email}
             onChange={handleChange}
             className="profile__input-text" 
-            // type="email"
             name="email"
             id="email"
             required
@@ -94,8 +86,12 @@ function Profile({ onLogout, updateMyProfile }) {
             pattern={USER_EMAIL_REGEX}
             disabled={inputDisable} />
           </label>
-          <p className="profile__input-error">{inputTypeEmailErrors}</p>
+          {inputTypeEmailErrors && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
         </form>
+        <div className="errors__container">
+          {inputTypeNameErrors && <p className="profile__input-error_type_info">{USER_NAME_ERROR_MESSAGE}</p>}
+          {inputTypeEmailErrors && <p className="profile__input-error_type_info">{USER_EMAIL_ERROR_MESSAGE}</p>}
+        </div>
         <div className="buttons__container">
             <button
               onClick={handleInput}
