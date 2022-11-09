@@ -1,11 +1,12 @@
 import React from "react";
 import './MoviesCard.css';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {BEAT_FILMS_API } from '../../constants/constatnts';
 
 function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
   const [savedMovie, setSavedMovie] = React.useState(false);
+  const [filmDuration, setFilmDuration] = React.useState({});
   const location = useLocation();
 
   React.useEffect(() => {
@@ -22,6 +23,13 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
     }
   }, [localUserMovies, movie.id]);
 
+  React.useEffect(() => {
+    setFilmDuration({
+      hours: Math.floor(movie.duration / 60),
+      minutes: movie.duration % 60
+    })
+  }, [movie.duration])
+
   async function saveMovie() {
     if (savedMovie || !isMoviesPage) {
       await handleDeleteUserMovie(movie._id ? movie : localUserMovies.find(film => film.movieId === movie.id));
@@ -35,8 +43,10 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
   return(
     <article className="element">
       <h2 className="element__title">{movie.nameRU}</h2>
-      <p className="element__duration">{movie.duration}</p>
-      <a href={movie.trailerLink}>
+      <p className="element__duration">
+        {`${filmDuration.hours !== 0 ? filmDuration.hours + 'ч ': ''}${filmDuration.minutes !== 0 ? filmDuration.minutes + 'м' : ''}`}
+      </p>
+      <a className="element__link" href={movie.trailerLink}>
         <img
           className="element__pic"
           src={movie.image.url ? BEAT_FILMS_API + movie.image.url : movie.image} alt="Картинка постер фильма">
