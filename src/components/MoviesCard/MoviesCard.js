@@ -1,6 +1,7 @@
 import React from "react";
 import './MoviesCard.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import {BEAT_FILMS_API } from '../../constants/constatnts';
 
 function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
@@ -35,7 +36,12 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
     <article className="element">
       <h2 className="element__title">{movie.nameRU}</h2>
       <p className="element__duration">{movie.duration}</p>
-      <img className="element__pic" src={movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image} alt="Картинка постер фильма"></img> 
+      <a href={movie.trailerLink}>
+        <img
+          className="element__pic"
+          src={movie.image.url ? BEAT_FILMS_API + movie.image.url : movie.image} alt="Картинка постер фильма">
+        </img> 
+      </a>
       <button 
         className={`element__like-button 
           ${!isMoviesPage ? 'element__like-button_type_delete' : ''} 

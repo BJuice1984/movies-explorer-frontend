@@ -28,8 +28,9 @@ function SavedMovies({
   }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, isFirstLoading, localUserMovies.length]);
 
   return(
+    <>
+    <Header />
     <main className="movies">
-      <Header />
       <SearchForm
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathSavedMovies}
         checkboxStatus={checkboxStatusPathSavedMovies}
@@ -42,8 +43,9 @@ function SavedMovies({
         isLoading={isUserMoviesLoading}
         isError={isSavedMoviesError}
         handleDeleteUserMovie={handleDeleteUserMovie} />
-      <Footer />
     </main>
+    <Footer />
+    </>
   )
 }
 

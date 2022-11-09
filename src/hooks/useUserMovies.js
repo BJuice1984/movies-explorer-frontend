@@ -1,6 +1,6 @@
 import React from "react";
 import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
-import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE } from '../constants/constatnts';
+import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, NO_MATCHED_FILMS, TYPE_FILM_NAME } from '../constants/constatnts';
 
 function useUserMovies() {
 
@@ -9,7 +9,7 @@ function useUserMovies() {
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
   const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(true);
-  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState('Ничего не найдено');
+  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState(TYPE_FILM_NAME);
 
   async function handleAddUserMovie({
     country,
@@ -119,6 +119,7 @@ function useUserMovies() {
     setLocalUserMovies([]);
     setCheckboxStatusPathSavedMovies(false);
     setSearchedSavedFilmName('');
+    setIsSavedMoviesError(TYPE_FILM_NAME);
     setIsFirstLoading(true);
   }, []);
 
