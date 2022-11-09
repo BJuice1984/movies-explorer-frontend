@@ -27,6 +27,7 @@
   color: #fff;
   text-align: left;
   padding-left: 14px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
@@ -45,6 +46,7 @@
   color: #8B8B8B;
   text-align: right;
   padding-right: 14px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
