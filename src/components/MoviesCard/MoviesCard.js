@@ -56,12 +56,13 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
       <button 
         className={`element__like-button 
           ${!isMoviesPage ? 'element__like-button_type_delete' : ''} 
-          ${savedMovie ? 'element__like-button_type_save' : ''} 
+          ${savedMovie ? 'element__like-button_type_saved' : ''} 
           ${isLoading ? 'element__like-button_type_disabled' : ''}`} 
         type="button" 
         onClick={saveMovie}
         disabled={isLoading}
-        aria-label="Сохранить">{!isMoviesPage || savedMovie || isLoading ? '' : SAVE}
+        aria-label="Сохранить">
+          {!isMoviesPage || savedMovie || isLoading ? '' : SAVE}
       </button>
     </article>
   )

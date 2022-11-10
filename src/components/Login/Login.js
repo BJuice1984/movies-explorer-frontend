@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from '../Logo/Logo';
+import './Login.css'
 import { Link } from 'react-router-dom';
 
 function Login(props) {

@@ -14,8 +14,11 @@ import useInitialMovies from '../../hooks/useInitialMovies';
 import useUserMovies from '../../hooks/useUserMovies';
 import usePagination from '../../hooks/usePagination';
 import './App.css';
+import PopupInfoTooltip from '../PopupInfoTooltip/PopupInfoTooltip';
 
 function App() {
+
+  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
 
   const {
     currentUser,
@@ -71,11 +74,19 @@ function App() {
       clearLocalState();
       clearLocalUserState();
     }
-  }, [clearLocalState, clearLocalUserState, loggedOut])
+  }, [clearLocalState, clearLocalUserState, loggedOut]);
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
+        {/* <PopupInfoTooltip
+          // onRegistered={isRegistered}
+          isOpen={isPopupOpen}
+          onClose={closePopup} /> */}
         <div className="page__container">
           <Routes>
             <Route path="/" element={<Main 
