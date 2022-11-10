@@ -25,6 +25,7 @@ function Movies({
 
   return(
     <>
+    {isLoading ? <Preloader/> : ''}
     <Header />
     <main className="movies">
       <SearchForm
@@ -34,7 +35,7 @@ function Movies({
         checkboxStatus={checkboxStatusPathMovies}
         isLoading={isLoading}
         handleGetUserMovies={handleGetUserMovies} />
-      {isLoading ? <Preloader/> : <MoviesCardList
+      <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}
         handleDeleteUserMovie={handleDeleteUserMovie}
         localUserMovies={localUserMovies}
@@ -42,7 +43,7 @@ function Movies({
         numberOfFilms={numberOfFilms}
         isLoading={isUserMoviesLoading}
         isError={isError}
-        movies={localSearchedMovies} />}
+        movies={localSearchedMovies} />
     </main>
     <Footer />
     </>

@@ -2,6 +2,7 @@ import React from "react";
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import {BEAT_FILMS_API } from '../../constants/constatnts';
+import { HOURS, MINUTES, SAVE } from '../../constants/constatnts';
 
 function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, handleDeleteUserMovie }) {
   const [isMoviesPage, setIsMoviesPage] = React.useState(false);
@@ -44,7 +45,7 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
     <article className="element">
       <h2 className="element__title">{movie.nameRU}</h2>
       <p className="element__duration">
-        {`${filmDuration.hours !== 0 ? filmDuration.hours + 'ч ': ''}${filmDuration.minutes !== 0 ? filmDuration.minutes + 'м' : ''}`}
+        {`${filmDuration.hours !== 0 ? filmDuration.hours + HOURS : ''}${filmDuration.minutes !== 0 ? filmDuration.minutes + MINUTES : ''}`}
       </p>
       <a className="element__link" href={movie.trailerLink}>
         <img
@@ -60,7 +61,7 @@ function MoviesCard({ movie, localUserMovies, handleAddUserMovie, isLoading, han
         type="button" 
         onClick={saveMovie}
         disabled={isLoading}
-        aria-label="Сохранить">{!isMoviesPage || savedMovie || isLoading ? '' : 'Сохранить'}
+        aria-label="Сохранить">{!isMoviesPage || savedMovie || isLoading ? '' : SAVE}
       </button>
     </article>
   )

@@ -73,10 +73,6 @@ function App() {
     }
   }, [clearLocalState, clearLocalUserState, loggedOut])
 
-
-  // God Save Ozzy bag!!!!
-
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">

@@ -81,6 +81,7 @@ function useInitialMovies() {
       setSearchedFilmName('');
       setCheckboxStatusPathMovies(false);
       setIsError(TYPE_FILM_NAME);
+      setIsLoading(false);
   }, []);
 
   return {

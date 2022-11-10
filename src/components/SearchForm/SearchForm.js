@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
+import { FIND, FINDING, SHORT_MOVIES} from "../../constants/constatnts";
 import './SearchForm.css';
 
 function SearchForm({
@@ -46,7 +47,7 @@ function SearchForm({
             className="search-form__button"
             type="submit"
             disabled={isLoading}
-            aria-label="Найти">{isLoading ? 'Ищем...' : 'Найти'}</button>
+            aria-label="Найти">{isLoading ? FINDING : FIND}</button>
         </form>
         <div className="search-form__checkbox">
           <label className="switch">
@@ -55,7 +56,7 @@ function SearchForm({
             defaultChecked={checkboxStatus} />
             <span className="slider"></span>
           </label>
-          <p className="search-form__span">Короткометражки</p>
+          <p className="search-form__span">{SHORT_MOVIES}</p>
         </div>
       </div>
     </section>

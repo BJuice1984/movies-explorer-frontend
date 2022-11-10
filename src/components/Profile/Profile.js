@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE } from "../../constants/constatnts";
+import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
 import './Profile.css'
 
@@ -50,14 +50,14 @@ function Profile({ onLogout, updateMyProfile }) {
     <>
       <Header />
       <section className="profile">
-        <h2 className="profile__title">Привет, {currentUser.name}&#33;</h2>
+        <h2 className="profile__title">{HELLO + currentUser.name}&#33;</h2>
         <form 
         className="profile__input-form" 
         id="profile__input-form"
         onChange={validations}
         onSubmit={handleSubmit}>
           <label className="profile__input-form-label">
-            <span className="profile__input-name">Имя</span>
+            <span className="profile__input-name">{NAME}</span>
             <input
             placeholder="Имя пользователя"
             defaultValue={formParams.name}
@@ -72,7 +72,7 @@ function Profile({ onLogout, updateMyProfile }) {
           </label>
           {inputTypeNameErrors && <p className="profile__input-error">{inputTypeNameErrors}</p>}
           <label className="profile__input-form-label">
-            <span className="profile__input-name">Email</span>
+            <span className="profile__input-name">{EMAIL}</span>
             <input
             placeholder="Email пользователя"
             defaultValue={formParams.email}
@@ -99,9 +99,9 @@ function Profile({ onLogout, updateMyProfile }) {
               className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : inputValid ? 'profile__button_type_valid' : ''}`}
               form="profile__input-form"
               type={inputDisable ? "button" : "submit"}>
-                {inputDisable ? "Редактировать" : "Сохранить"}
+                {inputDisable ? EDIT : SAVE}
               </button>
-            <button className="profile__link" type="button" onClick={onLogout}>Выйти из аккаунта</button>
+            <button className="profile__link" type="button" onClick={onLogout}>{LOGOUT_OF_ACCOUNT}</button>
           </div>
       </section>
     </>

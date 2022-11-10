@@ -17,6 +17,18 @@ export const YOUTUBE_URL = 'https://www.youtube.com/';
 export const MAIN_API_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const NO_MATCHED_FILMS = 'Ничего не найдено';
 export const TYPE_FILM_NAME = 'Введите название фильма в строке поиска';
+export const FIND = 'Найти';
+export const FINDING = 'Ищем...';
+export const SHORT_MOVIES = 'Короткометражки';
+export const HOURS = 'ч ';
+export const MINUTES = 'м';
+export const SAVE = 'Сохранить';
+export const EDIT = 'Редактировать';
+
+export const HELLO = 'Привет, ';
+export const NAME = 'Имя';
+export const EMAIL = 'Email';
+export const LOGOUT_OF_ACCOUNT = 'Выйти из аккаунта';
 
 export const USER_EMAIL_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 export const USER_EMAIL_ERROR_MESSAGE = "E-mail должен соответствовать формату name@domain.ru";

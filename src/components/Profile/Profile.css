@@ -77,6 +77,17 @@
   overflow: hidden;
 }
 
+@media screen and (min-width: 520px) {
+  .profile__title {
+    padding-top: 236px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__title {
+    padding-top: 74px;
+  }
+}
 
 .profile__input-form {
   display: flex;
@@ -85,12 +96,25 @@
   padding: 0;
   border: none;
   padding-top: 80px;
+  max-width: 410px;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__input-form {
+    padding-top: 96px;
+  }
 }
 
 .buttons__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media screen and (min-width: 520px) {
+  .buttons__container {
+    padding-top: 210px;
+  }
 }
 
 .profile__input-form-label {
@@ -192,13 +216,11 @@
 @media screen and (min-width: 768px) {
   .profile__link {
     font-size: 13px;
-    padding-bottom: 269px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .profile__link {
     font-size: 13px;
-    padding-bottom: 70px;
   }
 }
