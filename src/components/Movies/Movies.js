@@ -25,7 +25,6 @@ function Movies({
 
   return(
     <>
-    {isLoading ? <Preloader/> : ''}
     <Header />
     <main className="movies">
       <SearchForm

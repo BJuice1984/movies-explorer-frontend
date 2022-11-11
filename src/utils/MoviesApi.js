@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+import { BEAT_FILMS_URL } from '../constants/constatnts';
 
 const checkResponse = (res) =>  {
   if (res.ok) {
@@ -8,7 +8,7 @@ const checkResponse = (res) =>  {
 };
 
 export const getInitialMovies = () => {
-  return fetch(`${BASE_URL}`, {
+  return fetch(`${BEAT_FILMS_URL}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

@@ -15,6 +15,7 @@ import useUserMovies from '../../hooks/useUserMovies';
 import usePagination from '../../hooks/usePagination';
 import './App.css';
 import PopupInfoTooltip from '../PopupInfoTooltip/PopupInfoTooltip';
+import Preloader from "../Preloader/Preloader";
 
 function App() {
 
@@ -80,6 +81,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
+        {isLoading || isUserMoviesLoading ? <Preloader/> : ''}
         <PopupInfoTooltip
         // onRegistered={isRegistered}
         err={isUserLoginError || isError || isSavedMoviesError } />

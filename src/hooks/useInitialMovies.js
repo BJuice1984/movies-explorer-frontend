@@ -18,10 +18,10 @@ function useInitialMovies() {
         localStorage.setItem("initial-movies", JSON.stringify(movies));
       })
       .catch(err => {
-        console.log(err)
+        console.log({err})
         setIsError(MAIN_API_ERROR_MESSAGE);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setTimeout(() => setIsLoading(false), 300));
     return JSON.parse(localStorage.getItem("initial-movies"))
   };
 
@@ -39,6 +39,7 @@ function useInitialMovies() {
   }, [searchFilm, searchedFilmName]);
 
   async function handleSearchFilm(filmName) {
+    setIsLoading(true);
     if (!JSON.parse(localStorage.getItem("initial-movies"))) {
       await getSavedMovies()
       .then((res) => {
@@ -46,11 +47,13 @@ function useInitialMovies() {
         localStorage.setItem("user-searched-film-name", JSON.stringify(filmName));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err)
       })
+      .finally(() => setTimeout(() => setIsLoading(false), 300));
       return setSearchedFilmName(JSON.parse(localStorage.getItem("user-searched-film-name")))
     } else {
       localStorage.setItem("user-searched-film-name", JSON.stringify(filmName));
+      setTimeout(() => setIsLoading(false), 300);
       return setSearchedFilmName(JSON.parse(localStorage.getItem("user-searched-film-name")))
     }
   }

@@ -9,7 +9,7 @@ function useUserMovies() {
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
   const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(true);
-  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState('');
+  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState(TYPE_FILM_NAME);
 
   async function handleAddUserMovie({
     country,
@@ -39,7 +39,7 @@ function useUserMovies() {
     })
     .then((movie) => {
       localStorage.setItem("user-movies", JSON.stringify([movie, ...localUserMovies]));
-      setIsUserMoviesLoading(false)
+      setTimeout(() => setIsUserMoviesLoading(false), 300)
     })
     .catch(err => {
       console.log(err);
@@ -57,7 +57,7 @@ function useUserMovies() {
     })
     .then((filtredMovies) => {
       localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
-      setIsUserMoviesLoading(false)
+      setTimeout(() => setIsUserMoviesLoading(false), 300)
     })
     .catch(err => {
       console.log(err)
@@ -78,7 +78,7 @@ function useUserMovies() {
       .catch(err => {
         console.log(err)
       })
-      .finally(setIsUserMoviesLoading(false));
+      .finally(setTimeout(() => setIsUserMoviesLoading(false), 300));
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }, []);
   
@@ -90,8 +90,13 @@ function useUserMovies() {
   function handleSearchSavedFilm(filmName) {
     updateLocalStorageFilmeName(filmName);
     setIsFirstLoading(false);
+    setIsUserMoviesLoading(true);
+    setTimeout(() => setIsUserMoviesLoading(false), 300);
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
-      .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()))
+      .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
+      if (searchedMovies.length === 0) {
+        setIsSavedMoviesError(NO_MATCHED_FILMS)
+      };
     return setLocalUserMovies(searchedMovies)
   }
 

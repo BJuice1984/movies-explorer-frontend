@@ -19,7 +19,7 @@ function PopupInfoTooltip(props) {
   React.useEffect(() => {
     if (props.err === 'Failed to fetch') {
       setIsPopupOpen(true);
-      setIsErrorMessage('Извините, на сервере произошла ошибка. Попробуйте перезагрузить страницу или зайдите позже :((');
+      setIsErrorMessage('Извините, на сервере произошла ошибка. Попробуйте перезагрузить страницу или зайдите, пожалуйста, позже :((');
     }
   }, [props.err])
 
