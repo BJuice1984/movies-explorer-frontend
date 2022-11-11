@@ -46,6 +46,7 @@ function App() {
 
   const {
     localUserMovies,
+    localSearchedUserMovies,
     handleSearchSavedFilm,
     searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
@@ -77,6 +78,9 @@ function App() {
       clearLocalUserState();
     }
   }, [clearLocalState, clearLocalUserState, loggedOut]);
+
+  console.log('localUserMovies', localUserMovies)
+  console.log('localSearchedUserMovies', localSearchedUserMovies)
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -121,7 +125,7 @@ function App() {
                 element={<SavedMovies
                 handleGetUserMovies={handleGetUserMovies}
                 handleDeleteUserMovie={handleDeleteUserMovie}
-                localUserMovies={localUserMovies}
+                localUserMovies={isFirstLoading ? localUserMovies : localSearchedUserMovies}
                 handleSearchSavedFilm={handleSearchSavedFilm}
                 searchedSavedFilmName={searchedSavedFilmName}
                 isUserMoviesLoading={isUserMoviesLoading}

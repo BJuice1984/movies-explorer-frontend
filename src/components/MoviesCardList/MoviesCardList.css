@@ -12,6 +12,16 @@
   padding-top: 80px;
   width: 200px;
   text-align: center;
+  opacity: 0;
+  transition: .3s;
+  animation: show .5s 1;
+  animation-fill-mode: forwards;
+  animation-delay: .3s;
+}
+
+@keyframes show{
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 
 .movie-card-list__info_type_disable {

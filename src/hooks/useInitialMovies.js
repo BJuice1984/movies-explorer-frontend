@@ -26,12 +26,13 @@ function useInitialMovies() {
   };
 
   const searchFilm = React.useCallback(async (filmName) => {
+    setIsError('');
     const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     if (localMovies.length !== 0 && searchedMovies.length === 0) {
-      setIsError(NO_MATCHED_FILMS)
+      setTimeout(() => setIsError(NO_MATCHED_FILMS), 300);
     };
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
-    return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")))
+    return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")));
   }, [localMovies]);
 
   React.useEffect(() => {
