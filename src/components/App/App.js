@@ -6,7 +6,7 @@ import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrnetUserContext';
 import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
 import useLogin from '../../hooks/useLogin';
@@ -18,7 +18,7 @@ import PopupInfoTooltip from '../PopupInfoTooltip/PopupInfoTooltip';
 
 function App() {
 
-  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
+  const location = useLocation();
 
   const {
     currentUser,
@@ -28,7 +28,8 @@ function App() {
     handleRegister,
     handleLogin,
     handleLogout,
-    updateMyProfile
+    updateMyProfile,
+    isUserLoginError
   } = useLogin();
 
   const {
@@ -76,18 +77,13 @@ function App() {
     }
   }, [clearLocalState, clearLocalUserState, loggedOut]);
 
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        {/* <PopupInfoTooltip
-          // onRegistered={isRegistered}
-          isOpen={isPopupOpen}
-          onClose={closePopup} /> */}
-        <div className="page__container">
+        <PopupInfoTooltip
+        // onRegistered={isRegistered}
+        err={isUserLoginError || isError || isSavedMoviesError } />
+        <div className={`page__container ${location.pathname === '/' ? 'page__container_type_movies' : ''}`}>
           <Routes>
             <Route path="/" element={<Main 
               isLoggedin={loggedIn}/>} />

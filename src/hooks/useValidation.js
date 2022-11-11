@@ -4,7 +4,6 @@ function useValidation () {
 
   const [inputTypeNameErrors, setInputTypeNameErrors] = React.useState('');
   const [inputTypeEmailErrors, setInputTypeEmailErrors] = React.useState('');
-  const [isValid, setIsValid] = React.useState('false');
 
   const validations = (e) => {
     if (e.target.id === 'name')
@@ -16,8 +15,7 @@ function useValidation () {
   return {
     validations,
     inputTypeNameErrors,
-    inputTypeEmailErrors,
-    isValid
+    inputTypeEmailErrors
   }
 
 }

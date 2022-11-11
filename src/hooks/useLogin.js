@@ -6,20 +6,24 @@ function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [loggedOut, setLoggedOut] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [isUserLoginError, setUserLoginError] = React.useState('');
 
   const navigate = useNavigate();
 
   const handleRegister = ({ name, password, email }) => {
+    setUserLoginError('');
     return Auth.register(name, password, email)
     .then(() => {
       handleLogin( { password, email });
     })
-    .catch(() => {
+    .catch((err) => {
       navigate('/sign-up')
+      setUserLoginError(err.message)
     })
   }
 
   const handleLogin = ({ password, email }) => {
+    setUserLoginError('');
     return Auth.authorize(password, email)
     .then((data) => {
       if (data) {
@@ -31,10 +35,12 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
+      setUserLoginError(err.message)
     })
   }
 
   const handleLogout = () => {
+    setUserLoginError('');
     return Auth.logout()
     .then(() => {
       setLoggedIn(false);
@@ -45,10 +51,12 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
+      setUserLoginError(err.message)
     })
   }
 
   const updateMyProfile = (name, email) => {
+    setUserLoginError('');
     return Auth.updateMyProfile(name, email)
     .then((profile) => {
       if (profile) {
@@ -57,19 +65,22 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
+      setUserLoginError(err.message)
     })
   }
 
   const getMyProfile = React.useCallback(async () => {
+    setUserLoginError('');
     await Auth.getMyProfile()
     .then((profile) => {
       setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
       setLoggedIn(true);
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
+      setUserLoginError(err.message)
     })
-  }, [])
+  }, []);
 
   return {
     currentUser,
@@ -79,7 +90,8 @@ function useLogin() {
     handleRegister,
     handleLogin,
     handleLogout,
-    updateMyProfile
+    updateMyProfile,
+    isUserLoginError
   };
 }
 

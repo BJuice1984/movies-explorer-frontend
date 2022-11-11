@@ -17,3 +17,7 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
+
+.page__container_type_movies {
+  margin: 0 auto;
+}

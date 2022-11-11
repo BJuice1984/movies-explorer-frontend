@@ -86,14 +86,6 @@
     right: -20px;
     top: -25px;
   }
-
-  .popup__close-button:before {
-    border: 2px solid #fff;
-  }
-  
-  .popup__close-button:after {
-    border: 2px solid #fff;
-  }
 }
 
 .popup__image {

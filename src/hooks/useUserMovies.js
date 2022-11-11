@@ -9,7 +9,7 @@ function useUserMovies() {
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
   const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(true);
-  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState(TYPE_FILM_NAME);
+  const [isSavedMoviesError, setIsSavedMoviesError] = React.useState('');
 
   async function handleAddUserMovie({
     country,
