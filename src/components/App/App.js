@@ -79,9 +79,6 @@ function App() {
     }
   }, [clearLocalState, clearLocalUserState, loggedOut]);
 
-  console.log('localUserMovies', localUserMovies)
-  console.log('localSearchedUserMovies', localSearchedUserMovies)
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">

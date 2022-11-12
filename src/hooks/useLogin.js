@@ -17,7 +17,8 @@ function useLogin() {
       handleLogin( { password, email });
     })
     .catch((err) => {
-      navigate('/sign-up')
+      navigate('/sign-up');
+      console.log({err})
       setUserLoginError(err.message)
     })
   }
@@ -35,7 +36,12 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err.message)
+      setUserLoginError(err.message);
+      setLoggedIn(false);
+      setLoggedOut(true);
+      setCurrentUser({});
+      localStorage.clear();
+      navigate('/sign-in');
     })
   }
 

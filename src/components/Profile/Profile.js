@@ -18,7 +18,7 @@ function Profile({ onLogout, updateMyProfile }) {
   const [formParams, setFormParams] = React.useState({});
   const [inputDisable, setInputDisable] = React.useState(true);
   const [buttonDisable, setButtonDisable] = React.useState(false);
-  const [inputValid, setInputValid] = React.useState(false);
+  const [subbbb, setSubbbb] = React.useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -32,19 +32,49 @@ function Profile({ onLogout, updateMyProfile }) {
     setFormParams({
       name: currentUser.name || '',
       email: currentUser.email || '',
-    })
+    });
+    // setInputDisable(true);
+    // setButtonDisable(false);
+    console.log('aaaaaaaaaaaa')
   }, [currentUser])
-
-  const handleInput = () => {
-    setInputDisable(false)
-    // setButtonDisable(true)
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateMyProfile(formParams.name, formParams.email);
-    // setInputDisable(true)
+    updateMyProfile(formParams.name, formParams.email)
   }
+
+  // console.log('inputDisable', inputDisable)
+
+  // const clearState = () => {
+  //   setInputDisable(true);
+  //   setButtonDisable(false);
+  // }
+
+
+
+  React.useEffect(() => {
+    if ((formParams.name === currentUser.name && formParams.email === currentUser.email && !inputDisable) || (inputTypeNameErrors !== '' || inputTypeEmailErrors !== '')) {
+      setButtonDisable(true);
+    } else if ((formParams.name !== currentUser.name || formParams.email !== currentUser.email) && (inputTypeNameErrors === '' || inputTypeEmailErrors === '')) {
+      setButtonDisable(false);
+    }
+  }, [currentUser.email, currentUser.name, formParams.email, formParams.name, inputDisable, inputTypeEmailErrors, inputTypeNameErrors]);
+
+  // console.log('inputValid', inputValid)
+  // console.log('1th 1', formParams.name === currentUser.name)
+  // console.log('1th 2', formParams.email === currentUser.email )
+  // console.log('inputDisable', !inputDisable )
+
+  // console.log('2nd', inputTypeNameErrors !== '' && inputTypeEmailErrors !== '')
+  // console.log('inputTypeNameErrors', inputTypeNameErrors !== '')
+  // console.log('inputTypeEmailErrors', inputTypeEmailErrors !== '')
+
+  // React.useEffect(() => {
+  //   if (updateMyProfile) {
+  //     setInputDisable(true);
+  //     setButtonDisable(false);
+  //   }
+  // }, [updateMyProfile])
 
   return (
     <>
@@ -94,12 +124,12 @@ function Profile({ onLogout, updateMyProfile }) {
         </div>
         <div className="buttons__container">
             <button
-              onClick={handleInput}
+              onClick={() => setInputDisable(false)}
               disabled={buttonDisable}
-              className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : inputValid ? 'profile__button_type_valid' : ''}`}
+              className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : !inputDisable ? 'profile__button_type_valid' : ''}`}
               form="profile__input-form"
               type={inputDisable ? "button" : "submit"}>
-                {inputDisable ? EDIT : SAVE}
+                {subbbb ? EDIT : SAVE}
               </button>
             <button className="profile__link" type="button" onClick={onLogout}>{LOGOUT_OF_ACCOUNT}</button>
           </div>
