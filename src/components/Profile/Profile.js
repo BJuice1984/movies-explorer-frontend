@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
+import useClose from '../../hooks/useClose';
 import './Profile.css'
 
 function Profile({ onLogout, updateMyProfile }) {
@@ -13,11 +14,20 @@ function Profile({ onLogout, updateMyProfile }) {
     inputTypeEmailErrors,
   } = useValidation();
 
+  const {
+    EscClose
+  } = useClose();
+
   const currentUser = useContext(CurrentUserContext);
 
   const [formParams, setFormParams] = React.useState({});
   const [inputDisable, setInputDisable] = React.useState(true);
   const [buttonDisable, setButtonDisable] = React.useState(false);
+
+  const resetValue = () => {
+    setInputDisable(true);
+    setButtonDisable(false);
+  }
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -37,8 +47,7 @@ function Profile({ onLogout, updateMyProfile }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateMyProfile(formParams.name, formParams.email);
-    setInputDisable(true);
-    setButtonDisable(false);
+    resetValue();
   }
 
   React.useEffect(() => {
@@ -55,6 +64,8 @@ function Profile({ onLogout, updateMyProfile }) {
       setButtonDisable(false);
     }
   }, [currentUser.email, currentUser.name, formParams.email, formParams.name, inputDisable, inputTypeEmailErrors, inputTypeNameErrors]);
+
+  EscClose(!inputDisable, resetValue);
 
   
 

@@ -1,6 +1,7 @@
 import React from "react";
 import * as Auth from '../utils/MainApi';
 import { useNavigate } from 'react-router-dom';
+import { OK_FETCH_ANSWER } from '../constants/constatnts';
 
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -70,8 +71,7 @@ function useLogin() {
       }
     })
     .then(() => {
-      setUserLoginError('Успешно!');
-        console.log('useLogin', isUserLoginError)
+      setUserLoginError(OK_FETCH_ANSWER);
     })
     .catch((err) => {
       console.log(err);
