@@ -39,11 +39,6 @@ function Login(props) {
     }
   }, [formParams.email, formParams.name, inputTypeEmailErrors, inputTypePasswordErrors])
 
-  console.log(inputTypePasswordErrors !== '')
-  console.log(inputTypeEmailErrors !== '')
-  console.log(formParams.name === '')
-  console.log(formParams.email === '', formParams.email)
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formParams.email || !formParams.password){
@@ -67,6 +62,7 @@ function Login(props) {
           value={formParams.email}
           onChange={handleChange}
           className={`login__input-text ${inputTypeEmailErrors !== '' ? 'login__input-text_type_not-valid' : ''}`}
+          type="email"
           name="email"
           id="email"
           required
@@ -79,7 +75,8 @@ function Login(props) {
           placeholder={YOUR_PASSWORD}
           value={formParams.password}
           onChange={handleChange}
-          className={`login__input-text ${inputTypePasswordErrors !== '' ? 'login__input-text_type_not-valid' : ''}`} 
+          className={`login__input-text ${inputTypePasswordErrors !== '' ? 'login__input-text_type_not-valid' : ''}`}
+          type="password"
           name="password"
           id="password"
           required

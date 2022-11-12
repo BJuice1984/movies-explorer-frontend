@@ -88,6 +88,7 @@ function Profile({ onLogout, updateMyProfile }) {
             defaultValue={formParams.name}
             onChange={handleChange}
             className={`profile__input-text ${inputTypeNameErrors ? 'profile__input-text_type_not-valid' : ''}`}
+            type="text"
             name="name"
             id="name"
             required
@@ -102,7 +103,8 @@ function Profile({ onLogout, updateMyProfile }) {
             placeholder="Email пользователя"
             defaultValue={formParams.email}
             onChange={handleChange}
-            className={`profile__input-text ${inputTypeEmailErrors ? 'profile__input-text_type_not-valid' : ''}`} 
+            className={`profile__input-text ${inputTypeEmailErrors ? 'profile__input-text_type_not-valid' : ''}`}
+            type="email"
             name="email"
             id="email"
             required
