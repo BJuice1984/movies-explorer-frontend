@@ -15,7 +15,7 @@ function useClose() {
       document.addEventListener("keydown", handleEsc);
   
       return () => document.removeEventListener("keydown", handleEsc)
-    }, [isOpen]);
+    }, [handleClose, isOpen]);
   } 
   
   function ClickClose(isOpen, handleClose, openedClass) {

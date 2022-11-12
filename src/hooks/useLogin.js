@@ -69,6 +69,10 @@ function useLogin() {
         setCurrentUser({ name: profile.name, email: profile.email });
       }
     })
+    .then(() => {
+      setUserLoginError('Успешно!');
+        console.log('useLogin', isUserLoginError)
+    })
     .catch((err) => {
       console.log(err);
       setUserLoginError(err.message)
