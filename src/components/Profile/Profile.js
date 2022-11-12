@@ -128,7 +128,10 @@ function Profile({ onLogout, updateMyProfile }) {
                 || (inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') ? "button" : "submit"}>
                 {inputDisable ? EDIT : SAVE}
               </button>
-            <button className="profile__link" type="button" onClick={onLogout}>{LOGOUT_OF_ACCOUNT}</button>
+            <button
+              className={`profile__link ${inputDisable ? '' : 'profile__link_type_disable'}`}
+              type="button"
+              onClick={onLogout}>{LOGOUT_OF_ACCOUNT}</button>
           </div>
       </section>
     </>

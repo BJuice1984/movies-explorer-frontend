@@ -47,6 +47,18 @@
   }
 }
 
+.login__button_type_disable {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+  cursor: default;
+}
+
+.login__button_type_disable:hover {
+  opacity: 1;
+  transition: none;
+}
+
+
 .login__button_type_register {
   margin-top: 178px;
 }
@@ -91,6 +103,10 @@
   white-space: nowrap;
   overflow: hidden;
   outline: none;
+}
+
+.login__input-text_type_not-valid {
+  color: #EE3465;
 }
 
 .login__input-name {

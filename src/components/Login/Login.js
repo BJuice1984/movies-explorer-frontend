@@ -7,9 +7,11 @@ import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, NOT_REG
 
 function Login(props) {
 
+  const [buttonDisable, setButtonDisable] = React.useState(true);
+
   const {
     validations,
-    inputTypeNameErrors,
+    inputTypePasswordErrors,
     inputTypeEmailErrors,
   } = useValidation();
 
@@ -25,6 +27,22 @@ function Login(props) {
       [name]: value
     }));
   }
+
+  React.useEffect(() => {
+    if ((inputTypePasswordErrors !== ''
+      || inputTypeEmailErrors !== '')
+      || (formParams.name === ''
+      || formParams.email === '')) {
+      setButtonDisable(true);
+    } else {
+      setButtonDisable(false);
+    }
+  }, [formParams.email, formParams.name, inputTypeEmailErrors, inputTypePasswordErrors])
+
+  console.log(inputTypePasswordErrors !== '')
+  console.log(inputTypeEmailErrors !== '')
+  console.log(formParams.name === '')
+  console.log(formParams.email === '', formParams.email)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,8 +66,7 @@ function Login(props) {
           placeholder={YOUR_EMAIL}
           value={formParams.email}
           onChange={handleChange}
-          className="login__input-text"
-          type="text"
+          className={`login__input-text ${inputTypeEmailErrors !== '' ? 'login__input-text_type_not-valid' : ''}`}
           name="email"
           id="email"
           required
@@ -62,15 +79,17 @@ function Login(props) {
           placeholder={YOUR_PASSWORD}
           value={formParams.password}
           onChange={handleChange}
-          className="login__input-text" 
-          type="password"
+          className={`login__input-text ${inputTypePasswordErrors !== '' ? 'login__input-text_type_not-valid' : ''}`} 
           name="password"
           id="password"
           required
           minLength="6"
           maxLength="40" />
         </label>
-        <button className="login__button" type="submit">{LOGIN}</button>
+        <button
+          className={`login__button ${buttonDisable ? 'login__button_type_disable' : ''}`}
+          disabled={buttonDisable}
+          type="submit">{LOGIN}</button>
       </form>
       <p className="login__text">{NOT_REGISTERED_YET} <Link className="login__link" to="/sign-up">{REGISTRATION}</Link></p>
     </section>

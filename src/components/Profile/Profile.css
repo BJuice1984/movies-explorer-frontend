@@ -47,6 +47,13 @@
   line-height: 1.25;
   color: #C2C2C2;
   font-weight: 400;
+  cursor: default;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__button_type_disable {
+    min-width: 410px;
+  }
 }
 
 .profile__button_type_disable:hover {
@@ -62,6 +69,12 @@
   cursor: pointer;
   background-color: #4285F4;
   color: #fff;
+}
+
+@media screen and (min-width: 520px) {
+  .profile__button_type_valid {
+    min-width: 410px;
+  }
 }
 
 .profile__title {
@@ -109,6 +122,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 40px;
 }
 
 @media screen and (min-width: 520px) {
@@ -202,7 +216,6 @@
 .profile__link {
   margin: 0 auto;
   padding-top: 16px;
-  padding-bottom: 40px;
   font-size: 12px;
   line-height: 1.21;
   font-weight: 500;
@@ -210,6 +223,10 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.profile__link_type_disable {
+  display: none;
 }
 
 .profile__link:hover {
