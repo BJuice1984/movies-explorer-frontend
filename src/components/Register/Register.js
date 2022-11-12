@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import '../Login/Login.css'
+import '../Login/Login.css';
+import { NAME, EMAIL, PASSWORD, WELCOME, YOUR_NAME, YOUR_EMAIL, YOUR_PASSWORD, REGISTER, ALREADY_REGISTERED, LOGIN } from '../../constants/constatnts';
 
 function Register(props) {
 
@@ -10,8 +11,6 @@ function Register(props) {
     email: '',
     password: '',
   });
-
-  const [message, setMessage] = React.useState('');
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -24,21 +23,18 @@ function Register(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { password, email, name } = formParams;
-    props.onRegClick({ password, email, name })
-        .catch(err => {
-          setMessage(err.message);
-        });
+    props.onRegClick({ password, email, name });
   }
 
   return (
     <section className="login">
     <Logo />
-      <h2 className="login__title">Добро пожаловать&#33;</h2>
+      <h2 className="login__title">{WELCOME}</h2>
       <form className="login__input-form" onSubmit={handleSubmit}>
         <label className="login__input-form-label">
-          <span className="login__input-name">Имя</span>
+          <span className="login__input-name">{NAME}</span>
           <input
-          placeholder="Ваше имя"
+          placeholder={YOUR_NAME}
           value={formParams.name}
           onChange={handleChange}
           className="login__input-text"
@@ -50,9 +46,9 @@ function Register(props) {
           maxLength="20" />
         </label>
         <label className="login__input-form-label">
-          <span className="login__input-name">Email</span>
+          <span className="login__input-name">{EMAIL}</span>
           <input
-          placeholder="Ваша почта"
+          placeholder={YOUR_EMAIL}
           value={formParams.email}
           onChange={handleChange}
           className="login__input-text"
@@ -64,9 +60,9 @@ function Register(props) {
           maxLength="40" />
         </label>
         <label className="login__input-form-label">
-          <span className="login__input-name">Пароль</span>
+          <span className="login__input-name">{PASSWORD}</span>
           <input
-          placeholder="Ваш пароль"
+          placeholder={YOUR_PASSWORD}
           value={formParams.password}
           onChange={handleChange}
           className="login__input-text" 
@@ -77,9 +73,9 @@ function Register(props) {
           minLength="6"
           maxLength="40" />
         </label>
-        <button className="login__button login__button_type_register" type="submit">Зарегистрироваться</button>
+        <button className="login__button login__button_type_register" type="submit">{REGISTER}</button>
       </form>
-      <p className="login__text">Уже зарегистрированы&#63; <Link className="login__link" to="/sign-in">Войти</Link></p>
+      <p className="login__text">{ALREADY_REGISTERED} <Link className="login__link" to="/sign-in">{LOGIN}</Link></p>
     </section>
   )
 }

@@ -30,9 +30,20 @@ export const SAVE = 'Сохранить';
 export const EDIT = 'Редактировать';
 
 export const HELLO = 'Привет, ';
+export const GLAD_TO_SEE = 'Рады видеть!';
+export const WELCOME = 'Добро пожаловать!';
+export const NOT_REGISTERED_YET = 'Ещё не зарегистрированы?';
+export const ALREADY_REGISTERED = 'Уже зарегистрированы?';
+export const REGISTRATION = 'Регистрация';
+export const REGISTER = 'Зарегистрироваться';
 export const NAME = 'Имя';
 export const EMAIL = 'Email';
+export const PASSWORD = 'Пароль';
+export const LOGIN = 'Войти';
 export const LOGOUT_OF_ACCOUNT = 'Выйти из аккаунта';
+export const YOUR_NAME = 'Ваше имя';
+export const YOUR_EMAIL = 'Ваша почта';
+export const YOUR_PASSWORD = 'Ваш пароль';
 
 export const USER_EMAIL_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 export const USER_EMAIL_ERROR_MESSAGE = "E-mail должен соответствовать формату name@domain.ru";
