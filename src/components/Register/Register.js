@@ -73,6 +73,7 @@ function Register(props) {
           minLength="2"
           maxLength="20" />
         </label>
+        {inputTypeNameErrors && <p className="login__input-error">{inputTypeNameErrors}</p>}
         <label className="login__input-form-label">
           <span className="login__input-name">{EMAIL}</span>
           <input
@@ -87,6 +88,7 @@ function Register(props) {
           minLength="2"
           maxLength="40" />
         </label>
+        {inputTypeEmailErrors && <p className="login__input-error">{inputTypeEmailErrors}</p>}
         <label className="login__input-form-label">
           <span className="login__input-name">{PASSWORD}</span>
           <input
@@ -101,6 +103,7 @@ function Register(props) {
           minLength="6"
           maxLength="40" />
         </label>
+        {inputTypePasswordErrors && <p className="login__input-error">{inputTypePasswordErrors}</p>}
         <button
           className={`login__button login__button_type_register ${buttonDisable ? 'login__button_type_disable' : ''}`}
           type="submit">{REGISTER}</button>

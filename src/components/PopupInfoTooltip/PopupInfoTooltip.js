@@ -3,7 +3,7 @@ import ok_pic from '../../images/OK_pic.svg';
 import err_pic from '../../images/ERR_pic.svg';
 import './PopupInfoTooltip.css';
 import useClose from '../../hooks/useClose';
-import { OK_FETCH_ANSWER, DATA_CHANGED_SUCCESSFULLY, MAIN_API_ERROR_MESSAGE, FAILED_TO_FETCH } from '../../constants/constatnts';
+import { OK_FETCH_ANSWER, DATA_CHANGED_SUCCESSFULLY, MAIN_API_ERROR_MESSAGE, FAILED_TO_FETCH, USER_ALREADY_REGISTERED } from '../../constants/constatnts';
 
 function PopupInfoTooltip(props) {
 
@@ -16,10 +16,16 @@ function PopupInfoTooltip(props) {
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [isErrorPic, setIsErrorPic] = React.useState();
 
+  console.log(isErrorMessage)
+
   React.useEffect(() => {
     if (props.err === FAILED_TO_FETCH) {
       setIsPopupOpen(true);
       setIsErrorMessage(MAIN_API_ERROR_MESSAGE);
+      setIsErrorPic(false)
+    } else if (props.err.includes('409'))  {
+      setIsPopupOpen(true);
+      setIsErrorMessage(USER_ALREADY_REGISTERED);
       setIsErrorPic(false)
     } else if (props.err === OK_FETCH_ANSWER)  {
       setIsPopupOpen(true);

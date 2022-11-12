@@ -167,3 +167,12 @@
     padding-top: 40px;
   }
 }
+
+.login__input-error {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #EE3465;
+  padding-top: 10px;
+}

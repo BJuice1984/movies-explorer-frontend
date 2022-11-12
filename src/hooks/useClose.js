@@ -33,7 +33,7 @@ function useClose() {
       return () => {document.removeEventListener("mousedown", handleClickClose)
       }
   
-    }, [isOpen])
+    }, [handleClose, isOpen, openedClass])
   }
 
   return {

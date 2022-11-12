@@ -69,6 +69,7 @@ function Login(props) {
           minLength="2"
           maxLength="40" />
         </label>
+        {inputTypeEmailErrors && <p className="login__input-error">{inputTypeEmailErrors}</p>}
         <label className="login__input-form-label">
           <span className="login__input-name">{PASSWORD}</span>
           <input
@@ -83,6 +84,7 @@ function Login(props) {
           minLength="6"
           maxLength="40" />
         </label>
+        {inputTypePasswordErrors && <p className="login__input-error">{inputTypePasswordErrors}</p>}
         <button
           className={`login__button ${buttonDisable ? 'login__button_type_disable' : ''}`}
           disabled={buttonDisable}

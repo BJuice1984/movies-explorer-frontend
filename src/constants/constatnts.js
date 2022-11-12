@@ -17,6 +17,7 @@ export const YOUTUBE_URL = 'https://www.youtube.com/';
 export const OK_FETCH_ANSWER = 'OK';
 export const DATA_CHANGED_SUCCESSFULLY = 'Данные успешно изменены';
 export const FAILED_TO_FETCH = 'Failed to fetch';
+export const USER_ALREADY_REGISTERED = 'Пользователь с таким email уже зарегистрирован';
 
 export const MAIN_API_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const NO_MATCHED_FILMS = 'Ничего не найдено';

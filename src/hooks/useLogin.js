@@ -20,7 +20,7 @@ function useLogin() {
     .catch((err) => {
       navigate('/sign-up');
       console.log({err})
-      setUserLoginError(err.message)
+      setUserLoginError(err)
     })
   }
 
@@ -91,7 +91,7 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err.message)
+      setUserLoginError(err)
     })
   }
 
