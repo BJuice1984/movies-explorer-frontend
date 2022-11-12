@@ -179,6 +179,10 @@
   width: 55vw;
 }
 
+.profile__input-text_type_not-valid {
+  color: #EE3465;
+}
+
 @media screen and (min-width: 520px) {
   .profile__input-text {
     width: 40vw;

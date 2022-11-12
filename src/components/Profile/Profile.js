@@ -27,6 +27,10 @@ function Profile({ onLogout, updateMyProfile }) {
   const resetValue = () => {
     setInputDisable(true);
     setButtonDisable(false);
+    setFormParams({
+      name: currentUser.name || '',
+      email: currentUser.email || '',
+    });
   }
 
   const handleChange = (e) => {
@@ -67,24 +71,6 @@ function Profile({ onLogout, updateMyProfile }) {
 
   EscClose(!inputDisable, resetValue);
 
-  
-
-  // console.log('inputValid', inputValid)
-  // console.log('1th 1', formParams.name === currentUser.name)
-  // console.log('1th 2', formParams.email === currentUser.email )
-  // console.log('inputDisable', !inputDisable )
-
-  // console.log('2nd', inputTypeNameErrors !== '' && inputTypeEmailErrors !== '')
-  // console.log('inputTypeNameErrors', inputTypeNameErrors !== '')
-  // console.log('inputTypeEmailErrors', inputTypeEmailErrors !== '')
-
-  // React.useEffect(() => {
-  //   if (updateMyProfile) {
-  //     setInputDisable(true);
-  //     setButtonDisable(false);
-  //   }
-  // }, [updateMyProfile])
-
   return (
     <>
       <Header />
@@ -101,7 +87,7 @@ function Profile({ onLogout, updateMyProfile }) {
             placeholder="Имя пользователя"
             defaultValue={formParams.name}
             onChange={handleChange}
-            className="profile__input-text"
+            className={`profile__input-text ${inputTypeNameErrors ? 'profile__input-text_type_not-valid' : ''}`}
             name="name"
             id="name"
             required
@@ -116,7 +102,7 @@ function Profile({ onLogout, updateMyProfile }) {
             placeholder="Email пользователя"
             defaultValue={formParams.email}
             onChange={handleChange}
-            className="profile__input-text" 
+            className={`profile__input-text ${inputTypeEmailErrors ? 'profile__input-text_type_not-valid' : ''}`} 
             name="email"
             id="email"
             required

@@ -41,7 +41,15 @@ function useLogin() {
       setLoggedIn(false);
       setLoggedOut(true);
       setCurrentUser({});
-      localStorage.clear();
+      localStorage.removeItem("user");
+      localStorage.removeItem("initial-movies");
+      localStorage.removeItem("user-searched-movies");
+      localStorage.removeItem("user-searched-film-name");
+      localStorage.removeItem("checkbox-path-movies-status");
+      localStorage.removeItem("user-movies");
+      localStorage.removeItem("user-searched-saved-movies");
+      localStorage.removeItem("checkbox-path-savedMovies-status");
+      localStorage.removeItem("user-searched-saved-film-name");
       navigate('/sign-in');
     })
   }
@@ -53,7 +61,15 @@ function useLogin() {
       setLoggedIn(false);
       setLoggedOut(true);
       setCurrentUser({});
-      localStorage.clear();
+      localStorage.removeItem("user");
+      localStorage.removeItem("initial-movies");
+      localStorage.removeItem("user-searched-movies");
+      localStorage.removeItem("user-searched-film-name");
+      localStorage.removeItem("checkbox-path-movies-status");
+      localStorage.removeItem("user-movies");
+      localStorage.removeItem("user-searched-saved-movies");
+      localStorage.removeItem("checkbox-path-savedMovies-status");
+      localStorage.removeItem("user-searched-saved-film-name");
       navigate('/sign-in');
     })
     .catch((err) => {

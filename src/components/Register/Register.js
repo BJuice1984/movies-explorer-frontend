@@ -2,9 +2,16 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import '../Login/Login.css';
+import useValidation from "../../hooks/useValidation";
 import { NAME, EMAIL, PASSWORD, WELCOME, YOUR_NAME, YOUR_EMAIL, YOUR_PASSWORD, REGISTER, ALREADY_REGISTERED, LOGIN } from '../../constants/constatnts';
 
 function Register(props) {
+
+  const {
+    validations,
+    inputTypeNameErrors,
+    inputTypeEmailErrors,
+  } = useValidation();
 
   const [formParams, setFormParams] = React.useState({
     name: '',
@@ -30,7 +37,10 @@ function Register(props) {
     <section className="login">
     <Logo />
       <h2 className="login__title">{WELCOME}</h2>
-      <form className="login__input-form" onSubmit={handleSubmit}>
+      <form
+      className="login__input-form"
+      onChange={validations}
+      onSubmit={handleSubmit}>
         <label className="login__input-form-label">
           <span className="login__input-name">{NAME}</span>
           <input

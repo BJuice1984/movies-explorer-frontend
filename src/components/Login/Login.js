@@ -2,9 +2,16 @@ import React from "react";
 import Logo from '../Logo/Logo';
 import './Login.css'
 import { Link } from 'react-router-dom';
+import useValidation from "../../hooks/useValidation";
 import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, NOT_REGISTERED_YET, REGISTRATION } from '../../constants/constatnts';
 
 function Login(props) {
+
+  const {
+    validations,
+    inputTypeNameErrors,
+    inputTypeEmailErrors,
+  } = useValidation();
 
   const [formParams, setFormParams] = React.useState({
     email: '',
@@ -31,7 +38,10 @@ function Login(props) {
     <section className="login">
       <Logo />
       <h2 className="login__title">{GLAD_TO_SEE}</h2>
-      <form className="login__input-form" onSubmit={handleSubmit}>
+      <form
+      className="login__input-form"
+      onChange={validations}
+      onSubmit={handleSubmit}>
         <label className="login__input-form-label">
           <span className="login__input-name">{EMAIL}</span>
           <input
