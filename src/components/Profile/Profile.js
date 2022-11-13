@@ -24,12 +24,14 @@ function Profile({ onLogout, updateMyProfile }) {
   const [inputDisable, setInputDisable] = React.useState(true);
   const [buttonDisable, setButtonDisable] = React.useState(false);
 
+  const userData = JSON.parse(localStorage.getItem("user-data"));
+
   const resetValue = () => {
     setInputDisable(true);
     setButtonDisable(false);
     setFormParams({
-      name: currentUser.name || '',
-      email: currentUser.email || '',
+      name: userData.name || '',
+      email: userData.email || '',
     });
   }
 
@@ -46,12 +48,14 @@ function Profile({ onLogout, updateMyProfile }) {
       name: currentUser.name || '',
       email: currentUser.email || '',
     });
+    console.log('re-re')
   }, [currentUser])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     updateMyProfile(formParams.name, formParams.email);
-    resetValue();
+    setInputDisable(true);
+    setButtonDisable(false);
   }
 
   React.useEffect(() => {
@@ -85,7 +89,7 @@ function Profile({ onLogout, updateMyProfile }) {
             <span className="profile__input-name">{NAME}</span>
             <input
             placeholder="Имя пользователя"
-            defaultValue={formParams.name}
+            value={formParams.name}
             onChange={handleChange}
             className={`profile__input-text ${inputTypeNameErrors ? 'profile__input-text_type_not-valid' : ''}`}
             type="text"
@@ -101,7 +105,7 @@ function Profile({ onLogout, updateMyProfile }) {
             <span className="profile__input-name">{EMAIL}</span>
             <input
             placeholder="Email пользователя"
-            defaultValue={formParams.email}
+            value={formParams.email}
             onChange={handleChange}
             className={`profile__input-text ${inputTypeEmailErrors ? 'profile__input-text_type_not-valid' : ''}`}
             type="email"

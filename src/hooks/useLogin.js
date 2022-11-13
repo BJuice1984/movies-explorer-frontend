@@ -6,7 +6,7 @@ import { OK_FETCH_ANSWER } from '../constants/constatnts';
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [loggedOut, setLoggedOut] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState(JSON.parse(localStorage.getItem("user-data")) ?? {});
   const [isUserLoginError, setUserLoginError] = React.useState('');
 
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ function useLogin() {
       setLoggedOut(true);
       setCurrentUser({});
       localStorage.removeItem("user");
+      localStorage.removeItem("user-data");
       localStorage.removeItem("initial-movies");
       localStorage.removeItem("user-searched-movies");
       localStorage.removeItem("user-searched-film-name");
@@ -62,6 +63,7 @@ function useLogin() {
       setLoggedOut(true);
       setCurrentUser({});
       localStorage.removeItem("user");
+      localStorage.removeItem("user-data");
       localStorage.removeItem("initial-movies");
       localStorage.removeItem("user-searched-movies");
       localStorage.removeItem("user-searched-film-name");
@@ -78,12 +80,12 @@ function useLogin() {
     })
   }
 
-  const updateMyProfile = (name, email) => {
+  async function updateMyProfile(name, email) {
     setUserLoginError('');
-    return Auth.updateMyProfile(name, email)
+    await Auth.updateMyProfile(name, email)
     .then((profile) => {
       if (profile) {
-        setCurrentUser({ name: profile.name, email: profile.email });
+        localStorage.setItem("user-data", JSON.stringify({ name: profile.name, email: profile.email, userID: profile._id }));
       }
     })
     .then(() => {
@@ -93,19 +95,21 @@ function useLogin() {
       console.log(err);
       setUserLoginError(err)
     })
+    return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
   }
 
   const getMyProfile = React.useCallback(async () => {
     setUserLoginError('');
     await Auth.getMyProfile()
     .then((profile) => {
-      setCurrentUser({ name: profile.name, email: profile.email, userID: profile._id });
+      localStorage.setItem("user-data", JSON.stringify({ name: profile.name, email: profile.email, userID: profile._id }));
       setLoggedIn(true);
     })
     .catch((err) => {
       console.log(err);
       setUserLoginError(err.message)
     })
+    return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
   }, []);
 
   return {
