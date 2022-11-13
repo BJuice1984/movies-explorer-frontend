@@ -3,7 +3,7 @@ import ok_pic from '../../images/OK_pic.svg';
 import err_pic from '../../images/ERR_pic.svg';
 import './PopupInfoTooltip.css';
 import useClose from '../../hooks/useClose';
-import { OK_FETCH_ANSWER, DATA_CHANGED_SUCCESSFULLY, MAIN_API_ERROR_MESSAGE, FAILED_TO_FETCH, USER_ALREADY_REGISTERED } from '../../constants/constatnts';
+import { OK_FETCH_ANSWER, DATA_CHANGED_SUCCESSFULLY, MAIN_API_ERROR_MESSAGE, FAILED_TO_FETCH, USER_ALREADY_REGISTERED, BAD_REQUEST, BAD_EMAIL_OR_PASSWORD, NOT_USER_MOVIE } from '../../constants/constatnts';
 
 function PopupInfoTooltip(props) {
 
@@ -16,16 +16,26 @@ function PopupInfoTooltip(props) {
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [isErrorPic, setIsErrorPic] = React.useState();
 
-  console.log(isErrorMessage)
-
   React.useEffect(() => {
     if (props.err === FAILED_TO_FETCH) {
       setIsPopupOpen(true);
       setIsErrorMessage(MAIN_API_ERROR_MESSAGE);
       setIsErrorPic(false)
+    } else if (props.err === NOT_USER_MOVIE)  {
+      setIsPopupOpen(true);
+      setIsErrorMessage(NOT_USER_MOVIE);
+      setIsErrorPic(false)
     } else if (props.err.includes('409'))  {
       setIsPopupOpen(true);
       setIsErrorMessage(USER_ALREADY_REGISTERED);
+      setIsErrorPic(false)
+    } else if (props.err.includes('400'))  {
+      setIsPopupOpen(true);
+      setIsErrorMessage(BAD_REQUEST);
+      setIsErrorPic(false)
+    } else if (props.err.includes('401'))  {
+      setIsPopupOpen(true);
+      setIsErrorMessage(BAD_EMAIL_OR_PASSWORD);
       setIsErrorPic(false)
     } else if (props.err === OK_FETCH_ANSWER)  {
       setIsPopupOpen(true);

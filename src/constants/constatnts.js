@@ -18,6 +18,9 @@ export const OK_FETCH_ANSWER = 'OK';
 export const DATA_CHANGED_SUCCESSFULLY = 'Данные успешно изменены';
 export const FAILED_TO_FETCH = 'Failed to fetch';
 export const USER_ALREADY_REGISTERED = 'Пользователь с таким email уже зарегистрирован';
+export const BAD_REQUEST = 'Данные, которые Вы ввели, к сожалению, не корректны. Ошибка';
+export const BAD_EMAIL_OR_PASSWORD = 'Вы ввели неправльный пароль, либо пользователя с таким Email не существует';
+export const NOT_USER_MOVIE = 'Мы сожалеем, но текущий фильм выбрал другой пользователь. Мы не знаем, как это произошло, возможно, проблема на сервере. Рекомендуем выйти и зайти в свой акакаунт заново. Ошибка!'
 
 export const MAIN_API_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const NO_MATCHED_FILMS = 'Ничего не найдено';
@@ -46,6 +49,7 @@ export const YOUR_NAME = 'Ваше имя';
 export const YOUR_EMAIL = 'Ваша почта';
 export const YOUR_PASSWORD = 'Ваш пароль';
 
-export const USER_EMAIL_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+// eslint-disable-next-line no-useless-escape
+export const USER_EMAIL_REGEX = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
 export const USER_EMAIL_ERROR_MESSAGE = "E-mail должен соответствовать формату name@domain.ru";
 export const USER_NAME_ERROR_MESSAGE = "Имя пользователя может содержать только буквенно-цифровые символы, символ подчеркивания (_), дефис (-), точку (.) или символ @";

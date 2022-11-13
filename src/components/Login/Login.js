@@ -3,7 +3,7 @@ import Logo from '../Logo/Logo';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import useValidation from "../../hooks/useValidation";
-import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, NOT_REGISTERED_YET, REGISTRATION } from '../../constants/constatnts';
+import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, NOT_REGISTERED_YET, REGISTRATION, USER_EMAIL_REGEX } from '../../constants/constatnts';
 
 function Login(props) {
 
@@ -65,6 +65,7 @@ function Login(props) {
           type="email"
           name="email"
           id="email"
+          pattern={USER_EMAIL_REGEX}
           required
           minLength="2"
           maxLength="40" />

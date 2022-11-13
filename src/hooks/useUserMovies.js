@@ -1,6 +1,6 @@
 import React from "react";
 import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
-import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, NO_MATCHED_FILMS, TYPE_FILM_NAME } from '../constants/constatnts';
+import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, NO_MATCHED_FILMS, TYPE_FILM_NAME, NOT_USER_MOVIE } from '../constants/constatnts';
 
 function useUserMovies() {
 
@@ -40,11 +40,12 @@ function useUserMovies() {
     })
     .then((movie) => {
       localStorage.setItem("user-movies", JSON.stringify([movie, ...localUserMovies]));
-      setTimeout(() => setIsUserMoviesLoading(false), 200)
+      setTimeout(() => setIsUserMoviesLoading(false), 200);
     })
     .catch(err => {
       console.log(err);
-      setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE)
+      setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE);
+      setTimeout(() => setIsUserMoviesLoading(false), 200);
     })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
@@ -58,10 +59,12 @@ function useUserMovies() {
     })
     .then((filtredMovies) => {
       localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
-      setTimeout(() => setIsUserMoviesLoading(false), 200)
+      setTimeout(() => setIsUserMoviesLoading(false), 200);
     })
     .catch(err => {
-      console.log(err)
+      console.log(err);
+      setIsSavedMoviesError(NOT_USER_MOVIE);
+      setTimeout(() => setIsUserMoviesLoading(false), 200);
     })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   }
