@@ -72,11 +72,11 @@ function useLogin() {
       localStorage.removeItem("user-searched-saved-movies");
       localStorage.removeItem("checkbox-path-savedMovies-status");
       localStorage.removeItem("user-searched-saved-film-name");
-      navigate('/sign-in');
+      navigate('/');
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err.message)
+      setUserLoginError(err)
     })
   }
 
@@ -107,7 +107,7 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err.message)
+      setUserLoginError(err)
     })
     return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
   }, []);

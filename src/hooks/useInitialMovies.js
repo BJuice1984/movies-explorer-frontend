@@ -18,7 +18,7 @@ function useInitialMovies() {
         localStorage.setItem("initial-movies", JSON.stringify(movies));
       })
       .catch(err => {
-        console.log({err})
+        console.log(err)
         setIsError(MAIN_API_ERROR_MESSAGE);
       })
       .finally(() => setTimeout(() => setIsLoading(false), 300));

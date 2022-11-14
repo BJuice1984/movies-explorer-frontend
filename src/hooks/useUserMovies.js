@@ -80,7 +80,8 @@ function useUserMovies() {
         localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE);
       })
       .finally(setTimeout(() => setIsUserMoviesLoading(false), 300));
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))

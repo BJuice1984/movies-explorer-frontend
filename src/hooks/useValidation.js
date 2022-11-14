@@ -15,8 +15,18 @@ function useValidation () {
     return setInputTypePasswordErrors(e.target.validationMessage);
   }
 
+  const resetNameErrors = () => {
+    setInputTypeNameErrors('');
+  }
+
+  const resetEmailErrors = () => {
+    setInputTypeEmailErrors('');
+  }
+
   return {
     validations,
+    resetNameErrors,
+    resetEmailErrors,
     inputTypeNameErrors,
     inputTypeEmailErrors,
     inputTypePasswordErrors

@@ -10,6 +10,8 @@ function Profile({ onLogout, updateMyProfile }) {
 
   const {
     validations,
+    resetNameErrors,
+    resetEmailErrors,
     inputTypeNameErrors,
     inputTypeEmailErrors,
   } = useValidation();
@@ -33,6 +35,8 @@ function Profile({ onLogout, updateMyProfile }) {
       name: userData.name || '',
       email: userData.email || '',
     });
+    resetNameErrors();
+    resetEmailErrors();
   }
 
   const handleChange = (e) => {
