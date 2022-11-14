@@ -20,7 +20,7 @@ function Profile({ onLogout, updateMyProfile }) {
 
   const currentUser = useContext(CurrentUserContext);
 
-  const [formParams, setFormParams] = React.useState({});
+  const [formParams, setFormParams] = React.useState({ name: currentUser.name || '', email: currentUser.email || '', });
   const [inputDisable, setInputDisable] = React.useState(true);
   const [buttonDisable, setButtonDisable] = React.useState(false);
 
@@ -36,11 +36,7 @@ function Profile({ onLogout, updateMyProfile }) {
   }
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormParams((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormParams({ ...formParams, [e.target.name]: e.target.value });
   }
 
   React.useEffect(() => {
@@ -48,7 +44,6 @@ function Profile({ onLogout, updateMyProfile }) {
       name: currentUser.name || '',
       email: currentUser.email || '',
     });
-    console.log('re-re')
   }, [currentUser])
 
   const handleSubmit = (e) => {
@@ -120,8 +115,8 @@ function Profile({ onLogout, updateMyProfile }) {
           {inputTypeEmailErrors && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
         </form>
         <div className="errors__container">
-          {inputTypeNameErrors && <p className="profile__input-error_type_info">{USER_NAME_ERROR_MESSAGE}</p>}
-          {inputTypeEmailErrors && <p className="profile__input-error_type_info">{USER_EMAIL_ERROR_MESSAGE}</p>}
+          <p className={`profile__input-error_type_info ${inputTypeNameErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_NAME_ERROR_MESSAGE}</p>
+          <p className={`profile__input-error_type_info ${inputTypeEmailErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_EMAIL_ERROR_MESSAGE}</p>
         </div>
         <div className="buttons__container">
             <button

@@ -125,12 +125,6 @@
   padding-bottom: 40px;
 }
 
-@media screen and (min-width: 520px) {
-  .buttons__container {
-    padding-top: 200px;
-  }
-}
-
 .profile__input-form-label {
   display: flex;
   justify-content: space-between;
@@ -169,10 +163,19 @@
   color: #EE3465;
   padding-top: 60px;
   text-align: center;
+  align-self: center;
+  max-width: 550px;
+  opacity: 1;
+  transition: .2s;
 }
 
 .profile__input-error_type_info:last-of-type {
   padding-top: 10px;
+}
+
+.profile__input-error_type_disable {
+  opacity: 0;
+  transition: .3s;
 }
 
 .profile__input-text {

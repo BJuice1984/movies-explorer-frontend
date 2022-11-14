@@ -26,7 +26,6 @@ function useInitialMovies() {
   };
 
   const searchFilm = React.useCallback(async (filmName) => {
-    setIsError('');
     const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     if (localMovies.length !== 0 && searchedMovies.length === 0) {
       setTimeout(() => setIsError(NO_MATCHED_FILMS), 300);
