@@ -30,6 +30,7 @@
   min-height: 22px;
   text-align: left;
   padding-bottom: 28px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
@@ -104,6 +105,7 @@
   min-height: 36px;
   text-align: left;
   padding-bottom: 20px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
@@ -130,6 +132,7 @@
   min-height: 16px;
   text-align: left;
   padding-bottom: 20px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
@@ -156,6 +159,7 @@
   min-height: 16px;
   text-align: left;
   padding-bottom: 40px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {

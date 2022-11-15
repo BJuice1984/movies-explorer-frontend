@@ -5,17 +5,46 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import './Movies.css'
 
-function Movies({ isPathMovies }) {
+function Movies({
+  handleSearchFilm,
+  localSearchedMovies,
+  searchedFilmName,
+  localUserMovies,
+  handleLoadMore,
+  numberOfFilms,
+  handleChangeCheckboxStatusPathMovies,
+  checkboxStatusPathMovies,
+  isLoading,
+  isError,
+  isUserMoviesLoading,
+  handleGetUserMovies,
+  handleAddUserMovie,
+  handleDeleteUserMovie
+}) {
 
   return(
+    <>
+    <Header />
     <main className="movies">
-      <Header 
-      isMainPage={false} 
-      isProfilePage={true} />
-      <SearchForm />
-      <MoviesCardList onPathMovies={isPathMovies} />
-      <Footer />
+      <SearchForm
+        handleSearchFilm={handleSearchFilm}
+        searchedFilmName={searchedFilmName}
+        handleChangeCheckboxStatus={handleChangeCheckboxStatusPathMovies}
+        checkboxStatus={checkboxStatusPathMovies}
+        isLoading={isLoading}
+        handleGetUserMovies={handleGetUserMovies} />
+      <MoviesCardList
+        handleAddUserMovie={handleAddUserMovie}
+        handleDeleteUserMovie={handleDeleteUserMovie}
+        localUserMovies={localUserMovies}
+        handleLoadMore={handleLoadMore}
+        numberOfFilms={numberOfFilms}
+        isLoading={isUserMoviesLoading}
+        isError={isError}
+        movies={localSearchedMovies} />
     </main>
+    <Footer />
+    </>
   )
 }
 

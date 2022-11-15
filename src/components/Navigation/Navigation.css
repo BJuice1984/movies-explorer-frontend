@@ -22,6 +22,10 @@
   transition: all 0.5s;
 }
 
+.menu__link_type_active {
+  border-bottom: solid 2px #fff;
+}
+
 .link_type_account {
   font-size: 14px;
   line-height: 1.14;
@@ -35,7 +39,7 @@
 }
 
 .menu__btn {
-  display: flex;
+  display: grid;
   justify-content: end;
   background-image: url('../../images/acc_pic.svg');
   margin: 0 auto;
@@ -48,4 +52,8 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 10% 40%;
+}
+
+.menu__btn_type_active {
+  box-shadow: 0 0 0 1px #2BE080, 0 0 8px #2BE080;
 }

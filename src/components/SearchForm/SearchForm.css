@@ -37,6 +37,15 @@
   display: contents;
 }
 
+.search-form__input-error {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #EE3465;
+  padding-top: 10px;
+}
+
 .search-form__input-text {
   margin: 0;
   font-size: 12px;
@@ -52,6 +61,10 @@
   overflow: hidden;
   outline: none;
   flex: auto;
+}
+
+.search-form__input-text_type_not-valid {
+  color: #EE3465;
 }
 
 .search-form__input-text:hover {
@@ -77,6 +90,17 @@
 .search-form__button:hover {
   opacity: 0.7;
   transition: 0.2s ease-in-out;
+}
+
+.search-form__button_type_disable {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+  cursor: default;
+}
+
+.search-form__button_type_disable:hover {
+  opacity: 1;
+  transition: none;
 }
 
 .search-form__checkbox {
@@ -105,6 +129,7 @@
   font-weight: 400;
   color: #fff;
   padding-left: 13px;
+  cursor: default;
 }
 
 /* ___________________________________ */

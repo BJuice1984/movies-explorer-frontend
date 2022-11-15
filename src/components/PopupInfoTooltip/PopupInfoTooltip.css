@@ -1,0 +1,126 @@
+.popup {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #000000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+.popup__content {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+.popup__window {
+  position: relative;
+  background-color: #2F2F2F;
+  margin: 0;
+  border-radius: 10px;
+  min-width: 282px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (min-width: 768px) {
+  .popup__window {
+    min-width: 430px;
+  }
+}
+
+.popup__close-button {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: -36px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  height: 20px;
+  width: 20px;
+  transition: all 0.5s ease;
+}
+
+.popup__close-button:hover {
+  opacity: 0.6;
+  transition: 0.2s ease-in-out;
+}
+
+.popup__close-button:before {
+  position: absolute;
+  content: '';
+  height: 25px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.popup__close-button:after {
+  position: absolute;
+  content: '';
+  height: 25px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+@media screen and (min-width: 768px) {
+  .popup__close-button {
+    right: -20px;
+    top: -25px;
+  }
+}
+
+.popup__image {
+  max-width: 60px;
+  max-height: 60px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__image {
+    padding-top: 35px;
+  }
+}
+
+.popup__text {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-decoration: none;
+  color: #EE3465;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 50px;
+  max-width: 244px;
+}
+
+.popup__text_type_valid {
+  color: #2be080;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__text {
+    font-size: 14px;
+    max-width: 358px;
+  }
+}

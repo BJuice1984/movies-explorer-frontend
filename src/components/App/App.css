@@ -7,31 +7,23 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  height: fit-content;
+  width: 100%;
 }
 
 .page__container {
-  min-width: 320px;
   max-width: 1280px;
-  margin: 0 auto;
-}
-
-/* @media screen and (min-width: 768px) {
-  .page__container {
-    max-width: 768px;
-    margin: 0 80px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .page__container {
-    max-width: 880px;
-    margin: 0 150px;
-  }
+  margin: 0 30px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 @media screen and (min-width: 1280px) {
   .page__container {
     margin: 0 auto;
   }
-} */
+}
+
+.page__container_type_movies {
+  margin: 0 auto;
+}

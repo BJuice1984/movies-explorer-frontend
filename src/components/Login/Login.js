@@ -1,15 +1,24 @@
 import React from "react";
 import Logo from '../Logo/Logo';
+import './Login.css'
 import { Link } from 'react-router-dom';
+import useValidation from "../../hooks/useValidation";
+import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, NOT_REGISTERED_YET, REGISTRATION, USER_EMAIL_REGEX } from '../../constants/constatnts';
 
 function Login(props) {
+
+  const [buttonDisable, setButtonDisable] = React.useState(true);
+
+  const {
+    validations,
+    inputTypePasswordErrors,
+    inputTypeEmailErrors,
+  } = useValidation();
 
   const [formParams, setFormParams] = React.useState({
     email: '',
     password: '',
   });
-
-  const [message, setMessage] = React.useState('');
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -19,43 +28,56 @@ function Login(props) {
     }));
   }
 
+  React.useEffect(() => {
+    if ((inputTypePasswordErrors !== ''
+      || inputTypeEmailErrors !== '')
+      || (formParams.name === ''
+      || formParams.email === '')) {
+      setButtonDisable(true);
+    } else {
+      setButtonDisable(false);
+    }
+  }, [formParams.email, formParams.name, inputTypeEmailErrors, inputTypePasswordErrors])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formParams.email || !formParams.password){
       return;
     }
-    props.onLoginClick({ email: formParams.email, password: formParams.password })
-        .catch(err => {
-          setMessage(err.message);
-        });
+    props.onLoginClick({ email: formParams.email, password: formParams.password });
   }
 
   return (
     <section className="login">
       <Logo />
-      <h2 className="login__title">Рады видеть&#33;</h2>
-      <form className="login__input-form" onSubmit={handleSubmit}>
+      <h2 className="login__title">{GLAD_TO_SEE}</h2>
+      <form
+      className="login__input-form"
+      onChange={validations}
+      onSubmit={handleSubmit}>
         <label className="login__input-form-label">
-          <span className="login__input-name">Email</span>
+          <span className="login__input-name">{EMAIL}</span>
           <input
-          placeholder="Ваша почта"
+          placeholder={YOUR_EMAIL}
           value={formParams.email}
           onChange={handleChange}
-          className="login__input-text"
-          type="text"
+          className={`login__input-text ${inputTypeEmailErrors !== '' ? 'login__input-text_type_not-valid' : ''}`}
+          type="email"
           name="email"
           id="email"
+          pattern={USER_EMAIL_REGEX}
           required
           minLength="2"
           maxLength="40" />
         </label>
+        {inputTypeEmailErrors && <p className="login__input-error">{inputTypeEmailErrors}</p>}
         <label className="login__input-form-label">
-          <span className="login__input-name">Пароль</span>
+          <span className="login__input-name">{PASSWORD}</span>
           <input
-          placeholder="Ваш пароль"
+          placeholder={YOUR_PASSWORD}
           value={formParams.password}
           onChange={handleChange}
-          className="login__input-text" 
+          className={`login__input-text ${inputTypePasswordErrors !== '' ? 'login__input-text_type_not-valid' : ''}`}
           type="password"
           name="password"
           id="password"
@@ -63,9 +85,13 @@ function Login(props) {
           minLength="6"
           maxLength="40" />
         </label>
-        <button className="login__button" type="submit">Войти</button>
+        {inputTypePasswordErrors && <p className="login__input-error">{inputTypePasswordErrors}</p>}
+        <button
+          className={`login__button ${buttonDisable ? 'login__button_type_disable' : ''}`}
+          disabled={buttonDisable}
+          type="submit">{LOGIN}</button>
       </form>
-      <p className="login__text">Ещё не зарегистрированы&#63; <Link className="login__link" to="/sign-up">Регистрация</Link></p>
+      <p className="login__text">{NOT_REGISTERED_YET} <Link className="login__link" to="/sign-up">{REGISTRATION}</Link></p>
     </section>
   )
 }

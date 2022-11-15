@@ -2,7 +2,6 @@
   margin: 0;
   background-color: #222;
   border-radius: 6px;
-  /* box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08); */
   display: grid;
   justify-items: stretch;
   grid-template-columns: 2fr;
@@ -28,6 +27,7 @@
   color: #fff;
   text-align: left;
   padding-left: 14px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
@@ -46,6 +46,7 @@
   color: #8B8B8B;
   text-align: right;
   padding-right: 14px;
+  cursor: default;
 }
 
 @media screen and (min-width: 768px) {
@@ -57,8 +58,7 @@
 }
 
 .element__pic {
-  grid-area: element__pic;
-  min-width: 100%;
+  width: 100%;
   height: calc(88vw / 1.78);
   object-fit: contain;
 }
@@ -66,7 +66,12 @@
 @media screen and (min-width: 768px) {
   .element__pic {
     max-height: 190px;
+    min-width: 100%;
   }
+}
+
+.element__link {
+  grid-area: element__pic;
 }
 
 .element__like-button {
@@ -91,11 +96,25 @@
   background-position: center;
 }
 
-.element__like-button_type_save {
+.element__like-button_type_saved {
   background-image: url('../../images/card_saved_btn.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-color: #EE3465;
+}
+
+.element__like-button_type_disabled {
+  cursor: not-allowed;
+  background-color: #313131;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent .5rem, rgb(41, 41, 41) .5rem, rgb(41, 41, 41) 1rem);
+  background-size: 200% 200%;
+  animation: gradient 5s linear infinite;
+}
+
+@keyframes gradient {
+  100% {
+		background-position: 100% 100%;
+	}
 }
 
 @media screen and (min-width: 768px) {

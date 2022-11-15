@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../Header/Header";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
+import { CurrentUserContext } from "../../context/CurrnetUserContext";
 import './SavedMovies.css'
 
-function SavedMovies() {
+function SavedMovies({
+  localUserMovies,
+  handleSearchSavedFilm,
+  searchedSavedFilmName,
+  handleGetUserMovies,
+  handleDeleteUserMovie,
+  handleChangeCheckboxStatusPathSavedMovies,
+  isUserMoviesLoading,
+  isFirstLoading,
+  isSavedMoviesError,
+  checkboxStatusPathSavedMovies
+}) {
+
+  const currentUser = useContext(CurrentUserContext);
+
+  React.useEffect(() => {
+    if ((localUserMovies.length === 0 && isFirstLoading) && !checkboxStatusPathSavedMovies) {
+      handleGetUserMovies(currentUser)
+    }
+  }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, isFirstLoading, localUserMovies.length]);
 
   return(
+    <>
+    <Header />
     <main className="movies">
-      <Header isMainPage={false}/>
-      <BurgerMenu />
-      <SearchForm />
-      <MoviesCardList />
-      <Footer />
+      <SearchForm
+        handleChangeCheckboxStatus={handleChangeCheckboxStatusPathSavedMovies}
+        checkboxStatus={checkboxStatusPathSavedMovies}
+        handleSearchFilm={handleSearchSavedFilm}
+        searchedFilmName={searchedSavedFilmName}
+        isLoading={isUserMoviesLoading}
+        handleGetUserMovies={handleGetUserMovies} />
+      <MoviesCardList
+        movies={localUserMovies}
+        isLoading={isUserMoviesLoading}
+        isError={isSavedMoviesError}
+        handleDeleteUserMovie={handleDeleteUserMovie} />
     </main>
+    <Footer />
+    </>
   )
 }
 
