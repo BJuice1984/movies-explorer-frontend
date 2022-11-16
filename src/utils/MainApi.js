@@ -35,7 +35,7 @@ export const authorize = (password, email) => {
 export const getMyProfile = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
-    credentials: 'include'
+    credentials: 'include',
   })
   .then(checkResponse)
 };

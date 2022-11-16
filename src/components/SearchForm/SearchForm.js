@@ -10,6 +10,7 @@ function SearchForm({
   handleChangeCheckboxStatus,
   checkboxStatus,
   isLoading,
+  userMovies,
   handleGetUserMovies }) {
 
     const [buttonDisable, setButtonDisable] = React.useState(true);
@@ -73,10 +74,12 @@ function SearchForm({
         {inputTypeNameErrors && <p className="search-form__input-error">{inputTypeNameErrors}</p>}
         <div className="search-form__checkbox">
           <label className="switch">
-            <input type="checkbox"
+            <input
+              type="checkbox"
+              disabled={userMovies.length === 0 ? true : false}
               onChange={handleChangeCheckboxStatus}
               defaultChecked={checkboxStatus} />
-            <span className="slider"></span>
+            <span className={`slider ${userMovies.length === 0 ? 'slider_type_disable' : ''}`}></span>
           </label>
           <p className="search-form__span">{SHORT_MOVIES}</p>
         </div>

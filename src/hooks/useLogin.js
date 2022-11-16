@@ -107,7 +107,9 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err)
+      setUserLoginError(err);
+      setLoggedIn(false);
+      setLoggedOut(true);
     })
     return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
   }, []);
