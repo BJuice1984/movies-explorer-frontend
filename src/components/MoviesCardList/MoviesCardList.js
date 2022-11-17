@@ -17,6 +17,10 @@ function MoviesCardList({
   const location = useLocation();  
   const slice = movies.slice(0, numberOfFilms)
 
+
+console.log('movies', movies)
+
+
   React.useEffect(() => {
     if (location.pathname === '/saved-movies') {
       setIsMoviesPage(false);

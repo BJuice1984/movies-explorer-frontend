@@ -12,7 +12,8 @@ export const SHORT_MOVIE_DURATION = 40;
 
 export const BEAT_FILMS_API = 'https://api.nomoreparties.co';
 export const BEAT_FILMS_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-export const BASE_URL = 'https://api.diploma.bjuice.nomoredomains.sbs';
+export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'https://api.diploma.bjuice.nomoredomains.sbs';
 export const YOUTUBE_URL = 'https://www.youtube.com/';
 export const OK_FETCH_ANSWER = 'OK';
 export const DATA_CHANGED_SUCCESSFULLY = 'Данные успешно изменены';

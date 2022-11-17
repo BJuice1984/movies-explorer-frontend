@@ -46,13 +46,11 @@ function App() {
 
   const {
     localUserMovies,
-    localSearchedUserMovies,
     handleSearchSavedFilm,
     searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
-    isFirstLoading,
     isSavedMoviesError,
     clearLocalUserState,
     handleAddUserMovie,
@@ -84,7 +82,6 @@ function App() {
       <div className="page">
         {isLoading || isUserMoviesLoading ? <Preloader/> : ''}
         <PopupInfoTooltip
-        // onRegistered={isRegistered}
         err={isUserLoginError || isError || isSavedMoviesError } />
         <div className={`page__container ${location.pathname === '/' ? 'page__container_type_movies' : ''}`}>
           <Routes>
@@ -122,11 +119,10 @@ function App() {
                 element={<SavedMovies
                 handleGetUserMovies={handleGetUserMovies}
                 handleDeleteUserMovie={handleDeleteUserMovie}
-                localUserMovies={isFirstLoading ? localUserMovies : localSearchedUserMovies}
+                localUserMovies={localUserMovies}
                 handleSearchSavedFilm={handleSearchSavedFilm}
                 searchedSavedFilmName={searchedSavedFilmName}
                 isUserMoviesLoading={isUserMoviesLoading}
-                isFirstLoading={isFirstLoading}
                 isSavedMoviesError={isSavedMoviesError}
                 handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
                 checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
