@@ -55,7 +55,8 @@ function App() {
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
-    handleGetUserMovies
+    handleGetUserMovies,
+    isNothingFound
   } = useUserMovies();
 
   const {
@@ -125,6 +126,7 @@ function App() {
                 isUserMoviesLoading={isUserMoviesLoading}
                 isSavedMoviesError={isSavedMoviesError}
                 handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
+                isNothingFound={isNothingFound}
                 checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
             </Route>
 

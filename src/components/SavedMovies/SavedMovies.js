@@ -15,16 +15,17 @@ function SavedMovies({
   handleChangeCheckboxStatusPathSavedMovies,
   isUserMoviesLoading,
   isSavedMoviesError,
+  isNothingFound,
   checkboxStatusPathSavedMovies
 }) {
 
   const currentUser = useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    if (localUserMovies.length === 0 && !checkboxStatusPathSavedMovies) {
+    if (localUserMovies.length === 0 && !isNothingFound && !checkboxStatusPathSavedMovies) {
       handleGetUserMovies(currentUser)
     }
-  }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, localUserMovies.length]);
+  }, [checkboxStatusPathSavedMovies, currentUser, handleGetUserMovies, isNothingFound, localUserMovies.length]);
 
   return(
     <>

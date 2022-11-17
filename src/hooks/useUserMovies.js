@@ -10,6 +10,7 @@ function useUserMovies() {
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
   const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
   const [isSavedMoviesError, setIsSavedMoviesError] = React.useState(TYPE_FILM_NAME);
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
 
   const location = useLocation();
 
@@ -101,7 +102,10 @@ function useUserMovies() {
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
       .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
       if (searchedMovies.length === 0) {
+        console.log('searchedMovies', searchedMovies)
         setTimeout(() => setIsSavedMoviesError(NO_MATCHED_FILMS), 300);
+        setIsNothingFound(true);
+        setLocalUserMovies([]);
       };
     return setLocalUserMovies(searchedMovies);
   }
@@ -128,7 +132,8 @@ function useUserMovies() {
 
   React.useEffect(() => {
     if (location.pathname === '/saved-movies') {
-      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? [])
+      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? []);
+      setIsSavedMoviesError(TYPE_FILM_NAME);
     }
   }, [location.pathname])
 
@@ -150,7 +155,8 @@ function useUserMovies() {
     clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
-    handleGetUserMovies
+    handleGetUserMovies,
+    isNothingFound
   }
 }
 

@@ -81,10 +81,10 @@ function SearchForm({
           <label className="switch">
             <input
               type="checkbox"
-              disabled={userMovies.length === 0 ? true : false}
+              disabled={isLoading ? true : false}
               onChange={handleChangeCheckboxStatus}
               defaultChecked={checkboxStatus} />
-            <span className={`slider ${userMovies.length === 0 ? 'slider_type_disable' : ''}`}></span>
+            <span className={`slider ${isLoading ? 'slider_type_disable' : ''}`}></span>
           </label>
           <p className="search-form__span">{SHORT_MOVIES}</p>
         </div>
