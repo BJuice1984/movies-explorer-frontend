@@ -45,7 +45,7 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formParams.email || !formParams.password || !formParams.name){
+    if (!formParams.email || !formParams.password || !formParams.name) {
       return;
     }
     props.onRegClick({ password: formParams.password, email: formParams.email, name: formParams.name });

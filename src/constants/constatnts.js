@@ -26,6 +26,7 @@ export const NOT_USER_MOVIE = 'Мы сожалеем, но текущий фил
 export const MAIN_API_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const NO_MATCHED_FILMS = 'Ничего не найдено';
 export const TYPE_FILM_NAME = 'Введите название фильма в строке поиска';
+export const NEED_A_KEY_WORD = 'Нужно ввести ключевое слово'
 export const FIND = 'Найти';
 export const FINDING = 'Ищем...';
 export const SHORT_MOVIES = 'Короткометражки';

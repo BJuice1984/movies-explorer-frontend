@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { FIND, FINDING, SHORT_MOVIES} from "../../constants/constatnts";
+import { FIND, FINDING, SHORT_MOVIES, NEED_A_KEY_WORD} from "../../constants/constatnts";
 import './SearchForm.css';
 import useValidation from "../../hooks/useValidation";
 
@@ -13,27 +13,32 @@ function SearchForm({
   userMovies,
   handleGetUserMovies }) {
 
-    const [buttonDisable, setButtonDisable] = React.useState(true);
-
-    const {
-      validations,
-      inputTypeNameErrors,
-    } = useValidation();
+  const [buttonDisable, setButtonDisable] = React.useState(true);
+  const [filmInputValue, setFilmInputValue] = React.useState(searchedFilmName ?? '');
+  const [isFormValid, setIsFormValid] = React.useState(true);
 
   const currentUser = useContext(CurrentUserContext);
 
-  const [filmInputValue, setFilmInputValue] = React.useState(searchedFilmName ?? '');
+  const {
+    isEmptyRowError,
+    handleEmptyRow
+  } = useValidation();
 
   React.useEffect(() => {
-    if (inputTypeNameErrors !== '') {
+    if (isLoading) {
       setButtonDisable(true);
     } else {
       setButtonDisable(false);
     }
-  }, [inputTypeNameErrors])
+  }, [isLoading])
 
   async function handleSubmit(e) {
+    setIsFormValid(true);
     e.preventDefault();
+    if (isEmptyRowError) {
+      setIsFormValid(false);
+      return;
+    }
     if (searchedFilmName) {
       handleSearchFilm(filmInputValue);
       setButtonDisable(false);
@@ -49,17 +54,17 @@ function SearchForm({
       <div className="search-form__container">
         <form
           className="search-form__input-form"
-          onChange={validations}
+          onChange={handleEmptyRow}
           onSubmit={handleSubmit}>
           <label className="search-form__input-form-label">
             <input
             onInput={e => setFilmInputValue(e.target.value)}
             placeholder="Фильм"
             defaultValue={searchedFilmName}
-            className={`search-form__input-text ${inputTypeNameErrors ? 'search-form__input-text_type_not-valid' : ''}`}
+            className={`search-form__input-text ${isFormValid ? '' : 'search-form__input-text_type_not-valid'}`}
             type="search"
             name="search"
-            id="name"
+            id="search"
             disabled={isLoading}
             minLength="1"
             maxLength="50"
@@ -71,7 +76,7 @@ function SearchForm({
             disabled={isLoading || buttonDisable}
             aria-label="Найти">{isLoading ? FINDING : FIND}</button>
         </form>
-        {inputTypeNameErrors && <p className="search-form__input-error">{inputTypeNameErrors}</p>}
+        {!isFormValid && <p className="search-form__input-error">{NEED_A_KEY_WORD}</p>}
         <div className="search-form__checkbox">
           <label className="switch">
             <input

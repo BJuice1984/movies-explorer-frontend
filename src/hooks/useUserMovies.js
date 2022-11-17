@@ -93,7 +93,7 @@ function useUserMovies() {
     return setSearchedSavedFilmName(JSON.parse(localStorage.getItem("user-searched-saved-film-name")))
   }
 
-  const handleSearchSavedFilm  = React.useCallback((filmName) => {
+  const handleSearchSavedFilm = (filmName) => {
     setIsSavedMoviesError('')
     updateLocalStorageFilmeName(filmName);
     setIsUserMoviesLoading(true);
@@ -104,7 +104,7 @@ function useUserMovies() {
         setTimeout(() => setIsSavedMoviesError(NO_MATCHED_FILMS), 300);
       };
     return setLocalUserMovies(searchedMovies);
-  }, [])
+  }
 
   const handleChangeCheckboxStatusPathSavedMovies = (e) => {
     if (e.target.checked) {

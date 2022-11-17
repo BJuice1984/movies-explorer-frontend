@@ -65,6 +65,7 @@
 
 .search-form__input-text_type_not-valid {
   color: #EE3465;
+  border: .5px solid #EE3465;
 }
 
 .search-form__input-text:hover {
