@@ -129,6 +129,12 @@
   cursor: pointer;
 }
 
+.login__link_type_disable {
+  color: #8B8B8B;
+  cursor: default;
+  pointer-events: none;
+}
+
 .login__link:hover {
   opacity: 0.85;
   transition: 0.2s ease-in-out;

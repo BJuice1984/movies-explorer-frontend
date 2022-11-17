@@ -33,6 +33,7 @@ export const SHORT_MOVIES = 'Короткометражки';
 export const HOURS = 'ч ';
 export const MINUTES = 'м';
 export const SAVE = 'Сохранить';
+export const WAITING = 'Секундочку...';
 export const EDIT = 'Редактировать';
 
 export const HELLO = 'Привет, ';

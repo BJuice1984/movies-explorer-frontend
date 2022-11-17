@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
+import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, WAITING, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
 import useClose from '../../hooks/useClose';
 import './Profile.css'
 
-function Profile({ onLogout, updateMyProfile }) {
+function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
 
   const {
     validations,
@@ -125,17 +125,18 @@ function Profile({ onLogout, updateMyProfile }) {
         <div className="buttons__container">
             <button
               onClick={() => setInputDisable(false)}
-              disabled={buttonDisable}
+              disabled={buttonDisable || isLoginLoading}
               className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : !inputDisable ? 'profile__button_type_valid' : ''}`}
               form="profile__input-form"
               type={inputDisable
                 || (formParams.name === currentUser.name && formParams.email === currentUser.email && !inputDisable)
                 || (inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') ? "button" : "submit"}>
-                {inputDisable ? EDIT : SAVE}
+                {isLoginLoading ? WAITING : inputDisable ? EDIT : SAVE}
               </button>
             <button
               className={`profile__link ${inputDisable ? '' : 'profile__link_type_disable'}`}
               type="button"
+              disabled={isLoginLoading}
               onClick={onLogout}>{LOGOUT_OF_ACCOUNT}</button>
           </div>
       </section>

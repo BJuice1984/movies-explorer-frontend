@@ -30,7 +30,8 @@ function App() {
     handleLogin,
     handleLogout,
     updateMyProfile,
-    isUserLoginError
+    isUserLoginError,
+    isLoginLoading
   } = useLogin();
 
   const {
@@ -90,15 +91,18 @@ function App() {
               isLoggedin={loggedIn}/>} />
             <Route path="sign-up"
               element={<Register
-              onRegClick={handleRegister}/>} />
+              onRegClick={handleRegister}
+              isLoginLoading={isLoginLoading}/>} />
             <Route path="sign-in"
               element={<Login
-              onLoginClick={handleLogin}/>} />
+              onLoginClick={handleLogin}
+              isLoginLoading={isLoginLoading}/>} />
 
             <Route element={<ProtectedRoutes loggedIn={loggedIn}/>} >
               <Route path="profile" 
                 element={<Profile 
                 onLogout={handleLogout}
+                isLoginLoading={isLoginLoading}
                 updateMyProfile={updateMyProfile}/>} />
               <Route path="movies"
                 element={<Movies

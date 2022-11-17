@@ -3,7 +3,7 @@ import Logo from '../Logo/Logo';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import useValidation from "../../hooks/useValidation";
-import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, NOT_REGISTERED_YET, REGISTRATION, USER_EMAIL_REGEX } from '../../constants/constatnts';
+import { EMAIL, PASSWORD, GLAD_TO_SEE, YOUR_EMAIL, YOUR_PASSWORD, LOGIN, WAITING, NOT_REGISTERED_YET, REGISTRATION, USER_EMAIL_REGEX } from '../../constants/constatnts';
 
 function Login(props) {
 
@@ -87,11 +87,11 @@ function Login(props) {
         </label>
         {inputTypePasswordErrors && <p className="login__input-error">{inputTypePasswordErrors}</p>}
         <button
-          className={`login__button ${buttonDisable ? 'login__button_type_disable' : ''}`}
-          disabled={buttonDisable}
-          type="submit">{LOGIN}</button>
+          className={`login__button ${buttonDisable || props.isLoginLoading ? 'login__button_type_disable' : ''}`}
+          disabled={buttonDisable || props.isLoginLoading}
+          type="submit">{props.isLoginLoading ? WAITING : LOGIN}</button>
       </form>
-      <p className="login__text">{NOT_REGISTERED_YET} <Link className="login__link" to="/sign-up">{REGISTRATION}</Link></p>
+      <p className="login__text">{NOT_REGISTERED_YET} <Link className={`login__link ${props.isLoginLoading ? 'login__link_type_disable' : ''}`} to="/sign-up">{REGISTRATION}</Link></p>
     </section>
   )
 }

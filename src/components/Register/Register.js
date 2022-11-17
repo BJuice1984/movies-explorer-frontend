@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import '../Login/Login.css';
 import useValidation from "../../hooks/useValidation";
-import { NAME, EMAIL, PASSWORD, WELCOME, YOUR_NAME, YOUR_EMAIL, YOUR_PASSWORD, REGISTER, ALREADY_REGISTERED, LOGIN } from '../../constants/constatnts';
+import { NAME, EMAIL, PASSWORD, WELCOME, YOUR_NAME, YOUR_EMAIL, YOUR_PASSWORD, REGISTER, WAITING, ALREADY_REGISTERED, LOGIN } from '../../constants/constatnts';
 
 function Register(props) {
 
@@ -105,10 +105,11 @@ function Register(props) {
         </label>
         {inputTypePasswordErrors && <p className="login__input-error">{inputTypePasswordErrors}</p>}
         <button
-          className={`login__button login__button_type_register ${buttonDisable ? 'login__button_type_disable' : ''}`}
-          type="submit">{REGISTER}</button>
+          className={`login__button login__button_type_register ${buttonDisable || props.isLoginLoading ? 'login__button_type_disable' : ''}`}
+          disabled={buttonDisable || props.isLoginLoading}
+          type="submit">{props.isLoginLoading ? WAITING : REGISTER}</button>
       </form>
-      <p className="login__text">{ALREADY_REGISTERED} <Link className="login__link" to="/sign-in">{LOGIN}</Link></p>
+      <p className="login__text">{ALREADY_REGISTERED} <Link className={`login__link ${props.isLoginLoading ? 'login__link_type_disable' : ''}`} to="/sign-in">{LOGIN}</Link></p>
     </section>
   )
 }

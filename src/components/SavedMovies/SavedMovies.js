@@ -32,7 +32,6 @@ function SavedMovies({
     <Header />
     <main className="movies">
       <SearchForm
-        userMovies={localUserMovies}
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathSavedMovies}
         checkboxStatus={checkboxStatusPathSavedMovies}
         handleSearchFilm={handleSearchSavedFilm}

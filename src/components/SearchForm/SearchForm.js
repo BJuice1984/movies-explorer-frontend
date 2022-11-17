@@ -10,7 +10,6 @@ function SearchForm({
   handleChangeCheckboxStatus,
   checkboxStatus,
   isLoading,
-  userMovies,
   handleGetUserMovies }) {
 
   const [buttonDisable, setButtonDisable] = React.useState(true);

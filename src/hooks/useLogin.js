@@ -8,23 +8,28 @@ function useLogin() {
   const [loggedOut, setLoggedOut] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState(JSON.parse(localStorage.getItem("user-data")) ?? {});
   const [isUserLoginError, setUserLoginError] = React.useState('');
+  const [isLoginLoading, setIsLoginLoading] = React.useState(false);
 
   const navigate = useNavigate();
 
   const handleRegister = ({ name, password, email }) => {
+    setIsLoginLoading(true);
     setUserLoginError('');
     return Auth.register(name, password, email)
     .then(() => {
       handleLogin( { password, email });
+      setTimeout(() => setIsLoginLoading(false), 200);
     })
     .catch((err) => {
       navigate('/sign-up');
       console.log(err);
       setUserLoginError(err);
+      setIsLoginLoading(false);
     })
   }
 
   const handleLogin = ({ password, email }) => {
+    setIsLoginLoading(true);
     setUserLoginError('');
     return Auth.authorize(password, email)
     .then((data) => {
@@ -33,6 +38,7 @@ function useLogin() {
         navigate('/');
         setLoggedIn(true);
         setLoggedOut(false);
+        setTimeout(() => setIsLoginLoading(false), 200);
       }
     })
     .catch((err) => {
@@ -49,13 +55,16 @@ function useLogin() {
       localStorage.removeItem("checkbox-path-movies-status");
       localStorage.removeItem("user-movies");
       localStorage.removeItem("user-searched-saved-movies");
+      console.log('CHEK IT')
       localStorage.removeItem("checkbox-path-savedMovies-status");
       localStorage.removeItem("user-searched-saved-film-name");
       navigate('/sign-in');
+      setIsLoginLoading(false);
     })
   }
 
   const handleLogout = () => {
+    setIsLoginLoading(true);
     setUserLoginError('');
     return Auth.logout()
     .then(() => {
@@ -70,17 +79,21 @@ function useLogin() {
       localStorage.removeItem("checkbox-path-movies-status");
       localStorage.removeItem("user-movies");
       localStorage.removeItem("user-searched-saved-movies");
+      console.log('CHEK IT')
       localStorage.removeItem("checkbox-path-savedMovies-status");
       localStorage.removeItem("user-searched-saved-film-name");
       navigate('/');
+      setTimeout(() => setIsLoginLoading(false), 200);
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err)
+      setUserLoginError(err);
+      setIsLoginLoading(false);
     })
   }
 
   async function updateMyProfile(name, email) {
+    setIsLoginLoading(true);
     setUserLoginError('');
     await Auth.updateMyProfile(name, email)
     .then((profile) => {
@@ -90,10 +103,12 @@ function useLogin() {
     })
     .then(() => {
       setUserLoginError(OK_FETCH_ANSWER);
+      setTimeout(() => setIsLoginLoading(false), 200);
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err)
+      setUserLoginError(err);
+      setIsLoginLoading(false);
     })
     return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
   }
@@ -123,7 +138,8 @@ function useLogin() {
     handleLogin,
     handleLogout,
     updateMyProfile,
-    isUserLoginError
+    isUserLoginError,
+    isLoginLoading
   };
 }
 
