@@ -29,10 +29,12 @@ function useInitialMovies() {
     const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     if (localMovies.length !== 0 && searchedMovies.length === 0) {
       setTimeout(() => setIsError(NO_MATCHED_FILMS), 300);
-    };
+    } else if (checkboxStatusPathMovies) {
+      return setLocalSearchedMovies(searchedMovies.filter(m => m.duration < SHORT_MOVIE_DURATION));
+    }
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
     return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")));
-  }, [localMovies]);
+  }, [checkboxStatusPathMovies, localMovies]);
 
   React.useEffect(() => {
     searchFilm(searchedFilmName);

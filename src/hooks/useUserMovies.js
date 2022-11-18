@@ -111,8 +111,6 @@ function useUserMovies() {
     return setLocalUserMovies(searchedMovies);
   }
 
-  console.log('checkboxStatusPathSavedMovies', checkboxStatusPathSavedMovies)
-
   const handleChangeCheckboxStatusPathSavedMovies = (e) => {
     if (e.target.checked) {
       localStorage.setItem("checkbox-path-savedMovies-status", JSON.stringify(true))

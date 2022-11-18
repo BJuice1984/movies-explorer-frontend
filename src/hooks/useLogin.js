@@ -54,8 +54,6 @@ function useLogin() {
       localStorage.removeItem("user-searched-film-name");
       localStorage.removeItem("checkbox-path-movies-status");
       localStorage.removeItem("user-movies");
-      localStorage.removeItem("user-searched-saved-movies");
-      console.log('CHEK IT')
       localStorage.removeItem("checkbox-path-savedMovies-status");
       localStorage.removeItem("user-searched-saved-film-name");
       navigate('/sign-in');
@@ -78,8 +76,6 @@ function useLogin() {
       localStorage.removeItem("user-searched-film-name");
       localStorage.removeItem("checkbox-path-movies-status");
       localStorage.removeItem("user-movies");
-      localStorage.removeItem("user-searched-saved-movies");
-      console.log('CHEK IT')
       localStorage.removeItem("checkbox-path-savedMovies-status");
       localStorage.removeItem("user-searched-saved-film-name");
       navigate('/');
