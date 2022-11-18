@@ -25,6 +25,7 @@ function App() {
   const {
     currentUser,
     loggedIn,
+    loggedOut,
     getMyProfile,
     handleRegister,
     handleLogin,
@@ -42,7 +43,8 @@ function App() {
     handleChangeCheckboxStatusPathMovies,
     checkboxStatusPathMovies,
     isLoading,
-    isError
+    isError,
+    clearLocalState
   } = useInitialMovies();
 
   const {
@@ -56,7 +58,8 @@ function App() {
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies,
-    isNothingFound
+    isNothingFound,
+    clearLocalUserState
   } = useUserMovies();
 
   const {
@@ -74,8 +77,17 @@ function App() {
   React.useEffect(() => {
     if (isSavedMoviesError === TOKEN_ERROR) {
       clearAllData();
+      clearLocalState();
+      clearLocalUserState();
     }
-  }, [clearAllData, isSavedMoviesError]);
+  }, [clearAllData, clearLocalState, clearLocalUserState, isSavedMoviesError]);
+
+  React.useEffect(() => {
+    if (loggedOut) {
+      clearLocalState();
+      clearLocalUserState();
+    }
+  }, [clearLocalState, clearLocalUserState, loggedOut])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

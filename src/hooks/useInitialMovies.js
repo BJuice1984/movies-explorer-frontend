@@ -20,6 +20,7 @@ function useInitialMovies() {
       .catch(err => {
         console.log(err)
         setIsError(MAIN_API_ERROR_MESSAGE);
+        setIsLoading(false);
       })
       .finally(() => setTimeout(() => setIsLoading(false), 300));
     return JSON.parse(localStorage.getItem("initial-movies"))
@@ -78,7 +79,16 @@ function useInitialMovies() {
     } else {
       setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")) ?? [])
     }
-  }, [checkboxStatusPathMovies])
+  }, [checkboxStatusPathMovies]);
+
+  const clearLocalState = React.useCallback(() => {
+    setLocalMovies([]);
+      setLocalSearchedMovies([]);
+      setSearchedFilmName('');
+      setCheckboxStatusPathMovies(false);
+      setIsError(TYPE_FILM_NAME);
+      setIsLoading(false);
+}, []);
 
   return {
     getSavedMovies,
@@ -88,7 +98,8 @@ function useInitialMovies() {
     handleChangeCheckboxStatusPathMovies,
     checkboxStatusPathMovies,
     isLoading,
-    isError
+    isError,
+    clearLocalState
   }
 }
 

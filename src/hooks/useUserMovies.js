@@ -84,6 +84,7 @@ function useUserMovies() {
         localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
       })
       .catch(err => {
+        setLocalUserMovies([]);
         console.log(err);
         setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE);
       })
@@ -138,7 +139,14 @@ function useUserMovies() {
       setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? []);
       setIsSavedMoviesError(TYPE_FILM_NAME);
     }
-  }, [location.pathname])
+  }, [location.pathname]);
+
+  const clearLocalUserState = React.useCallback(() => {
+    setLocalUserMovies([]);
+    setCheckboxStatusPathSavedMovies(false);
+    setSearchedSavedFilmName('');
+    setIsSavedMoviesError(TYPE_FILM_NAME);
+  }, []);
 
   return {
     localUserMovies,
@@ -151,7 +159,8 @@ function useUserMovies() {
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies,
-    isNothingFound
+    isNothingFound,
+    clearLocalUserState
   }
 }
 
