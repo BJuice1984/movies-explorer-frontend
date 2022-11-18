@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import '../Login/Login.css';
 import useValidation from "../../hooks/useValidation";
-import { NAME, EMAIL, PASSWORD, WELCOME, YOUR_NAME, YOUR_EMAIL, YOUR_PASSWORD, REGISTER, WAITING, ALREADY_REGISTERED, LOGIN } from '../../constants/constatnts';
+import { NAME, EMAIL, PASSWORD, WELCOME, YOUR_NAME, YOUR_EMAIL, YOUR_PASSWORD, REGISTER, WAITING, ALREADY_REGISTERED, LOGIN, USER_EMAIL_ERROR_MESSAGE } from '../../constants/constatnts';
 
 function Register(props) {
 
@@ -13,6 +13,7 @@ function Register(props) {
     validations,
     inputTypeNameErrors,
     inputTypeEmailErrors,
+    inputTypeRegexpEmailErrors,
     inputTypePasswordErrors
   } = useValidation();
 
@@ -31,17 +32,13 @@ function Register(props) {
   }
 
   React.useEffect(() => {
-    if ((inputTypePasswordErrors !== ''
-      || inputTypeEmailErrors !== ''
-      || inputTypeNameErrors !== '')
-      || (formParams.name === ''
-      || formParams.email === ''
-      || formParams.password === '')) {
+    if ((inputTypePasswordErrors !== '' || inputTypeEmailErrors !== '' || inputTypeNameErrors !== '')
+      || ((formParams.name === '' || formParams.email === '' || formParams.password === '') || !inputTypeRegexpEmailErrors)) {
       setButtonDisable(true);
     } else {
       setButtonDisable(false);
     }
-  }, [formParams.email, formParams.name, formParams.password, inputTypeEmailErrors, inputTypeNameErrors, inputTypePasswordErrors])
+  }, [formParams.email, formParams.name, formParams.password, inputTypeEmailErrors, inputTypeNameErrors, inputTypePasswordErrors, inputTypeRegexpEmailErrors])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +66,7 @@ function Register(props) {
           type="text"
           name="name"
           id="name"
+          disabled={props.isLoginLoading}
           required
           minLength="2"
           maxLength="20" />
@@ -80,15 +78,16 @@ function Register(props) {
           placeholder={YOUR_EMAIL}
           value={formParams.email}
           onChange={handleChange}
-          className={`login__input-text ${inputTypeEmailErrors !== '' ? 'login__input-text_type_not-valid' : ''}`}
+          className={`login__input-text ${inputTypeEmailErrors !== '' || !inputTypeRegexpEmailErrors ? 'login__input-text_type_not-valid' : ''}`}
           type="email"
           name="email"
           id="email"
+          disabled={props.isLoginLoading}
           required
           minLength="2"
           maxLength="40" />
         </label>
-        {inputTypeEmailErrors && <p className="login__input-error">{inputTypeEmailErrors}</p>}
+        {(inputTypeEmailErrors || !inputTypeRegexpEmailErrors) && <p className="login__input-error">{USER_EMAIL_ERROR_MESSAGE}</p>}
         <label className="login__input-form-label">
           <span className="login__input-name">{PASSWORD}</span>
           <input

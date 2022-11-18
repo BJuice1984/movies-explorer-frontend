@@ -52,7 +52,5 @@ export const YOUR_NAME = 'Ваше имя';
 export const YOUR_EMAIL = 'Ваша почта';
 export const YOUR_PASSWORD = 'Ваш пароль';
 
-// eslint-disable-next-line no-useless-escape
-export const USER_EMAIL_REGEX = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
 export const USER_EMAIL_ERROR_MESSAGE = "E-mail должен соответствовать формату name@domain.ru";
 export const USER_NAME_ERROR_MESSAGE = "Имя пользователя может содержать только буквенно-цифровые символы, символ подчеркивания (_), дефис (-), точку (.) или символ @";

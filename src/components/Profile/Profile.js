@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, WAITING, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
+import { USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, WAITING, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
 import useClose from '../../hooks/useClose';
 import './Profile.css'
@@ -113,7 +113,6 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
             required
             minLength="6"
             maxLength="30"
-            pattern={USER_EMAIL_REGEX}
             disabled={inputDisable} />
           </label>
           {inputTypeEmailErrors && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
