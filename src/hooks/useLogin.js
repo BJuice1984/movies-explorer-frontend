@@ -1,7 +1,7 @@
 import React from "react";
 import * as Auth from '../utils/MainApi';
 import { useNavigate } from 'react-router-dom';
-import { OK_FETCH_ANSWER } from '../constants/constatnts';
+import { OK_FETCH_ANSWER, UNAFTORIZED_ERROR,TOKEN_ERROR } from '../constants/constatnts';
 
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -11,6 +11,21 @@ function useLogin() {
   const [isLoginLoading, setIsLoginLoading] = React.useState(false);
 
   const navigate = useNavigate();
+
+  const clearAllData = React.useCallback(() => {
+    setLoggedIn(false);
+    setLoggedOut(true);
+    setCurrentUser({});
+    localStorage.removeItem("user");
+    localStorage.removeItem("user-data");
+    localStorage.removeItem("initial-movies");
+    localStorage.removeItem("user-searched-movies");
+    localStorage.removeItem("user-searched-film-name");
+    localStorage.removeItem("checkbox-path-movies-status");
+    localStorage.removeItem("user-movies");
+    localStorage.removeItem("checkbox-path-savedMovies-status");
+    localStorage.removeItem("user-searched-saved-film-name");
+  }, []);
 
   const handleRegister = ({ name, password, email }) => {
     setIsLoginLoading(true);
@@ -44,18 +59,7 @@ function useLogin() {
     .catch((err) => {
       console.log(err);
       setUserLoginError(err);
-      setLoggedIn(false);
-      setLoggedOut(true);
-      setCurrentUser({});
-      localStorage.removeItem("user");
-      localStorage.removeItem("user-data");
-      localStorage.removeItem("initial-movies");
-      localStorage.removeItem("user-searched-movies");
-      localStorage.removeItem("user-searched-film-name");
-      localStorage.removeItem("checkbox-path-movies-status");
-      localStorage.removeItem("user-movies");
-      localStorage.removeItem("checkbox-path-savedMovies-status");
-      localStorage.removeItem("user-searched-saved-film-name");
+      clearAllData();
       navigate('/sign-in');
       setIsLoginLoading(false);
     })
@@ -66,18 +70,7 @@ function useLogin() {
     setUserLoginError('');
     return Auth.logout()
     .then(() => {
-      setLoggedIn(false);
-      setLoggedOut(true);
-      setCurrentUser({});
-      localStorage.removeItem("user");
-      localStorage.removeItem("user-data");
-      localStorage.removeItem("initial-movies");
-      localStorage.removeItem("user-searched-movies");
-      localStorage.removeItem("user-searched-film-name");
-      localStorage.removeItem("checkbox-path-movies-status");
-      localStorage.removeItem("user-movies");
-      localStorage.removeItem("checkbox-path-savedMovies-status");
-      localStorage.removeItem("user-searched-saved-film-name");
+      clearAllData();
       navigate('/');
       setTimeout(() => setIsLoginLoading(false), 200);
     })
@@ -103,7 +96,8 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err);
+      setUserLoginError(TOKEN_ERROR);
+      clearAllData();
       setIsLoginLoading(false);
     })
     return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
@@ -118,12 +112,13 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(err);
-      setLoggedIn(false);
-      setLoggedOut(true);
+      setUserLoginError(TOKEN_ERROR);
+      if (err.includes(UNAFTORIZED_ERROR)) {
+        clearAllData();
+      }
     })
     return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));
-  }, []);
+  }, [clearAllData]);
 
   return {
     currentUser,
@@ -135,7 +130,8 @@ function useLogin() {
     handleLogout,
     updateMyProfile,
     isUserLoginError,
-    isLoginLoading
+    isLoginLoading,
+    clearAllData
   };
 }
 

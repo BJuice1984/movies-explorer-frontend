@@ -140,13 +140,6 @@ function useUserMovies() {
     }
   }, [location.pathname])
 
-  const clearLocalUserState = React.useCallback(() => {
-    setLocalUserMovies([]);
-    setCheckboxStatusPathSavedMovies(false);
-    setSearchedSavedFilmName('');
-    setIsSavedMoviesError(TYPE_FILM_NAME);
-  }, []);
-
   return {
     localUserMovies,
     handleSearchSavedFilm,
@@ -155,7 +148,6 @@ function useUserMovies() {
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
     isSavedMoviesError,
-    clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies,

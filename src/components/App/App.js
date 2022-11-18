@@ -16,6 +16,7 @@ import usePagination from '../../hooks/usePagination';
 import './App.css';
 import PopupInfoTooltip from '../PopupInfoTooltip/PopupInfoTooltip';
 import Preloader from "../Preloader/Preloader";
+import { TOKEN_ERROR } from '../../constants/constatnts';
 
 function App() {
 
@@ -24,14 +25,14 @@ function App() {
   const {
     currentUser,
     loggedIn,
-    loggedOut,
     getMyProfile,
     handleRegister,
     handleLogin,
     handleLogout,
     updateMyProfile,
     isUserLoginError,
-    isLoginLoading
+    isLoginLoading,
+    clearAllData
   } = useLogin();
 
   const {
@@ -41,8 +42,7 @@ function App() {
     handleChangeCheckboxStatusPathMovies,
     checkboxStatusPathMovies,
     isLoading,
-    isError,
-    clearLocalState
+    isError
   } = useInitialMovies();
 
   const {
@@ -53,14 +53,11 @@ function App() {
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
     isSavedMoviesError,
-    clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
     handleGetUserMovies,
     isNothingFound
   } = useUserMovies();
-
-console.log('isSavedMoviesError', isSavedMoviesError)
 
   const {
     handleLoadMore,
@@ -75,18 +72,17 @@ console.log('isSavedMoviesError', isSavedMoviesError)
   }, [getMyProfile, loggedIn]);
 
   React.useEffect(() => {
-    if (loggedOut) {
-      clearLocalState();
-      clearLocalUserState();
+    if (isSavedMoviesError === TOKEN_ERROR) {
+      clearAllData();
     }
-  }, [clearLocalState, clearLocalUserState, loggedOut]);
+  }, [clearAllData, isSavedMoviesError]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         {isLoading || isUserMoviesLoading ? <Preloader/> : ''}
         <PopupInfoTooltip
-        err={isUserLoginError || isError || isSavedMoviesError } />
+        err={isUserLoginError || isSavedMoviesError } />
         <div className={`page__container ${location.pathname === '/' ? 'page__container_type_movies' : ''}`}>
           <Routes>
             <Route path="/" element={<Main 
