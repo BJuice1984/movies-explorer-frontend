@@ -102,13 +102,16 @@ function useUserMovies() {
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
       .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
       if (searchedMovies.length === 0) {
-        console.log('searchedMovies', searchedMovies)
         setTimeout(() => setIsSavedMoviesError(NO_MATCHED_FILMS), 300);
         setIsNothingFound(true);
         setLocalUserMovies([]);
-      };
+      } else if (checkboxStatusPathSavedMovies) {
+        return setLocalUserMovies(searchedMovies.filter(m => m.duration < SHORT_MOVIE_DURATION))
+      }
     return setLocalUserMovies(searchedMovies);
   }
+
+  console.log('checkboxStatusPathSavedMovies', checkboxStatusPathSavedMovies)
 
   const handleChangeCheckboxStatusPathSavedMovies = (e) => {
     if (e.target.checked) {
