@@ -96,14 +96,15 @@ function App() {
         <PopupInfoTooltip
         err={isUserLoginError || isSavedMoviesError } />
         <div className={`page__container ${location.pathname === '/' ? 'page__container_type_movies' : ''}`}>
+
           <Routes>
             <Route path="/" element={<Main 
               isLoggedin={loggedIn}/>} />
-            <Route path="sign-up"
+            <Route path={loggedIn ? "/" : "/sign-up"}
               element={<Register
               onRegClick={handleRegister}
               isLoginLoading={isLoginLoading}/>} />
-            <Route path="sign-in"
+            <Route path={loggedIn ? "/" : "/sign-in"}
               element={<Login
               onLoginClick={handleLogin}
               isLoginLoading={isLoginLoading}/>} />
