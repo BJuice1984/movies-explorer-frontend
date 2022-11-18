@@ -60,6 +60,8 @@ function App() {
     isNothingFound
   } = useUserMovies();
 
+console.log('isSavedMoviesError', isSavedMoviesError)
+
   const {
     handleLoadMore,
     numberOfFilms

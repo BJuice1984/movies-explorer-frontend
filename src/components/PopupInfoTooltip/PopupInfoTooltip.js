@@ -3,9 +3,11 @@ import ok_pic from '../../images/OK_pic.svg';
 import err_pic from '../../images/ERR_pic.svg';
 import './PopupInfoTooltip.css';
 import useClose from '../../hooks/useClose';
-import { OK_FETCH_ANSWER, DATA_CHANGED_SUCCESSFULLY, MAIN_API_ERROR_MESSAGE, FAILED_TO_FETCH, USER_ALREADY_REGISTERED, BAD_REQUEST, BAD_EMAIL_OR_PASSWORD, NOT_USER_MOVIE } from '../../constants/constatnts';
+import { OK_FETCH_ANSWER, DATA_CHANGED_SUCCESSFULLY, MAIN_API_ERROR_MESSAGE, FAILED_TO_FETCH, TOKEN_ERROR, USER_ALREADY_REGISTERED, BAD_REQUEST, BAD_EMAIL_OR_PASSWORD, NOT_USER_MOVIE } from '../../constants/constatnts';
 
 function PopupInfoTooltip(props) {
+
+  console.log(props.err)
 
   const {
     EscClose,
@@ -24,6 +26,10 @@ function PopupInfoTooltip(props) {
     } else if (props.err === NOT_USER_MOVIE)  {
       setIsPopupOpen(true);
       setIsErrorMessage(NOT_USER_MOVIE);
+      setIsErrorPic(false)
+    } else if (props.err === TOKEN_ERROR)  {
+      setIsPopupOpen(true);
+      setIsErrorMessage(TOKEN_ERROR);
       setIsErrorPic(false)
     } else if (props.err.includes('409'))  {
       setIsPopupOpen(true);

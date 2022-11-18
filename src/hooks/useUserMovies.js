@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
 import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
-import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, NO_MATCHED_FILMS, TYPE_FILM_NAME, NOT_USER_MOVIE } from '../constants/constatnts';
+import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, TOKEN_ERROR, NO_MATCHED_FILMS, TYPE_FILM_NAME, NOT_USER_MOVIE } from '../constants/constatnts';
 
 function useUserMovies() {
 
@@ -26,6 +26,7 @@ function useUserMovies() {
     id,
     nameRU,
     nameEN,}) {
+    setIsSavedMoviesError('');
     setIsUserMoviesLoading(true);
     await addUserMovie({
       country,
@@ -46,13 +47,14 @@ function useUserMovies() {
     })
     .catch(err => {
       console.log(err);
-      setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE);
+      setIsSavedMoviesError(TOKEN_ERROR);
       setTimeout(() => setIsUserMoviesLoading(false), 200);
     })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
 
   async function handleDeleteUserMovie(movie) {
+    setIsSavedMoviesError('');
     setIsUserMoviesLoading(true);
     await deleteUserMovie(movie)
     .then((movie) => {
