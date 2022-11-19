@@ -1,10 +1,10 @@
 import React from "react";
 import * as Auth from '../utils/MainApi';
 import { useNavigate } from 'react-router-dom';
-import { OK_FETCH_ANSWER, UNAFTORIZED_ERROR,TOKEN_ERROR } from '../constants/constatnts';
+import { OK_FETCH_ANSWER, UNAFTORIZED_ERROR,TOKEN_ERROR, BAD_REQUEST_ERROR } from '../constants/constatnts';
 
 function useLogin() {
-  const [loggedIn, setLoggedIn] = React.useState(JSON.parse(localStorage.getItem("user")) ?? false);
+  const [loggedIn, setLoggedIn] = React.useState(JSON.parse(localStorage.getItem("user")) ? true : false);
   const [loggedOut, setLoggedOut] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState(JSON.parse(localStorage.getItem("user-data")) ?? {});
   const [isUserLoginError, setUserLoginError] = React.useState('');
@@ -96,8 +96,12 @@ function useLogin() {
     })
     .catch((err) => {
       console.log(err);
-      setUserLoginError(TOKEN_ERROR);
-      clearAllData();
+      if (err.includes(BAD_REQUEST_ERROR)) {
+        setUserLoginError(BAD_REQUEST_ERROR);
+      } else {
+        setUserLoginError(TOKEN_ERROR);
+        clearAllData();        
+      }
       setIsLoginLoading(false);
     })
     return setCurrentUser(JSON.parse(localStorage.getItem("user-data")));

@@ -19,6 +19,7 @@ export const OK_FETCH_ANSWER = 'OK';
 export const DATA_CHANGED_SUCCESSFULLY = 'Данные успешно изменены';
 export const FAILED_TO_FETCH = 'Failed to fetch';
 export const UNAFTORIZED_ERROR = '401';
+export const BAD_REQUEST_ERROR = '400';
 export const USER_ALREADY_REGISTERED = 'Пользователь с таким email уже зарегистрирован';
 export const BAD_REQUEST = 'Данные, которые Вы ввели, к сожалению, не корректны. Ошибка';
 export const BAD_EMAIL_OR_PASSWORD = 'Вы ввели неправльный пароль, либо пользователя с таким Email не существует';

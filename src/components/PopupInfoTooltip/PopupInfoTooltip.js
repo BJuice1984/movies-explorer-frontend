@@ -9,6 +9,7 @@ import { OK_FETCH_ANSWER,
   MAIN_API_ERROR_MESSAGE,
   FAILED_TO_FETCH,
   TOKEN_ERROR,
+  BAD_REQUEST_ERROR,
   USER_ALREADY_REGISTERED,
   BAD_REQUEST,
   BAD_EMAIL_OR_PASSWORD,
@@ -42,7 +43,7 @@ function PopupInfoTooltip(props) {
       setIsPopupOpen(true);
       setIsErrorMessage(USER_ALREADY_REGISTERED);
       setIsErrorPic(false)
-    } else if (props.err.includes('400'))  {
+    } else if (props.err.includes(BAD_REQUEST_ERROR))  {
       setIsPopupOpen(true);
       setIsErrorMessage(BAD_REQUEST);
       setIsErrorPic(false)
