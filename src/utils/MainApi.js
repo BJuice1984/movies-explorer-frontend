@@ -1,4 +1,4 @@
-import { BASE_URL, BEAT_FILMS_API, YOUTUBE_URL } from '../constants/constatnts';
+import { BASE_URL, BEAT_FILMS_API, YOUTUBE_URL, NO_DATA } from '../constants/constatnts';
 
 const checkResponse = (res) =>  {
   if (res.ok) {
@@ -70,13 +70,13 @@ export const addUserMovie = (movie) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      country: movie.country || 'Неизвестно',
-      director: movie.director || 'Неизвестно',
-      duration: movie.duration || 'Неизвестно',
-      year: movie.year || 'Неизвестно',
-      description: movie.description || 'Неизвестно',
+      country: movie.country || NO_DATA,
+      director: movie.director || NO_DATA,
+      duration: movie.duration || NO_DATA,
+      year: movie.year || NO_DATA,
+      description: movie.description || NO_DATA,
       image: BEAT_FILMS_API + movie.image.url,
-      trailerLink: movie.trailerLink || YOUTUBE_URL,  // God Save Ozzy bag!!!!
+      trailerLink: movie.trailerLink || YOUTUBE_URL,
       thumbnail: BEAT_FILMS_API + movie.image.formats.thumbnail.url,
       movieId: movie.id,
       nameRU: movie.nameRU || movie.nameEN,

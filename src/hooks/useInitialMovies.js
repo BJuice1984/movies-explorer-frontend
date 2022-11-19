@@ -83,11 +83,11 @@ function useInitialMovies() {
 
   const clearLocalState = React.useCallback(() => {
     setLocalMovies([]);
-      setLocalSearchedMovies([]);
-      setSearchedFilmName('');
-      setCheckboxStatusPathMovies(false);
-      setIsError(TYPE_FILM_NAME);
-      setIsLoading(false);
+    setLocalSearchedMovies([]);
+    setSearchedFilmName('');
+    setCheckboxStatusPathMovies(false);
+    setIsError(TYPE_FILM_NAME);
+    setIsLoading(false);
 }, []);
 
   return {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { OK_FETCH_ANSWER, UNAFTORIZED_ERROR,TOKEN_ERROR } from '../constants/constatnts';
 
 function useLogin() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(JSON.parse(localStorage.getItem("user")) ?? false);
   const [loggedOut, setLoggedOut] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState(JSON.parse(localStorage.getItem("user-data")) ?? {});
   const [isUserLoginError, setUserLoginError] = React.useState('');
@@ -108,7 +108,6 @@ function useLogin() {
     await Auth.getMyProfile()
     .then((profile) => {
       localStorage.setItem("user-data", JSON.stringify({ name: profile.name, email: profile.email, userID: profile._id }));
-      setLoggedIn(true);
     })
     .catch((err) => {
       console.log(err);
