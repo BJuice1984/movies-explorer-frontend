@@ -28,7 +28,7 @@ function Login(props) {
       ...prev,
       [name]: value
     }));
-  }
+  };
 
   React.useEffect(() => {
     if (((inputTypePasswordErrors !== '' || inputTypeEmailErrors !== '')

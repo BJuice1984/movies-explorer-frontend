@@ -12,8 +12,10 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
     validations,
     resetNameErrors,
     resetEmailErrors,
+    resetRegexpEmailErrors,
     inputTypeNameErrors,
     inputTypeEmailErrors,
+    inputTypeRegexpEmailErrors
   } = useValidation();
 
   const {
@@ -37,18 +39,23 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
     });
     resetNameErrors();
     resetEmailErrors();
+    resetRegexpEmailErrors();
   }
 
   const handleChange = (e) => {
-    setFormParams({ ...formParams, [e.target.name]: e.target.value });
-  }
+    const {name, value} = e.target;
+    setFormParams((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   React.useEffect(() => {
     setFormParams({
       name: currentUser.name || '',
       email: currentUser.email || '',
     });
-  }, [currentUser])
+  }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,20 +64,20 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
     setButtonDisable(false);
   }
 
+  // console.log('inputTypeNameErrors !==', inputTypeNameErrors !== '')
+  // console.log('inputTypeEmailErrors !==', inputTypeEmailErrors !== '')
+  // console.log('inputTypeEmailErrors !==++++++', inputTypeNameErrors !== '' || inputTypeEmailErrors !== '')
+  // console.log('inputTypeEmailErrors !==-----', (inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') || !inputTypeRegexpEmailErrors)
+  console.log('ProfileRegExp', inputTypeRegexpEmailErrors)
+
   React.useEffect(() => {
-    if ((formParams.name === currentUser.name
-        && formParams.email === currentUser.email
-        && !inputDisable)
-        || (inputTypeNameErrors !== ''
-        || inputTypeEmailErrors !== '')) {
+    if ((formParams.name === currentUser.name && formParams.email === currentUser.email && !inputDisable)
+        || ((inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') || !inputTypeRegexpEmailErrors)) {
       setButtonDisable(true);
-    } else if ((formParams.name !== currentUser.name
-        || formParams.email !== currentUser.email)
-        && (inputTypeNameErrors === ''
-        || inputTypeEmailErrors === '')) {
+    } else {
       setButtonDisable(false);
     }
-  }, [currentUser.email, currentUser.name, formParams.email, formParams.name, inputDisable, inputTypeEmailErrors, inputTypeNameErrors]);
+  }, [currentUser.email, currentUser.name, formParams.email, formParams.name, inputDisable, inputTypeEmailErrors, inputTypeNameErrors, inputTypeRegexpEmailErrors]);
 
   EscClose(!inputDisable, resetValue);
 
@@ -106,7 +113,7 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
             placeholder="Email пользователя"
             value={formParams.email}
             onChange={handleChange}
-            className={`profile__input-text ${inputTypeEmailErrors ? 'profile__input-text_type_not-valid' : ''}`}
+            className={`profile__input-text ${inputTypeEmailErrors || !inputTypeRegexpEmailErrors ? 'profile__input-text_type_not-valid' : ''}`}
             type="email"
             name="email"
             id="email"
@@ -115,11 +122,11 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
             maxLength="30"
             disabled={inputDisable} />
           </label>
-          {inputTypeEmailErrors && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
+          {(inputTypeEmailErrors || !inputTypeRegexpEmailErrors) && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
         </form>
         <div className="errors__container">
           <p className={`profile__input-error_type_info ${inputTypeNameErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_NAME_ERROR_MESSAGE}</p>
-          <p className={`profile__input-error_type_info ${inputTypeEmailErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_EMAIL_ERROR_MESSAGE}</p>
+          <p className={`profile__input-error_type_info ${inputTypeEmailErrors || !inputTypeRegexpEmailErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_EMAIL_ERROR_MESSAGE}</p>
         </div>
         <div className="buttons__container">
             <button

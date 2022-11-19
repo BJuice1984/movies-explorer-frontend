@@ -89,8 +89,6 @@ function App() {
     }
   }, [clearLocalState, clearLocalUserState, loggedOut]);
 
-  console.log(loggedIn)
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">

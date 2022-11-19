@@ -4,7 +4,7 @@ function useValidation () {
 
   const [inputTypeNameErrors, setInputTypeNameErrors] = React.useState('');
   const [inputTypeEmailErrors, setInputTypeEmailErrors] = React.useState('');
-  const [inputTypeRegexpEmailErrors, setInputTypeRegexpEmailErrors] = React.useState(false);
+  const [inputTypeRegexpEmailErrors, setInputTypeRegexpEmailErrors] = React.useState(true);
   const [inputTypePasswordErrors, setInputTypePasswordErrors] = React.useState('');
   const [isEmptyRowError, setIsEmptyRowError] = React.useState(false);
 
@@ -12,6 +12,8 @@ function useValidation () {
 
   const validations = (e) => {
     if (e.target.id === 'email') {
+      console.log('valid', regex.test(e.target.value))
+      console.log(e.target.value)
       setInputTypeRegexpEmailErrors(regex.test(e.target.value));
     }
     if (e.target.id === 'name')
@@ -39,10 +41,15 @@ function useValidation () {
     setIsEmptyRowError(false);
   }
 
+  const resetRegexpEmailErrors = () => {
+    setInputTypeRegexpEmailErrors(true);
+  }
+
   return {
     validations,
     resetNameErrors,
     resetEmailErrors,
+    resetRegexpEmailErrors,
     inputTypeNameErrors,
     inputTypeEmailErrors,
     inputTypeRegexpEmailErrors,
