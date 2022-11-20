@@ -50,7 +50,7 @@ function useLogin() {
     .then((data) => {
       if (data) {
         localStorage.setItem("user", JSON.stringify(data));
-        navigate('/');
+        navigate('/movies');
         setLoggedIn(true);
         setLoggedOut(false);
         setTimeout(() => setIsLoginLoading(false), 200);
