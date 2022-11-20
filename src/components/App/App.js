@@ -6,7 +6,7 @@ import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrnetUserContext';
 import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
 import useLogin from '../../hooks/useLogin';
@@ -100,12 +100,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Main 
               isLoggedin={loggedIn}/>} />
-            <Route path={loggedIn ? "/" : "/sign-up"}
-              element={<Register
+            <Route path="/sign-up"
+              element={loggedIn ? <Navigate to={{pathname:"/"}} /> : <Register
               onRegClick={handleRegister}
               isLoginLoading={isLoginLoading}/>} />
             <Route path={loggedIn ? "/" : "/sign-in"}
-              element={<Login
+              element={loggedIn ? <Navigate to={{pathname:"/"}} /> : <Login
               onLoginClick={handleLogin}
               isLoginLoading={isLoginLoading}/>} />
 
