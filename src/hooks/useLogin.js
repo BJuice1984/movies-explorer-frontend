@@ -100,7 +100,7 @@ function useLogin() {
         setUserLoginError(BAD_REQUEST_ERROR);
       } else if (err.includes(ALREADY_REGISTERED_ERROR)) {
         setUserLoginError(ALREADY_REGISTERED_ERROR);     
-      } else {
+      } else if (err.includes(UNAFTORIZED_ERROR)) {
         setUserLoginError(TOKEN_ERROR);
         clearAllData();        
       }

@@ -16,7 +16,7 @@ import usePagination from '../../hooks/usePagination';
 import './App.css';
 import PopupInfoTooltip from '../PopupInfoTooltip/PopupInfoTooltip';
 import Preloader from "../Preloader/Preloader";
-import { TOKEN_ERROR } from '../../constants/constatnts';
+import { TOKEN_ERROR, NOT_USER_MOVIE } from '../../constants/constatnts';
 
 function App() {
 
@@ -76,6 +76,10 @@ function App() {
 
   React.useEffect(() => {
     if (isSavedMoviesError === TOKEN_ERROR) {
+      clearAllData();
+      clearLocalState();
+      clearLocalUserState();
+    } else if (isSavedMoviesError === NOT_USER_MOVIE) {
       clearAllData();
       clearLocalState();
       clearLocalUserState();
