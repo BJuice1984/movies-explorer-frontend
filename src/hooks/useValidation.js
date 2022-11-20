@@ -12,8 +12,6 @@ function useValidation () {
 
   const validations = (e) => {
     if (e.target.id === 'email') {
-      console.log('valid', regex.test(e.target.value))
-      console.log(e.target.value)
       setInputTypeRegexpEmailErrors(regex.test(e.target.value));
     }
     if (e.target.id === 'name')

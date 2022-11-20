@@ -64,12 +64,6 @@ function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
     setButtonDisable(false);
   }
 
-  // console.log('inputTypeNameErrors !==', inputTypeNameErrors !== '')
-  // console.log('inputTypeEmailErrors !==', inputTypeEmailErrors !== '')
-  // console.log('inputTypeEmailErrors !==++++++', inputTypeNameErrors !== '' || inputTypeEmailErrors !== '')
-  // console.log('inputTypeEmailErrors !==-----', (inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') || !inputTypeRegexpEmailErrors)
-  console.log('ProfileRegExp', inputTypeRegexpEmailErrors)
-
   React.useEffect(() => {
     if ((formParams.name === currentUser.name && formParams.email === currentUser.email && !inputDisable)
         || ((inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') || !inputTypeRegexpEmailErrors)) {
