@@ -1,7 +1,7 @@
 import React from "react";
 import * as Auth from '../utils/MainApi';
 import { useNavigate } from 'react-router-dom';
-import { OK_FETCH_ANSWER, UNAFTORIZED_ERROR,TOKEN_ERROR, BAD_REQUEST_ERROR } from '../constants/constatnts';
+import { OK_FETCH_ANSWER, UNAFTORIZED_ERROR,TOKEN_ERROR, BAD_REQUEST_ERROR, ALREADY_REGISTERED_ERROR } from '../constants/constatnts';
 
 function useLogin() {
   const [loggedIn, setLoggedIn] = React.useState(JSON.parse(localStorage.getItem("user")) ? true : false);
@@ -98,6 +98,8 @@ function useLogin() {
       console.log(err);
       if (err.includes(BAD_REQUEST_ERROR)) {
         setUserLoginError(BAD_REQUEST_ERROR);
+      } else if (err.includes(ALREADY_REGISTERED_ERROR)) {
+        setUserLoginError(ALREADY_REGISTERED_ERROR);     
       } else {
         setUserLoginError(TOKEN_ERROR);
         clearAllData();        

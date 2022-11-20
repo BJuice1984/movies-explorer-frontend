@@ -66,8 +66,7 @@ function SearchForm({
             id="search"
             disabled={isLoading}
             minLength="1"
-            maxLength="50"
-            required />
+            maxLength="50"/>
           </label>
           <button
             className={`search-form__button ${buttonDisable ? 'search-form__button_type_disable' : ''}`}

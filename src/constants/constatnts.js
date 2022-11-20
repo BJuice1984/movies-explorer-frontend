@@ -12,7 +12,8 @@ export const SHORT_MOVIE_DURATION = 40;
 
 export const BEAT_FILMS_API = 'https://api.nomoreparties.co';
 export const BEAT_FILMS_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-export const BASE_URL = 'https://api.diploma.bjuice.nomoredomains.sbs';
+// export const BASE_URL = 'https://api.diploma.bjuice.nomoredomains.sbs';
+export const BASE_URL = 'http://localhost:3000';
 export const YOUTUBE_URL = 'https://www.youtube.com/';
 export const NO_DATA = 'Неизвестно';
 export const OK_FETCH_ANSWER = 'OK';
@@ -20,6 +21,7 @@ export const DATA_CHANGED_SUCCESSFULLY = 'Данные успешно измен
 export const FAILED_TO_FETCH = 'Failed to fetch';
 export const UNAFTORIZED_ERROR = '401';
 export const BAD_REQUEST_ERROR = '400';
+export const ALREADY_REGISTERED_ERROR = '409';
 export const USER_ALREADY_REGISTERED = 'Пользователь с таким email уже зарегистрирован';
 export const BAD_REQUEST = 'Данные, которые Вы ввели, к сожалению, не корректны. Ошибка';
 export const BAD_EMAIL_OR_PASSWORD = 'Вы ввели неправльный пароль, либо пользователя с таким Email не существует';
