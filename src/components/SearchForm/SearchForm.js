@@ -34,7 +34,7 @@ function SearchForm({
   async function handleSubmit(e) {
     setIsFormValid(true);
     e.preventDefault();
-    if (isEmptyRowError) {
+    if (isEmptyRowError || filmInputValue === '') {
       setIsFormValid(false);
       return;
     }
@@ -64,9 +64,7 @@ function SearchForm({
             type="search"
             name="search"
             id="search"
-            disabled={isLoading}
-            minLength="1"
-            maxLength="50"/>
+            disabled={isLoading}/>
           </label>
           <button
             className={`search-form__button ${buttonDisable ? 'search-form__button_type_disable' : ''}`}
