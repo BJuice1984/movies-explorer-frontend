@@ -20,6 +20,7 @@ function useInitialMovies() {
       .catch(err => {
         console.log(err)
         setIsError(MAIN_API_ERROR_MESSAGE);
+        setIsLoading(false);
       })
       .finally(() => setTimeout(() => setIsLoading(false), 300));
     return JSON.parse(localStorage.getItem("initial-movies"))
@@ -29,10 +30,12 @@ function useInitialMovies() {
     const searchedMovies = localMovies.filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
     if (localMovies.length !== 0 && searchedMovies.length === 0) {
       setTimeout(() => setIsError(NO_MATCHED_FILMS), 300);
-    };
+    } else if (checkboxStatusPathMovies) {
+      return setLocalSearchedMovies(searchedMovies.filter(m => m.duration < SHORT_MOVIE_DURATION));
+    }
     localStorage.setItem("user-searched-movies", JSON.stringify(searchedMovies));
     return setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")));
-  }, [localMovies]);
+  }, [checkboxStatusPathMovies, localMovies]);
 
   React.useEffect(() => {
     searchFilm(searchedFilmName);
@@ -76,16 +79,16 @@ function useInitialMovies() {
     } else {
       setLocalSearchedMovies(JSON.parse(localStorage.getItem("user-searched-movies")) ?? [])
     }
-  }, [checkboxStatusPathMovies])
+  }, [checkboxStatusPathMovies]);
 
   const clearLocalState = React.useCallback(() => {
-      setLocalMovies([]);
-      setLocalSearchedMovies([]);
-      setSearchedFilmName('');
-      setCheckboxStatusPathMovies(false);
-      setIsError(TYPE_FILM_NAME);
-      setIsLoading(false);
-  }, []);
+    setLocalMovies([]);
+    setLocalSearchedMovies([]);
+    setSearchedFilmName('');
+    setCheckboxStatusPathMovies(false);
+    setIsError(TYPE_FILM_NAME);
+    setIsLoading(false);
+}, []);
 
   return {
     getSavedMovies,

@@ -65,6 +65,7 @@
 
 .search-form__input-text_type_not-valid {
   color: #EE3465;
+  border: .5px solid #EE3465;
 }
 
 .search-form__input-text:hover {
@@ -110,11 +111,6 @@
   padding-bottom: 43px;
 }
 
-.slider:hover {
-  opacity: 0.7;
-  transition: 0.2s ease-in-out;
-}
-
 @media screen and (min-width: 768px) {
   .search-form__checkbox {
     padding-top: 30px;
@@ -134,13 +130,11 @@
 
 /* ___________________________________ */
 
-.switch input
-{
+.switch input {
   display: none;
 }
 
-.switch 
-{
+.switch {
   display: inline-block;
   width: 40px; /*=w*/
   height: 20px; /*=h*/
@@ -148,8 +142,7 @@
   position: relative;
 }
 
-.slider
-{
+.slider {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -164,8 +157,7 @@
   transition: 0.2s;
 }
 
-.slider:before
-{
+.slider:before {
   position: absolute;
   content: "";
   width: 100%;
@@ -176,13 +168,26 @@
   transition: 0.2s;
 }
 
-input:checked + .slider:before
-{
+.slider:hover {
+  opacity: 0.7;
+  transition: 0.2s ease-in-out;
+}
+
+.slider_type_disable {
+  box-shadow: 0 0 0 2px #d4d3d3, 0 0 4px #A0A0A0;
+  background-color: #d4d3d3;
+  cursor: default;
+}
+
+.slider_type_disable:hover {
+  opacity: 1;
+}
+
+input:checked + .slider:before {
   transform: translateX(20px); /*translateX(w-h)*/
   background-color: #2BE080;
 }
 
-input:checked + .slider
-{
+input:checked + .slider {
   box-shadow: 0 0 0 1px #2BE080, 0 0 8px #2BE080;
 }

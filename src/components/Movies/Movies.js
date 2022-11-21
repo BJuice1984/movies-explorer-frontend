@@ -32,6 +32,7 @@ function Movies({
         handleChangeCheckboxStatus={handleChangeCheckboxStatusPathMovies}
         checkboxStatus={checkboxStatusPathMovies}
         isLoading={isLoading}
+        userMovies={localSearchedMovies}
         handleGetUserMovies={handleGetUserMovies} />
       <MoviesCardList
         handleAddUserMovie={handleAddUserMovie}

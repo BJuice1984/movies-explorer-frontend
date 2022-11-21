@@ -6,7 +6,7 @@ import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrnetUserContext';
 import ProtectedRoutes from '../ProtectedRoutes/ProtectedRoutes';
 import useLogin from '../../hooks/useLogin';
@@ -16,6 +16,7 @@ import usePagination from '../../hooks/usePagination';
 import './App.css';
 import PopupInfoTooltip from '../PopupInfoTooltip/PopupInfoTooltip';
 import Preloader from "../Preloader/Preloader";
+import { TOKEN_ERROR, NOT_USER_MOVIE } from '../../constants/constatnts';
 
 function App() {
 
@@ -30,7 +31,9 @@ function App() {
     handleLogin,
     handleLogout,
     updateMyProfile,
-    isUserLoginError
+    isUserLoginError,
+    isLoginLoading,
+    clearAllData
   } = useLogin();
 
   const {
@@ -46,18 +49,17 @@ function App() {
 
   const {
     localUserMovies,
-    localSearchedUserMovies,
     handleSearchSavedFilm,
     searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
-    isFirstLoading,
     isSavedMoviesError,
-    clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
-    handleGetUserMovies
+    handleGetUserMovies,
+    isNothingFound,
+    clearLocalUserState
   } = useUserMovies();
 
   const {
@@ -73,6 +75,18 @@ function App() {
   }, [getMyProfile, loggedIn]);
 
   React.useEffect(() => {
+    if (isSavedMoviesError === TOKEN_ERROR) {
+      clearAllData();
+      clearLocalState();
+      clearLocalUserState();
+    } else if (isSavedMoviesError === NOT_USER_MOVIE) {
+      clearAllData();
+      clearLocalState();
+      clearLocalUserState();
+    }
+  }, [clearAllData, clearLocalState, clearLocalUserState, isSavedMoviesError]);
+
+  React.useEffect(() => {
     if (loggedOut) {
       clearLocalState();
       clearLocalUserState();
@@ -84,23 +98,26 @@ function App() {
       <div className="page">
         {isLoading || isUserMoviesLoading ? <Preloader/> : ''}
         <PopupInfoTooltip
-        // onRegistered={isRegistered}
-        err={isUserLoginError || isError || isSavedMoviesError } />
+        err={isUserLoginError || isSavedMoviesError } />
         <div className={`page__container ${location.pathname === '/' ? 'page__container_type_movies' : ''}`}>
+
           <Routes>
             <Route path="/" element={<Main 
               isLoggedin={loggedIn}/>} />
-            <Route path="sign-up"
-              element={<Register
-              onRegClick={handleRegister}/>} />
-            <Route path="sign-in"
-              element={<Login
-              onLoginClick={handleLogin}/>} />
+            <Route path="/sign-up"
+              element={loggedIn ? <Navigate to={{pathname:"/"}} /> : <Register
+              onRegClick={handleRegister}
+              isLoginLoading={isLoginLoading}/>} />
+            <Route path={loggedIn ? "/" : "/sign-in"}
+              element={loggedIn ? <Navigate to={{pathname:"/"}} /> : <Login
+              onLoginClick={handleLogin}
+              isLoginLoading={isLoginLoading}/>} />
 
             <Route element={<ProtectedRoutes loggedIn={loggedIn}/>} >
               <Route path="profile" 
                 element={<Profile 
                 onLogout={handleLogout}
+                isLoginLoading={isLoginLoading}
                 updateMyProfile={updateMyProfile}/>} />
               <Route path="movies"
                 element={<Movies
@@ -122,13 +139,13 @@ function App() {
                 element={<SavedMovies
                 handleGetUserMovies={handleGetUserMovies}
                 handleDeleteUserMovie={handleDeleteUserMovie}
-                localUserMovies={isFirstLoading ? localUserMovies : localSearchedUserMovies}
+                localUserMovies={localUserMovies}
                 handleSearchSavedFilm={handleSearchSavedFilm}
                 searchedSavedFilmName={searchedSavedFilmName}
                 isUserMoviesLoading={isUserMoviesLoading}
-                isFirstLoading={isFirstLoading}
                 isSavedMoviesError={isSavedMoviesError}
                 handleChangeCheckboxStatusPathSavedMovies={handleChangeCheckboxStatusPathSavedMovies}
+                isNothingFound={isNothingFound}
                 checkboxStatusPathSavedMovies={checkboxStatusPathSavedMovies}/>} />
             </Route>
 

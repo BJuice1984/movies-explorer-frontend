@@ -1,16 +1,18 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
 import { addUserMovie, deleteUserMovie, getUserMovies } from '../utils/MainApi';
-import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, NO_MATCHED_FILMS, TYPE_FILM_NAME, NOT_USER_MOVIE } from '../constants/constatnts';
+import { SHORT_MOVIE_DURATION, MAIN_API_ERROR_MESSAGE, TOKEN_ERROR, NO_MATCHED_FILMS, TYPE_FILM_NAME, NOT_USER_MOVIE } from '../constants/constatnts';
 
 function useUserMovies() {
 
   const [localUserMovies, setLocalUserMovies] = React.useState(JSON.parse(localStorage.getItem("user-movies")) ?? []);
-  const [localSearchedUserMovies, setLocalSearchedUserMovies] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-movies")) ?? []);
   const [checkboxStatusPathSavedMovies, setCheckboxStatusPathSavedMovies] = React.useState(JSON.parse(localStorage.getItem("checkbox-path-savedMovies-status")) ?? false);
   const [searchedSavedFilmName, setSearchedSavedFilmName] = React.useState(JSON.parse(localStorage.getItem("user-searched-saved-film-name")) ?? '');
   const [isUserMoviesLoading, setIsUserMoviesLoading] = React.useState(false);
-  const [isFirstLoading, setIsFirstLoading] = React.useState(true);
   const [isSavedMoviesError, setIsSavedMoviesError] = React.useState(TYPE_FILM_NAME);
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
+
+  const location = useLocation();
 
   async function handleAddUserMovie({
     country,
@@ -24,6 +26,7 @@ function useUserMovies() {
     id,
     nameRU,
     nameEN,}) {
+    setIsSavedMoviesError('');
     setIsUserMoviesLoading(true);
     await addUserMovie({
       country,
@@ -44,13 +47,14 @@ function useUserMovies() {
     })
     .catch(err => {
       console.log(err);
-      setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE);
+      setIsSavedMoviesError(TOKEN_ERROR);
       setTimeout(() => setIsUserMoviesLoading(false), 200);
     })
     return setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")))
   };
 
   async function handleDeleteUserMovie(movie) {
+    setIsSavedMoviesError('');
     setIsUserMoviesLoading(true);
     await deleteUserMovie(movie)
     .then((movie) => {
@@ -80,6 +84,7 @@ function useUserMovies() {
         localStorage.setItem("user-movies", JSON.stringify(filtredMovies));
       })
       .catch(err => {
+        setLocalUserMovies([]);
         console.log(err);
         setIsSavedMoviesError(MAIN_API_ERROR_MESSAGE);
       })
@@ -92,19 +97,21 @@ function useUserMovies() {
     return setSearchedSavedFilmName(JSON.parse(localStorage.getItem("user-searched-saved-film-name")))
   }
 
-  function handleSearchSavedFilm(filmName) {
+  const handleSearchSavedFilm = (filmName) => {
     setIsSavedMoviesError('')
     updateLocalStorageFilmeName(filmName);
-    setIsFirstLoading(false);
     setIsUserMoviesLoading(true);
     setTimeout(() => setIsUserMoviesLoading(false), 300);
     const searchedMovies = JSON.parse(localStorage.getItem("user-movies"))
       .filter((movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase()) || movie.nameEN.toLowerCase().includes(filmName.toLowerCase()));
-      localStorage.setItem("user-searched-saved-movies", JSON.stringify(searchedMovies));
       if (searchedMovies.length === 0) {
         setTimeout(() => setIsSavedMoviesError(NO_MATCHED_FILMS), 300);
-      };
-    return setLocalSearchedUserMovies(JSON.parse(localStorage.getItem("user-searched-saved-movies")));
+        setIsNothingFound(true);
+        setLocalUserMovies([]);
+      } else if (checkboxStatusPathSavedMovies) {
+        return setLocalUserMovies(searchedMovies.filter(m => m.duration < SHORT_MOVIE_DURATION))
+      }
+    return setLocalUserMovies(searchedMovies);
   }
 
   const handleChangeCheckboxStatusPathSavedMovies = (e) => {
@@ -119,37 +126,41 @@ function useUserMovies() {
 
   React.useEffect(() => {
     if (checkboxStatusPathSavedMovies) {
-      setLocalSearchedUserMovies((prevMovies) => {
-        return prevMovies.filter(m => m.duration < SHORT_MOVIE_DURATION)
+      setLocalUserMovies((prevMovies) => {
+        return prevMovies.filter(m => m.duration < SHORT_MOVIE_DURATION);
       })
     } else {
-      setLocalSearchedUserMovies(JSON.parse(localStorage.getItem("user-searched-saved-movies")) ?? [])
+      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? []);
     }
-  }, [checkboxStatusPathSavedMovies])
+  }, [checkboxStatusPathSavedMovies]);
+
+  React.useEffect(() => {
+    if (location.pathname === '/saved-movies') {
+      setLocalUserMovies(JSON.parse(localStorage.getItem("user-movies")) ?? []);
+      setIsSavedMoviesError(TYPE_FILM_NAME);
+    }
+  }, [location.pathname]);
 
   const clearLocalUserState = React.useCallback(() => {
     setLocalUserMovies([]);
-    setLocalSearchedUserMovies([]);
     setCheckboxStatusPathSavedMovies(false);
     setSearchedSavedFilmName('');
     setIsSavedMoviesError(TYPE_FILM_NAME);
-    setIsFirstLoading(true);
   }, []);
 
   return {
     localUserMovies,
-    localSearchedUserMovies,
     handleSearchSavedFilm,
     searchedSavedFilmName,
     handleChangeCheckboxStatusPathSavedMovies,
     checkboxStatusPathSavedMovies,
     isUserMoviesLoading,
-    isFirstLoading,
     isSavedMoviesError,
-    clearLocalUserState,
     handleAddUserMovie,
     handleDeleteUserMovie,
-    handleGetUserMovies
+    handleGetUserMovies,
+    isNothingFound,
+    clearLocalUserState
   }
 }
 

@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrnetUserContext";
-import { USER_EMAIL_REGEX, USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
+import { USER_EMAIL_ERROR_MESSAGE, USER_NAME_ERROR_MESSAGE, NAME, EMAIL, HELLO, SAVE, WAITING, EDIT, LOGOUT_OF_ACCOUNT } from "../../constants/constatnts";
 import useValidation from "../../hooks/useValidation";
 import useClose from '../../hooks/useClose';
 import './Profile.css'
 
-function Profile({ onLogout, updateMyProfile }) {
+function Profile({ onLogout, isLoginLoading, updateMyProfile }) {
 
   const {
     validations,
     resetNameErrors,
     resetEmailErrors,
+    resetRegexpEmailErrors,
     inputTypeNameErrors,
     inputTypeEmailErrors,
+    inputTypeRegexpEmailErrors
   } = useValidation();
 
   const {
@@ -37,18 +39,23 @@ function Profile({ onLogout, updateMyProfile }) {
     });
     resetNameErrors();
     resetEmailErrors();
+    resetRegexpEmailErrors();
   }
 
   const handleChange = (e) => {
-    setFormParams({ ...formParams, [e.target.name]: e.target.value });
-  }
+    const {name, value} = e.target;
+    setFormParams((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   React.useEffect(() => {
     setFormParams({
       name: currentUser.name || '',
       email: currentUser.email || '',
     });
-  }, [currentUser])
+  }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,19 +65,13 @@ function Profile({ onLogout, updateMyProfile }) {
   }
 
   React.useEffect(() => {
-    if ((formParams.name === currentUser.name
-        && formParams.email === currentUser.email
-        && !inputDisable)
-        || (inputTypeNameErrors !== ''
-        || inputTypeEmailErrors !== '')) {
+    if ((formParams.name === currentUser.name && formParams.email === currentUser.email && !inputDisable)
+        || ((inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') || !inputTypeRegexpEmailErrors)) {
       setButtonDisable(true);
-    } else if ((formParams.name !== currentUser.name
-        || formParams.email !== currentUser.email)
-        && (inputTypeNameErrors === ''
-        || inputTypeEmailErrors === '')) {
+    } else {
       setButtonDisable(false);
     }
-  }, [currentUser.email, currentUser.name, formParams.email, formParams.name, inputDisable, inputTypeEmailErrors, inputTypeNameErrors]);
+  }, [currentUser.email, currentUser.name, formParams.email, formParams.name, inputDisable, inputTypeEmailErrors, inputTypeNameErrors, inputTypeRegexpEmailErrors]);
 
   EscClose(!inputDisable, resetValue);
 
@@ -106,36 +107,36 @@ function Profile({ onLogout, updateMyProfile }) {
             placeholder="Email пользователя"
             value={formParams.email}
             onChange={handleChange}
-            className={`profile__input-text ${inputTypeEmailErrors ? 'profile__input-text_type_not-valid' : ''}`}
+            className={`profile__input-text ${inputTypeEmailErrors || !inputTypeRegexpEmailErrors ? 'profile__input-text_type_not-valid' : ''}`}
             type="email"
             name="email"
             id="email"
             required
             minLength="6"
             maxLength="30"
-            pattern={USER_EMAIL_REGEX}
             disabled={inputDisable} />
           </label>
-          {inputTypeEmailErrors && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
+          {(inputTypeEmailErrors || !inputTypeRegexpEmailErrors) && <p className="profile__input-error">{inputTypeEmailErrors}</p>}
         </form>
         <div className="errors__container">
           <p className={`profile__input-error_type_info ${inputTypeNameErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_NAME_ERROR_MESSAGE}</p>
-          <p className={`profile__input-error_type_info ${inputTypeEmailErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_EMAIL_ERROR_MESSAGE}</p>
+          <p className={`profile__input-error_type_info ${inputTypeEmailErrors || !inputTypeRegexpEmailErrors ? '' : 'profile__input-error_type_disable'}`}>{USER_EMAIL_ERROR_MESSAGE}</p>
         </div>
         <div className="buttons__container">
             <button
               onClick={() => setInputDisable(false)}
-              disabled={buttonDisable}
+              disabled={buttonDisable || isLoginLoading}
               className={`profile__button ${buttonDisable ? 'profile__button_type_disable' : !inputDisable ? 'profile__button_type_valid' : ''}`}
               form="profile__input-form"
               type={inputDisable
                 || (formParams.name === currentUser.name && formParams.email === currentUser.email && !inputDisable)
                 || (inputTypeNameErrors !== '' || inputTypeEmailErrors !== '') ? "button" : "submit"}>
-                {inputDisable ? EDIT : SAVE}
+                {isLoginLoading ? WAITING : inputDisable ? EDIT : SAVE}
               </button>
             <button
               className={`profile__link ${inputDisable ? '' : 'profile__link_type_disable'}`}
               type="button"
+              disabled={isLoginLoading}
               onClick={onLogout}>{LOGOUT_OF_ACCOUNT}</button>
           </div>
       </section>
